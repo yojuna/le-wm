@@ -204,7 +204,15 @@ def attach_reach_head(
     cache_goal_emb: bool = True,
     device: str | None = None,
 ):
-    """Attach lewm-phi ReachabilityHead to a loaded JEPA without rewriting ckpts."""
+    """Attach lewm-phi ReachabilityHead to a loaded world model (HF LeWM or local JEPA).
+
+    Eval checkpoints instantiate ``stable_worldmodel.wm.lewm.LeWM``, not local
+    ``jepa.JEPA``. We bind lewm-phi criterion/get_cost/cache helpers onto the
+    instance so CEM uses φ without forking the package.
+    """
+    import types
+
+    from jepa import JEPA
     from reachability import ReachabilityHead
 
     if plan_cost not in ("l2_z", "phi_d"):
@@ -212,6 +220,14 @@ def attach_reach_head(
 
     model.plan_cost = plan_cost
     model.cache_goal_emb = cache_goal_emb
+    model._cached_goal_emb = None
+    model._cached_goal_id = None
+
+    # Bind lewm-phi planning API onto whatever trunk class was loaded.
+    model.clear_goal_cache = types.MethodType(JEPA.clear_goal_cache, model)
+    model._goal_cache_id = types.MethodType(JEPA._goal_cache_id, model)
+    model.criterion = types.MethodType(JEPA.criterion, model)
+    model.get_cost = types.MethodType(JEPA.get_cost, model)
     model.clear_goal_cache()
 
     if plan_cost == "l2_z" and not phi_weights:
