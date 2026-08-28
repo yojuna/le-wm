@@ -66,6 +66,73 @@ def pearson_corr(x: torch.Tensor, y: torch.Tensor) -> float:
     return float((x * y).sum() / denom)
 
 
+def _append_metrics_csv(path: Path, row: dict) -> None:
+    import csv
+
+    flat = {
+        "epoch": row["epoch"],
+        "train_loss": row["train"]["loss"],
+        "train_corr": row["train"]["corr_d_k"],
+        "train_mean_d": row["train"]["mean_d"],
+        "val_loss": row["val"]["loss"],
+        "val_corr": row["val"]["corr_d_k"],
+        "val_mean_d": row["val"]["mean_d"],
+    }
+    write_header = not path.exists()
+    with path.open("a", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(flat.keys()))
+        if write_header:
+            w.writeheader()
+        w.writerow(flat)
+
+
+def plot_training_curves(history: list[dict], out_path: Path) -> None:
+    """Write loss/corr curves with matplotlib (always; no TensorBoard required)."""
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    if not history:
+        return
+    epochs = [r["epoch"] for r in history]
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+
+    axes[0].plot(epochs, [r["train"]["loss"] for r in history], label="train", marker="o")
+    axes[0].plot(epochs, [r["val"]["loss"] for r in history], label="val", marker="o")
+    axes[0].set_xlabel("epoch")
+    axes[0].set_ylabel("Huber loss")
+    axes[0].set_title("reachability loss")
+    axes[0].legend()
+    axes[0].grid(True, alpha=0.3)
+
+    axes[1].plot(epochs, [r["train"]["corr_d_k"] for r in history], label="train", marker="o")
+    axes[1].plot(epochs, [r["val"]["corr_d_k"] for r in history], label="val", marker="o")
+    axes[1].set_xlabel("epoch")
+    axes[1].set_ylabel("Pearson corr(d, k)")
+    axes[1].set_title("distance vs temporal k")
+    axes[1].legend()
+    axes[1].grid(True, alpha=0.3)
+
+    fig.tight_layout()
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out_path, dpi=120)
+    plt.close(fig)
+
+
+def _maybe_tb_writer(log_dir: Path, enabled: bool):
+    if not enabled:
+        return None
+    try:
+        from torch.utils.tensorboard import SummaryWriter
+    except Exception as exc:  # noqa: BLE001
+        print(f"TensorBoard unavailable ({exc}); continuing with matplotlib/CSV only")
+        return None
+    writer = SummaryWriter(log_dir=str(log_dir / "tb"))
+    print(f"TensorBoard logdir: {log_dir / 'tb'}  (tensorboard --logdir {log_dir / 'tb'})")
+    return writer
+
+
 def _assert_on_device(module: torch.nn.Module, device: torch.device, *, name: str) -> None:
     param = next(module.parameters(), None)
     if param is None:
@@ -193,6 +260,11 @@ def main():
         action="store_true",
         help="permit falling back to CPU if CUDA is unavailable (default: abort)",
     )
+    p.add_argument(
+        "--tensorboard",
+        action="store_true",
+        help="also log scalars with torch.utils.tensorboard if installed",
+    )
     p.add_argument("--out-dir", type=Path, default=None)
     args = p.parse_args()
 
@@ -277,16 +349,30 @@ def main():
     history = []
     best_corr = -1.0
     best_path = out_dir / "reach.pt"
+    metrics_csv = out_dir / "metrics.csv"
+    curves_png = out_dir / "training_curves.png"
+    if metrics_csv.exists():
+        metrics_csv.unlink()
+    tb = _maybe_tb_writer(out_dir, enabled=args.tensorboard)
 
     for epoch in range(1, args.epochs + 1):
         tr = run_epoch(model, reach, train_loader, device, train=True, optimizer=optim)
         va = run_epoch(model, reach, val_loader, device, train=False)
         row = {"epoch": epoch, "train": tr, "val": va}
         history.append(row)
+        _append_metrics_csv(metrics_csv, row)
+        plot_training_curves(history, curves_png)
+        if tb is not None:
+            tb.add_scalar("loss/train", tr["loss"], epoch)
+            tb.add_scalar("loss/val", va["loss"], epoch)
+            tb.add_scalar("corr/train", tr["corr_d_k"], epoch)
+            tb.add_scalar("corr/val", va["corr_d_k"], epoch)
+            tb.flush()
         print(
             f"epoch {epoch}/{args.epochs}  "
             f"train_loss={tr['loss']:.4f} corr={tr['corr_d_k']:.3f}  "
-            f"val_loss={va['loss']:.4f} corr={va['corr_d_k']:.3f}"
+            f"val_loss={va['loss']:.4f} corr={va['corr_d_k']:.3f}  "
+            f"[wrote {curves_png.name}, {metrics_csv.name}]"
         )
         if va["corr_d_k"] == va["corr_d_k"] and va["corr_d_k"] >= best_corr:
             best_corr = va["corr_d_k"]
@@ -308,10 +394,16 @@ def main():
         "bank_episodes": len(bank.episodes),
         "bank_steps": bank.num_steps,
         "data_source": "live_simulator",
+        "metrics_csv": str(metrics_csv),
+        "training_curves": str(curves_png),
     }
     meta_path = out_dir / "train_phi_meta.json"
     meta_path.write_text(json.dumps(meta, indent=2))
     print(f"wrote {meta_path}")
+    print(f"metrics CSV: {metrics_csv}")
+    print(f"curves plot: {curves_png}")
+    if tb is not None:
+        tb.close()
 
 
 if __name__ == "__main__":
