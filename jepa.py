@@ -26,6 +26,18 @@ class JEPA(nn.Module):
         self.projector = projector or nn.Identity()
         self.pred_proj = pred_proj or nn.Identity()
 
+        # lewm-phi: optional reachability head + planning cost mode
+        self.reach = None
+        self.plan_cost = "l2_z"  # "l2_z" | "phi_d"
+        self.cache_goal_emb = True
+        self._cached_goal_emb = None
+        self._cached_goal_id = None
+
+    def clear_goal_cache(self):
+        """Drop C1 cached goal embedding (call at episode / pair boundaries)."""
+        self._cached_goal_emb = None
+        self._cached_goal_id = None
+
     def encode(self, info):
         """Encode observations and actions into embeddings.
         info: dict with pixels and action keys
@@ -114,6 +126,12 @@ class JEPA(nn.Module):
         pred_emb = info_dict["predicted_emb"]  # (B,S, T-1, dim)
         goal_emb = info_dict["goal_emb"]  # (B, S, T, dim)
 
+        if (
+            getattr(self, "plan_cost", "l2_z") == "phi_d"
+            and getattr(self, "reach", None) is not None
+        ):
+            return self.reach.planning_cost(pred_emb, goal_emb)
+
         goal_emb = goal_emb[..., -1:, :].expand_as(pred_emb)
 
         # return last-step cost per action candidate
@@ -125,6 +143,12 @@ class JEPA(nn.Module):
 
         return cost
 
+    def _goal_cache_id(self, goal_pixels: torch.Tensor) -> tuple:
+        """Cheap identity for C1 cache: shape + checksum of flattened goal batch."""
+        flat = goal_pixels.detach().float().reshape(-1)[:4096]
+        checksum = float(flat.sum().item()) + float(flat.numel())
+        return (tuple(goal_pixels.shape), checksum)
+
     def get_cost(self, info_dict: dict, action_candidates: torch.Tensor):
         """ Compute the cost of action candidates given an info dict with goal and initial state."""
 
@@ -135,19 +159,33 @@ class JEPA(nn.Module):
             if torch.is_tensor(info_dict[k]):
                 info_dict[k] = info_dict[k].to(device)
 
-        goal = {k: v[:, 0] for k, v in info_dict.items() if torch.is_tensor(v)}
-        goal["pixels"] = goal["goal"]
+        goal_pixels = info_dict["goal"]
+        use_cache = bool(getattr(self, "cache_goal_emb", True))
+        goal_id = self._goal_cache_id(goal_pixels[:, 0] if goal_pixels.ndim >= 2 else goal_pixels)
 
-        for k in info_dict:
-            if k.startswith("goal_"):
-                goal[k[len("goal_") :]] = goal.pop(k)
+        if (
+            use_cache
+            and self._cached_goal_emb is not None
+            and self._cached_goal_id == goal_id
+        ):
+            info_dict["goal_emb"] = self._cached_goal_emb
+        else:
+            goal = {k: v[:, 0] for k, v in info_dict.items() if torch.is_tensor(v)}
+            goal["pixels"] = goal["goal"]
 
-        goal.pop("action")
-        goal = self.encode(goal)
+            for k in list(info_dict.keys()):
+                if k.startswith("goal_"):
+                    goal[k[len("goal_") :]] = goal.pop(k)
 
-        info_dict["goal_emb"] = goal["emb"]
+            goal.pop("action", None)
+            goal = self.encode(goal)
+            info_dict["goal_emb"] = goal["emb"]
+            if use_cache:
+                self._cached_goal_emb = goal["emb"].detach()
+                self._cached_goal_id = goal_id
+
         info_dict = self.rollout(info_dict, action_candidates)
 
         cost = self.criterion(info_dict)
-        
+
         return cost
