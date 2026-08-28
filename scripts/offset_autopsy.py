@@ -198,10 +198,13 @@ def imagine_path(
 
 def cost_to_goal(name: str, z: torch.Tensor, z_g: torch.Tensor, reach: ReachabilityHead | None):
     """z (L,D), z_g (D,) → distances (L,)."""
-    zg = z_g.unsqueeze(0).expand(z.size(0), -1)
     if name == "l2_z":
-        return torch.linalg.vector_norm(z - zg, ord=2, dim=-1).numpy()
+        zg = z_g.unsqueeze(0).expand(z.size(0), -1)
+        return torch.linalg.vector_norm(z - zg, ord=2, dim=-1).cpu().numpy()
     assert reach is not None
+    device = next(reach.parameters()).device
+    z = z.to(device)
+    zg = z_g.to(device).unsqueeze(0).expand(z.size(0), -1)
     with torch.no_grad():
         return reach.distance(z, zg, detach_z=True).cpu().numpy()
 
