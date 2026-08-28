@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import torch
 from torch import nn
-import torch.nn.functional as F
+
+from iqe import iqe_sum
 
 
 class ReachProjection(nn.Module):
@@ -25,16 +26,38 @@ class ReachProjection(nn.Module):
 
 
 class ReachabilityHead(nn.Module):
-    """φ + Euclidean distance used as CEM planning cost / hindsight target."""
+    """φ + distance used as CEM planning cost / value target.
+
+    distance_mode:
+      - "euclidean": ‖φ(z_s)-φ(z_g)‖₂  (hindsight-k regression path)
+      - "iqe_sum": Wang&Isola IQE-sum quasimetric (Protocol T3 / Destrade VF_quasi)
+    """
 
     def __init__(
         self,
         input_dim: int = 192,
         hidden_dim: int = 256,
         output_dim: int = 64,
+        *,
+        distance_mode: str = "euclidean",
+        iqe_k: int = 8,
+        iqe_l: int = 8,
     ):
         super().__init__()
+        if distance_mode not in ("euclidean", "iqe_sum"):
+            raise ValueError(
+                f"distance_mode must be 'euclidean' or 'iqe_sum', got {distance_mode!r}"
+            )
+        if distance_mode == "iqe_sum" and output_dim != iqe_k * iqe_l:
+            raise ValueError(
+                f"iqe_sum requires output_dim=k*l ({iqe_k}*{iqe_l}={iqe_k * iqe_l}), "
+                f"got {output_dim}"
+            )
         self.phi = ReachProjection(input_dim, hidden_dim, output_dim)
+        self.distance_mode = distance_mode
+        self.iqe_k = int(iqe_k)
+        self.iqe_l = int(iqe_l)
+        self.output_dim = int(output_dim)
 
     def project(self, z: torch.Tensor, *, detach_z: bool = True) -> torch.Tensor:
         if detach_z:
@@ -44,19 +67,30 @@ class ReachabilityHead(nn.Module):
         u = self.phi(flat)
         return u.view(*z.shape[:-1], u.size(-1))
 
+    def _distance_u(self, u_t: torch.Tensor, u_g: torch.Tensor) -> torch.Tensor:
+        if self.distance_mode == "euclidean":
+            return torch.linalg.vector_norm(u_t - u_g, ord=2, dim=-1)
+        return iqe_sum(u_t, u_g, k=self.iqe_k, l=self.iqe_l)
+
     def pairwise_distance(
         self, z_t: torch.Tensor, z_tk: torch.Tensor, *, detach_z: bool = True
     ) -> torch.Tensor:
-        """Return Euclidean ‖φ(z_t) - φ(z_tk)‖ with shape broadcast of leading dims."""
+        """Nonnegative distance between φ(z_t) and φ(z_tk)."""
         u_t = self.project(z_t, detach_z=detach_z)
         u_tk = self.project(z_tk, detach_z=detach_z)
-        return torch.linalg.vector_norm(u_t - u_tk, ord=2, dim=-1)
+        return self._distance_u(u_t, u_tk)
 
     def distance(
         self, z: torch.Tensor, z_star: torch.Tensor, *, detach_z: bool = True
     ) -> torch.Tensor:
         """Alias for pairwise_distance (planning API)."""
         return self.pairwise_distance(z, z_star, detach_z=detach_z)
+
+    def value(
+        self, z: torch.Tensor, z_g: torch.Tensor, *, detach_z: bool = True
+    ) -> torch.Tensor:
+        """Destrade-style value V = -d(φ(z), φ(z_g))."""
+        return -self.pairwise_distance(z, z_g, detach_z=detach_z)
 
     def planning_cost(
         self, pred_emb: torch.Tensor, goal_emb: torch.Tensor

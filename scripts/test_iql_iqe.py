@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from iqe import iqe_sum, reshape_phi  # noqa: E402
+from reachability import ReachabilityHead  # noqa: E402
 from iql_loss import expectile_l2, iql_vf_loss  # noqa: E402
 
 
@@ -116,6 +117,27 @@ def test_iql_shapes():
     assert torch.isfinite(loss)
 
 
+def test_reach_head_iqe_value_and_cost():
+    head = ReachabilityHead(
+        input_dim=192, output_dim=64, distance_mode="iqe_sum", iqe_k=8, iqe_l=8
+    )
+    z = torch.randn(4, 192)
+    d = head.distance(z, z)
+    assert torch.allclose(d, torch.zeros_like(d), atol=1e-4)
+    V = head.value(z, z)
+    assert torch.allclose(V, torch.zeros_like(V), atol=1e-4)
+
+    z_g = torch.randn(4, 192)
+    d2 = head.distance(z, z_g)
+    assert (d2 >= -1e-5).all()
+    assert torch.allclose(head.value(z, z_g), -d2)
+
+    B, S, T, D = 2, 3, 5, 192
+    cost = head.planning_cost(torch.randn(B, S, T, D), torch.randn(B, S, 1, D))
+    assert cost.shape == (B, S)
+    assert torch.isfinite(cost).all()
+
+
 def main():
     test_iqe_zero_self_distance()
     test_iqe_nonnegative()
@@ -126,7 +148,8 @@ def main():
     test_iql_s_equals_g_zero_reward_term()
     test_iql_bootstrap_stopgrad()
     test_iql_shapes()
-    print("iqe + iql_loss tests OK")
+    test_reach_head_iqe_value_and_cost()
+    print("iqe + iql_loss + reach tests OK")
 
 
 if __name__ == "__main__":

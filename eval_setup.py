@@ -222,6 +222,7 @@ def attach_reach_head(
     model.cache_goal_emb = cache_goal_emb
     model._cached_goal_emb = None
     model._cached_goal_id = None
+    model._forced_goal_cache_key = None
 
     # Bind lewm-phi planning API onto whatever trunk class was loaded.
     model.clear_goal_cache = types.MethodType(JEPA.clear_goal_cache, model)
@@ -234,16 +235,39 @@ def attach_reach_head(
         model.reach = None
         return model
 
-    head = ReachabilityHead(
-        input_dim=input_dim, hidden_dim=hidden_dim, output_dim=output_dim
-    )
+    distance_mode = "euclidean"
+    iqe_k, iqe_l = 8, 8
+    ckpt_meta: dict = {}
+    weight_state = None
     if phi_weights:
         path = Path(phi_weights)
-        state = torch.load(path, map_location="cpu", weights_only=True)
-        if isinstance(state, dict) and "reach" in state:
-            state = state["reach"]
-        head.load_state_dict(state)
+        blob = torch.load(path, map_location="cpu", weights_only=True)
+        if isinstance(blob, dict) and "reach" in blob:
+            weight_state = blob["reach"]
+            meta = blob.get("meta") or {}
+            if isinstance(meta, dict):
+                ckpt_meta = meta
+                distance_mode = str(meta.get("distance_mode", distance_mode))
+                iqe_k = int(meta.get("iqe_k", iqe_k))
+                iqe_l = int(meta.get("iqe_l", iqe_l))
+                output_dim = int(meta.get("output_dim", output_dim))
+                hidden_dim = int(meta.get("hidden_dim", hidden_dim))
+                input_dim = int(meta.get("input_dim", input_dim))
+        else:
+            weight_state = blob
+
+    head = ReachabilityHead(
+        input_dim=input_dim,
+        hidden_dim=hidden_dim,
+        output_dim=output_dim,
+        distance_mode=distance_mode,
+        iqe_k=iqe_k,
+        iqe_l=iqe_l,
+    )
+    if weight_state is not None:
+        head.load_state_dict(weight_state)
     model.reach = head
+    model._reach_meta = ckpt_meta
     if device is not None:
         model.reach.to(device)
     model.reach.eval()
