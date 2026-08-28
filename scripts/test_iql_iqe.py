@@ -6,6 +6,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+import numpy as np
 import torch
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +15,11 @@ sys.path.insert(0, str(ROOT))
 from iqe import iqe_sum, reshape_phi  # noqa: E402
 from reachability import ReachabilityHead  # noqa: E402
 from iql_loss import expectile_l2, iql_vf_loss  # noqa: E402
+from phi_iql_data import (  # noqa: E402
+    IQLTransition,
+    sample_iql_transitions,
+)
+from eval_logging.pairs import EpisodeTraj  # noqa: E402
 
 
 def test_iqe_zero_self_distance():
@@ -138,6 +144,24 @@ def test_reach_head_iqe_value_and_cost():
     assert torch.isfinite(cost).all()
 
 
+def test_iql_transition_identity():
+    eps = [
+        EpisodeTraj(seed=0, pixels=[np.zeros((8, 8, 3), dtype=np.uint8)] * 5),
+        EpisodeTraj(seed=1, pixels=[np.zeros((8, 8, 3), dtype=np.uint8)] * 4),
+    ]
+    trs = sample_iql_transitions(eps, n_samples=200, seed=0, terminal_goal_frac=0.5)
+    assert len(trs) == 200
+    # Exact s==g when indices match
+    hit = IQLTransition(ep_idx=0, t=4, g_ep_idx=0, g_t=4)
+    assert hit.not_at_goal is False
+    miss = IQLTransition(ep_idx=0, t=1, g_ep_idx=0, g_t=4)
+    assert miss.not_at_goal is True
+    # Some terminal goals exist
+    assert any(
+        t.g_t == len(eps[t.ep_idx].pixels) - 1 and t.g_ep_idx == t.ep_idx for t in trs
+    )
+
+
 def main():
     test_iqe_zero_self_distance()
     test_iqe_nonnegative()
@@ -149,7 +173,8 @@ def main():
     test_iql_bootstrap_stopgrad()
     test_iql_shapes()
     test_reach_head_iqe_value_and_cost()
-    print("iqe + iql_loss + reach tests OK")
+    test_iql_transition_identity()
+    print("iqe + iql_loss + reach + data tests OK")
 
 
 if __name__ == "__main__":
