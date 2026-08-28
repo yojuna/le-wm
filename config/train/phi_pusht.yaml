@@ -1,15 +1,18 @@
-# Reference config / defaults for train_phi.py (CLI is primary entrypoint).
+# Live-sim train_phi defaults (no HF HDF5).
 # Example:
-#   python train_phi.py --ckpt hf_pusht --dataset pusht_expert_train --epochs 5
+#   python train_phi.py --collector weak --collect-steps 8000 --epochs 5
 
 ckpt: hf_pusht
-dataset: pusht_expert_train
+collector: weak
+collect_episodes: 64
+collect_steps: 8000
+ep_horizon: 80
 k_max: 25
 batch_size: 64
 epochs: 5
 lr: 1.0e-3
-num_workers: 4
-samples_per_epoch: 4096
+samples_per_epoch: 2048
 seed: 0
 embed_dim: 192
 phi_dim: 64
+data_source: live_trajectory_bank
