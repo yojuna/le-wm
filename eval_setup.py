@@ -193,6 +193,49 @@ def load_lewm_checkpoint(ckpt_name: str, *, cache_dir: str | Path | None = None)
     return model
 
 
+def attach_reach_head(
+    model,
+    *,
+    plan_cost: str = "l2_z",
+    phi_weights: str | Path | None = None,
+    input_dim: int = 192,
+    hidden_dim: int = 256,
+    output_dim: int = 64,
+    cache_goal_emb: bool = True,
+    device: str | None = None,
+):
+    """Attach lewm-phi ReachabilityHead to a loaded JEPA without rewriting ckpts."""
+    from reachability import ReachabilityHead
+
+    if plan_cost not in ("l2_z", "phi_d"):
+        raise ValueError(f"plan_cost must be 'l2_z' or 'phi_d', got {plan_cost!r}")
+
+    model.plan_cost = plan_cost
+    model.cache_goal_emb = cache_goal_emb
+    model.clear_goal_cache()
+
+    if plan_cost == "l2_z" and not phi_weights:
+        model.reach = None
+        return model
+
+    head = ReachabilityHead(
+        input_dim=input_dim, hidden_dim=hidden_dim, output_dim=output_dim
+    )
+    if phi_weights:
+        path = Path(phi_weights)
+        state = torch.load(path, map_location="cpu", weights_only=True)
+        if isinstance(state, dict) and "reach" in state:
+            state = state["reach"]
+        head.load_state_dict(state)
+    model.reach = head
+    if device is not None:
+        model.reach.to(device)
+    model.reach.eval()
+    for p in model.reach.parameters():
+        p.requires_grad_(False)
+    return model
+
+
 def build_world_model_policy(
     model,
     *,
@@ -207,6 +250,9 @@ def build_world_model_policy(
     seed: int,
     on_planning_solve=None,
     plan_debugger=None,
+    plan_cost: str = "l2_z",
+    phi_weights: str | Path | None = None,
+    cache_goal_emb: bool = True,
 ):
     """Build WorldModelPolicy the same way eval.py does."""
     from eval_logging import wrap_solver_timing
@@ -216,9 +262,20 @@ def build_world_model_policy(
         EliteCostRecorder,
     )
 
+    attach_reach_head(
+        model,
+        plan_cost=plan_cost,
+        phi_weights=phi_weights,
+        cache_goal_emb=cache_goal_emb,
+        device=device,
+    )
+
     model = model.to(device)
     model.eval()
     model.requires_grad_(False)
+    if getattr(model, "reach", None) is not None:
+        model.reach.to(device)
+        model.reach.eval()
     if hasattr(model, "interpolate_pos_encoding"):
         model.interpolate_pos_encoding = True
 

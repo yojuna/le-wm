@@ -162,6 +162,7 @@ def build_policy(spec: EnvSpec, args, *, process=None, on_planning_solve=None, p
         "action_block": spec.action_block,
         "warm_start": True,
     }
+    phi_weights = getattr(args, "phi_weights", "") or None
     return build_world_model_policy(
         model,
         process=process,
@@ -175,6 +176,9 @@ def build_policy(spec: EnvSpec, args, *, process=None, on_planning_solve=None, p
         seed=args.seed,
         on_planning_solve=on_planning_solve,
         plan_debugger=plan_debugger,
+        plan_cost=getattr(args, "plan_cost", "l2_z"),
+        phi_weights=phi_weights,
+        cache_goal_emb=not getattr(args, "no_cache_goal_emb", False),
     )
 
 
@@ -689,6 +693,22 @@ def parse_args(argv=None):
         "--plan-debug",
         action="store_true",
         help="log CEM cost curves, action plans, start/goal images, near-miss panels",
+    )
+    p.add_argument(
+        "--plan-cost",
+        choices=["l2_z", "phi_d"],
+        default="l2_z",
+        help="CEM cost: legacy L2 in z, or Euclidean in φ (lewm-phi)",
+    )
+    p.add_argument(
+        "--phi-weights",
+        default="",
+        help="path to reach.pt (empty + plan-cost=phi_d → random φ / E4)",
+    )
+    p.add_argument(
+        "--no-cache-goal-emb",
+        action="store_true",
+        help="disable C1 goal embedding cache (re-encode goal every CEM call)",
     )
     return p.parse_args(argv)
 

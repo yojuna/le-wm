@@ -140,6 +140,12 @@ def evaluate_goal_offset(
 
     try:
         for ep_idx, pair in enumerate(pairs):
+            # C1: drop cached goal emb between pairs
+            policy = getattr(world, "policy", None)
+            model = getattr(getattr(policy, "solver", None), "model", None)
+            if model is not None and hasattr(model, "clear_goal_cache"):
+                model.clear_goal_cache()
+
             world.reset(seed=pair.seed)
             env = world.envs.envs[0].unwrapped
             _apply_pair_to_env(env, pair)
