@@ -36,10 +36,9 @@ os.environ.setdefault("STABLEWM_HOME", str(DEFAULT_CACHE))
 
 
 def img_transform(img_size: int = 224):
+    """Expect CHW float tensor in [0, 1]; apply ImageNet normalize + resize."""
     return transforms.Compose(
         [
-            transforms.ToImage(),
-            transforms.ToDtype(torch.float32, scale=True),
             transforms.Normalize(**spt.data.dataset_stats.ImageNet),
             transforms.Resize(size=img_size),
         ]
@@ -65,6 +64,22 @@ def pearson_corr(x: torch.Tensor, y: torch.Tensor) -> float:
     if float(denom) < 1e-8:
         return float("nan")
     return float((x * y).sum() / denom)
+
+
+def _assert_on_device(module: torch.nn.Module, device: torch.device, *, name: str) -> None:
+    param = next(module.parameters(), None)
+    if param is None:
+        return
+    if param.device.type != device.type:
+        raise RuntimeError(
+            f"{name} is on {param.device}, expected {device}. "
+            "Training would not use the requested GPU."
+        )
+    if device.type == "cuda" and device.index is not None and param.device.index not in (
+        device.index,
+        None,
+    ):
+        raise RuntimeError(f"{name} is on {param.device}, expected {device}")
 
 
 def collect_live_bank(args) -> TrajectoryBank:
@@ -112,10 +127,11 @@ def collect_live_bank(args) -> TrajectoryBank:
 def run_epoch(model, reach, loader, device, *, train: bool, optimizer=None):
     reach.train(train)
     losses, ds, ks = [], [], []
+    non_blocking = isinstance(device, torch.device) and device.type == "cuda"
     for batch in loader:
-        pixels_t = batch["pixels_t"].to(device)
-        pixels_tk = batch["pixels_tk"].to(device)
-        k = batch["k"].to(device)
+        pixels_t = batch["pixels_t"].to(device, non_blocking=non_blocking)
+        pixels_tk = batch["pixels_tk"].to(device, non_blocking=non_blocking)
+        k = batch["k"].to(device, non_blocking=non_blocking)
 
         with torch.no_grad():
             z_t = encode_frames(model, pixels_t)
@@ -167,13 +183,40 @@ def main():
     p.add_argument("--samples-per-epoch", type=int, default=2048)
     p.add_argument("--val-frac", type=float, default=0.1)
     p.add_argument("--seed", type=int, default=0)
-    p.add_argument("--device", default="cuda")
+    p.add_argument(
+        "--device",
+        default="cuda",
+        help="torch device (default: cuda). Use --device cuda:0 to pin a GPU.",
+    )
+    p.add_argument(
+        "--allow-cpu",
+        action="store_true",
+        help="permit falling back to CPU if CUDA is unavailable (default: abort)",
+    )
     p.add_argument("--out-dir", type=Path, default=None)
     args = p.parse_args()
 
-    device = args.device
-    if device == "cuda" and not torch.cuda.is_available():
-        device = "cpu"
+    device = torch.device(args.device)
+    if device.type == "cuda":
+        if not torch.cuda.is_available():
+            if args.allow_cpu:
+                print("WARNING: CUDA unavailable; falling back to CPU (--allow-cpu)")
+                device = torch.device("cpu")
+            else:
+                raise SystemExit(
+                    "CUDA requested but torch.cuda.is_available() is False. "
+                    "Fix the GPU driver/PyTorch install, or pass --allow-cpu."
+                )
+        # Resolve cuda -> cuda:0 so .to(device) is unambiguous
+        if device.index is None:
+            device = torch.device("cuda", torch.cuda.current_device())
+        torch.cuda.set_device(device)
+        print(
+            f"using GPU {device} ({torch.cuda.get_device_name(device)})  "
+            f"mem={torch.cuda.get_device_properties(device).total_memory / 1e9:.1f} GB"
+        )
+    else:
+        print(f"using device {device}")
 
     cache = Path(os.environ["STABLEWM_HOME"])
     out_dir = args.out_dir or (cache / "checkpoints" / "pusht" / "lewm_phi")
@@ -181,12 +224,15 @@ def main():
 
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
+    if device.type == "cuda":
+        torch.cuda.manual_seed_all(args.seed)
 
     print(f"loading frozen trunk {args.ckpt}")
     model = load_lewm_checkpoint(args.ckpt, cache_dir=cache)
     model.to(device)
     model.eval()
     model.requires_grad_(False)
+    _assert_on_device(model, device, name="trunk")
 
     print(f"collecting live PushT bank collector={args.collector}")
     bank = collect_live_bank(args)
@@ -212,6 +258,7 @@ def main():
         num_workers=args.num_workers,
         collate_fn=collate_hindsight,
         drop_last=True,
+        pin_memory=(device.type == "cuda"),
     )
     val_loader = DataLoader(
         val_set,
@@ -220,9 +267,11 @@ def main():
         num_workers=0,
         collate_fn=collate_hindsight,
         drop_last=False,
+        pin_memory=(device.type == "cuda"),
     )
 
     reach = ReachabilityHead(input_dim=192, output_dim=64).to(device)
+    _assert_on_device(reach, device, name="reach")
     optim = torch.optim.AdamW(reach.parameters(), lr=args.lr, weight_decay=1e-4)
 
     history = []
