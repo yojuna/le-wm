@@ -1,0 +1,15 @@
+# Reference config / defaults for train_phi.py (CLI is primary entrypoint).
+# Example:
+#   python train_phi.py --ckpt hf_pusht --dataset pusht_expert_train --epochs 5
+
+ckpt: hf_pusht
+dataset: pusht_expert_train
+k_max: 25
+batch_size: 64
+epochs: 5
+lr: 1.0e-3
+num_workers: 4
+samples_per_epoch: 4096
+seed: 0
+embed_dim: 192
+phi_dim: 64
