@@ -3,6 +3,7 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+MUJOCO_LOG.TXT
 
 # Eval artifacts (metrics may be force-added selectively)
 eval_results/
