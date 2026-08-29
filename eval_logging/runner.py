@@ -140,11 +140,13 @@ def evaluate_goal_offset(
 
     try:
         for ep_idx, pair in enumerate(pairs):
-            # C1: drop cached goal emb between pairs
+            # C1: drop cached goal emb between pairs; set explicit cache key on
+            # the model (not world.infos — CEM only expands tensors safely).
             policy = getattr(world, "policy", None)
             model = getattr(getattr(policy, "solver", None), "model", None)
             if model is not None and hasattr(model, "clear_goal_cache"):
                 model.clear_goal_cache()
+                model._forced_goal_cache_key = f"pair:{ep_idx}:seed:{pair.seed}"
 
             world.reset(seed=pair.seed)
             env = world.envs.envs[0].unwrapped

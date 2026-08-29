@@ -16,7 +16,7 @@ from pathlib import Path
 import numpy as np
 import torch
 import torch.nn.functional as F
-from torch.utils.data import DataLoader, random_split
+from torch.utils.data import DataLoader
 from torchvision.transforms import v2 as transforms
 import stable_pretraining as spt
 import stable_worldmodel as swm
@@ -27,7 +27,11 @@ from eval_logging.pairs import (
     collect_trajectory_bank,
 )
 from eval_setup import load_lewm_checkpoint
-from phi_data import LiveHindsightPairDataset, collate_hindsight
+from phi_data import (
+    build_train_val_datasets,
+    collate_hindsight,
+    sample_hindsight_pairs,
+)
 from reachability import ReachabilityHead
 
 ROOT = Path(__file__).resolve().parent
@@ -74,9 +78,11 @@ def _append_metrics_csv(path: Path, row: dict) -> None:
         "train_loss": row["train"]["loss"],
         "train_corr": row["train"]["corr_d_k"],
         "train_mean_d": row["train"]["mean_d"],
+        "train_mean_k": row["train"]["mean_k"],
         "val_loss": row["val"]["loss"],
         "val_corr": row["val"]["corr_d_k"],
         "val_mean_d": row["val"]["mean_d"],
+        "val_mean_k": row["val"]["mean_k"],
     }
     write_header = not path.exists()
     with path.open("a", newline="") as f:
@@ -310,37 +316,48 @@ def main():
     bank = collect_live_bank(args)
 
     transform = img_transform(224)
-    full = LiveHindsightPairDataset(
+    train_set, val_set, split_meta = build_train_val_datasets(
         bank,
         k_max=args.k_max,
-        img_transform=transform,
         samples_per_epoch=args.samples_per_epoch,
+        val_frac=args.val_frac,
         seed=args.seed,
+        img_transform=transform,
     )
-    n_val = max(1, int(len(full) * args.val_frac))
-    n_train = len(full) - n_val
-    train_set, val_set = random_split(
-        full, [n_train, n_val], generator=torch.Generator().manual_seed(args.seed)
+    print(
+        f"episode split: train_eps={split_meta['n_train_episodes']} "
+        f"val_eps={split_meta['n_val_episodes']} "
+        f"train_pairs={split_meta['n_train_pairs']} "
+        f"val_pairs={split_meta['n_val_pairs']}"
+        + (
+            "  WARNING: only 1 usable episode — val is not held-out"
+            if split_meta.get("same_episode_fallback")
+            else ""
+        )
     )
 
-    train_loader = DataLoader(
-        train_set,
-        batch_size=args.batch_size,
-        shuffle=True,
-        num_workers=args.num_workers,
-        collate_fn=collate_hindsight,
-        drop_last=True,
-        pin_memory=(device.type == "cuda"),
-    )
-    val_loader = DataLoader(
-        val_set,
-        batch_size=args.batch_size,
-        shuffle=False,
-        num_workers=0,
-        collate_fn=collate_hindsight,
-        drop_last=False,
-        pin_memory=(device.type == "cuda"),
-    )
+    def make_loaders(train_ds):
+        tr = DataLoader(
+            train_ds,
+            batch_size=args.batch_size,
+            shuffle=True,
+            num_workers=args.num_workers,
+            collate_fn=collate_hindsight,
+            drop_last=True,
+            pin_memory=(device.type == "cuda"),
+        )
+        va = DataLoader(
+            val_set,
+            batch_size=args.batch_size,
+            shuffle=False,
+            num_workers=0,
+            collate_fn=collate_hindsight,
+            drop_last=False,
+            pin_memory=(device.type == "cuda"),
+        )
+        return tr, va
+
+    train_loader, val_loader = make_loaders(train_set)
 
     reach = ReachabilityHead(input_dim=192, output_dim=64).to(device)
     _assert_on_device(reach, device, name="reach")
@@ -356,6 +373,16 @@ def main():
     tb = _maybe_tb_writer(out_dir, enabled=args.tensorboard)
 
     for epoch in range(1, args.epochs + 1):
+        # Fresh train pairs each epoch (same train episodes); val pairs stay fixed.
+        if epoch > 1:
+            train_set.pairs = sample_hindsight_pairs(
+                train_set.episodes,
+                k_max=args.k_max,
+                n_samples=args.samples_per_epoch,
+                seed=args.seed + epoch,
+            )
+            train_loader, val_loader = make_loaders(train_set)
+
         tr = run_epoch(model, reach, train_loader, device, train=True, optimizer=optim)
         va = run_epoch(model, reach, val_loader, device, train=False)
         row = {"epoch": epoch, "train": tr, "val": va}
@@ -394,6 +421,7 @@ def main():
         "bank_episodes": len(bank.episodes),
         "bank_steps": bank.num_steps,
         "data_source": "live_simulator",
+        "split": split_meta,
         "metrics_csv": str(metrics_csv),
         "training_curves": str(curves_png),
     }

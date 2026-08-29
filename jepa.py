@@ -37,6 +37,8 @@ class JEPA(nn.Module):
         """Drop C1 cached goal embedding (call at episode / pair boundaries)."""
         self._cached_goal_emb = None
         self._cached_goal_id = None
+        # Optional explicit key set by eval runner (preferred over pixel hash).
+        self._forced_goal_cache_key = None
 
     def encode(self, info):
         """Encode observations and actions into embeddings.
@@ -144,10 +146,26 @@ class JEPA(nn.Module):
         return cost
 
     def _goal_cache_id(self, goal_pixels: torch.Tensor) -> tuple:
-        """Cheap identity for C1 cache: shape + checksum of flattened goal batch."""
-        flat = goal_pixels.detach().float().reshape(-1)[:4096]
-        checksum = float(flat.sum().item()) + float(flat.numel())
-        return (tuple(goal_pixels.shape), checksum)
+        """Stable C1 cache key: shape + blake2b of evenly subsampled floats.
+
+        Prefer an explicit ``goal_cache_key`` in ``get_cost`` when the caller
+        knows the episode/pair id; this hash is the fallback for pixel tensors.
+        """
+        import hashlib
+
+        t = goal_pixels.detach().float().contiguous().cpu()
+        flat = t.reshape(-1)
+        n = int(flat.numel())
+        if n == 0:
+            return (tuple(goal_pixels.shape), "empty")
+        # Cap work: evenly spaced subsample (not just the head — avoids collisions).
+        if n > 8192:
+            idx = torch.linspace(0, n - 1, steps=8192).long()
+            flat = flat[idx]
+        digest = hashlib.blake2b(
+            flat.numpy().tobytes(), digest_size=16
+        ).hexdigest()
+        return (tuple(int(s) for s in goal_pixels.shape), digest)
 
     def get_cost(self, info_dict: dict, action_candidates: torch.Tensor):
         """ Compute the cost of action candidates given an info dict with goal and initial state."""
@@ -161,7 +179,22 @@ class JEPA(nn.Module):
 
         goal_pixels = info_dict["goal"]
         use_cache = bool(getattr(self, "cache_goal_emb", True))
-        goal_id = self._goal_cache_id(goal_pixels[:, 0] if goal_pixels.ndim >= 2 else goal_pixels)
+        # Prefer model-level key (set by eval runner). Avoid putting strings in
+        # CEM info_dict — CEM only safely expands tensors / ndarrays.
+        forced = getattr(self, "_forced_goal_cache_key", None)
+        if forced is not None:
+            goal_id = ("key", forced)
+        elif "goal_cache_key" in info_dict and info_dict["goal_cache_key"] is not None:
+            raw = info_dict["goal_cache_key"]
+            # If CEM somehow sliced a string, ignore garbage and hash pixels.
+            if isinstance(raw, str) and len(raw) > 1:
+                goal_id = ("key", raw)
+            else:
+                g = goal_pixels[:, 0] if goal_pixels.ndim >= 2 else goal_pixels
+                goal_id = self._goal_cache_id(g)
+        else:
+            g = goal_pixels[:, 0] if goal_pixels.ndim >= 2 else goal_pixels
+            goal_id = self._goal_cache_id(g)
 
         if (
             use_cache
@@ -173,8 +206,10 @@ class JEPA(nn.Module):
             goal = {k: v[:, 0] for k, v in info_dict.items() if torch.is_tensor(v)}
             goal["pixels"] = goal["goal"]
 
-            for k in list(info_dict.keys()):
-                if k.startswith("goal_"):
+            # Strip goal_ prefix only on tensor fields already copied into goal.
+            # Skip non-tensors like goal_cache_key (string C1 id).
+            for k in list(goal.keys()):
+                if k.startswith("goal_") and k != "goal":
                     goal[k[len("goal_") :]] = goal.pop(k)
 
             goal.pop("action", None)

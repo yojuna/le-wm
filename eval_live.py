@@ -17,7 +17,7 @@ from __future__ import annotations
 import argparse
 import os
 import subprocess
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -250,6 +250,17 @@ def _resolve_protocol(spec: EnvSpec, args) -> str:
     return spec.default_protocol
 
 
+def _apply_horizon(spec: EnvSpec, args) -> EnvSpec:
+    """CLI override for CEM imagination length (B2 T-sweep). Default 0 = spec."""
+    h = int(getattr(args, "horizon", 0) or 0)
+    rh = int(getattr(args, "receding_horizon", 0) or 0)
+    if h <= 0 and rh <= 0:
+        return spec
+    new_h = h if h > 0 else spec.horizon
+    new_rh = rh if rh > 0 else new_h
+    return replace(spec, horizon=new_h, receding_horizon=new_rh)
+
+
 def _run_meta(spec: EnvSpec, args, *, protocol: str, process_summary=None, extra=None) -> dict:
     meta = {
         "env_name": spec.env_name,
@@ -326,6 +337,7 @@ def run_eval(spec: EnvSpec, args):
     )
 
     protocol = _resolve_protocol(spec, args)
+    spec = _apply_horizon(spec, args)
     if protocol == "online_offset" and args.num_envs != 1:
         print("warning: online_offset requires num_envs=1; overriding")
         args.num_envs = 1
@@ -368,10 +380,15 @@ def run_eval(spec: EnvSpec, args):
 
     if protocol == "online_offset":
         collect_steps = max(args.stats_steps, args.episodes * (spec.goal_offset_steps + 5) * 4)
-        n_kin_eps = max(48, args.episodes * 4)
+        n_kin_eps = (
+            int(args.collect_episodes)
+            if getattr(args, "collect_episodes", 0)
+            else max(48, args.episodes * 4)
+        )
         print(
             f"collecting {args.collector} bank for "
-            f"scalers + {args.episodes} goal_offset={spec.goal_offset_steps} pairs"
+            f"scalers + {args.episodes} goal_offset={spec.goal_offset_steps} pairs "
+            f"(collect_episodes={n_kin_eps})"
         )
         bank = collect_trajectory_bank(
             world,
@@ -607,6 +624,18 @@ def parse_args(argv=None):
     p.add_argument("--topk", type=int, default=30)
     p.add_argument("--var-scale", type=float, default=1.0)
     p.add_argument(
+        "--horizon",
+        type=int,
+        default=0,
+        help="CEM imagination horizon (0 = env default, usually 5). B2 T-sweep.",
+    )
+    p.add_argument(
+        "--receding-horizon",
+        type=int,
+        default=0,
+        help="env steps of the plan to execute (0 = match --horizon if set, else spec)",
+    )
+    p.add_argument(
         "--stats-steps",
         type=int,
         default=2000,
@@ -617,6 +646,15 @@ def parse_args(argv=None):
         choices=["kinematic", "goal", "weak"],
         default="kinematic",
         help="PushT collection for online_offset (default: kinematic start→goal)",
+    )
+    p.add_argument(
+        "--collect-episodes",
+        type=int,
+        default=0,
+        help=(
+            "kinematic bank size for online_offset (0 = max(48, episodes*4)). "
+            "Raise this when short_horizon needs more valid pairs."
+        ),
     )
     p.add_argument(
         "--pair-mode",

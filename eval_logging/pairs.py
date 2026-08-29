@@ -24,7 +24,9 @@ class EpisodeTraj:
     succeeded: bool = False
 
     def __len__(self) -> int:
-        return len(self.state)
+        if self.state:
+            return len(self.state)
+        return len(self.pixels)
 
 
 @dataclass
@@ -182,6 +184,15 @@ def collect_trajectory_bank(
         infos = world.infos
         if "state" in infos:
             current.state.append(_vector(infos["state"]))
+        elif "qpos" in infos:
+            parts = [_vector(infos["qpos"])]
+            if "qvel" in infos:
+                parts.append(_vector(infos["qvel"]))
+            if "finger_pos" in infos:
+                parts.append(_vector(infos["finger_pos"]))
+            if "target_pos" in infos:
+                parts.append(_vector(infos["target_pos"]))
+            current.state.append(np.concatenate(parts, axis=0))
         if "proprio" in infos:
             current.proprio.append(_vector(infos["proprio"]))
         if "pixels" in infos:
