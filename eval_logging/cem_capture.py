@@ -30,6 +30,9 @@ class CemCapture:
         self._orig_get_cost = None
         self._dumped = False
         self._solve_count = 0
+        self._iter_best: list[float] = []
+        self._iter_mean: list[float] = []
+        self._iter_std: list[float] = []
         self.out_dir.mkdir(parents=True, exist_ok=True)
 
     def wrap_model(self, model):
@@ -47,6 +50,10 @@ class CemCapture:
                 self.last_info = snap
                 self.last_actions = action_candidates.detach().float().cpu().numpy()
                 self.last_costs = cost.detach().float().cpu().numpy()
+                flat = np.asarray(self.last_costs).reshape(-1)
+                self._iter_best.append(float(flat.min()))
+                self._iter_mean.append(float(flat.mean()))
+                self._iter_std.append(float(flat.std()) if flat.size > 1 else 0.0)
             except Exception:
                 pass
             return cost
@@ -98,20 +105,33 @@ class CemCapture:
         selected = int(np.argmin(costs))
         oracle_tok = None
         oracle_cost = None
+        ls_alphas = np.zeros(0, dtype=np.float32)
+        ls_costs = np.zeros(0, dtype=np.float32)
         if self.oracle_actions is not None and self._orig_get_cost is not None:
             tok = _oracle_to_cem_tokens(self.oracle_actions, acts.shape)
             oracle_tok = tok
             try:
                 import torch
 
-                cand = torch.from_numpy(tok)
-                while cand.ndim < 4:
-                    cand = cand.unsqueeze(0)
-                cand = cand.to(next(self.model.parameters()).device)
-                info = self.last_info if self.last_info is not None else info_dict
-                info = _squeeze_info_one_sample(info)
-                oc = self._orig_get_cost(info, cand)
-                oracle_cost = float(oc.detach().float().cpu().numpy().reshape(-1)[0])
+                def _score(token_hw: np.ndarray, info):
+                    cand = torch.from_numpy(np.asarray(token_hw, dtype=np.float32))
+                    while cand.ndim < 4:
+                        cand = cand.unsqueeze(0)
+                    cand = cand.to(next(self.model.parameters()).device)
+                    oc = self._orig_get_cost(info, cand)
+                    return float(oc.detach().float().cpu().numpy().reshape(-1)[0])
+
+                info0 = self.last_info if self.last_info is not None else info_dict
+                info = _squeeze_info_one_sample(info0)
+                oracle_cost = _score(tok, info)
+                sel_tok = acts[selected]
+                alphas = np.linspace(0.0, 1.0, 9)
+                ls = []
+                for a in alphas:
+                    mix = (1.0 - float(a)) * sel_tok + float(a) * tok
+                    ls.append(_score(mix, _squeeze_info_one_sample(info0)))
+                ls_alphas = alphas.astype(np.float32)
+                ls_costs = np.asarray(ls, dtype=np.float32)
                 errp = self.out_dir / "oracle_cost_error.txt"
                 if errp.exists():
                     errp.unlink()
@@ -132,6 +152,11 @@ class CemCapture:
             oracle_cost=np.asarray(
                 [oracle_cost if oracle_cost is not None else np.nan], dtype=np.float32
             ),
+            line_search_alphas=ls_alphas,
+            line_search_costs=ls_costs,
+            iter_best=np.asarray(self._iter_best, dtype=np.float32),
+            iter_mean=np.asarray(self._iter_mean, dtype=np.float32),
+            iter_std=np.asarray(self._iter_std, dtype=np.float32),
         )
         meta = {
             "episode": self.episode,
@@ -145,6 +170,8 @@ class CemCapture:
                 if oracle_cost is None
                 else float(oracle_cost - costs[selected])
             ),
+            "n_line_search": int(ls_alphas.size),
+            "n_iters": int(len(self._iter_best)),
         }
         (self.out_dir / "cem_capture.meta.json").write_text(json.dumps(meta, indent=2))
         self._dumped = True
@@ -160,7 +187,10 @@ def _squeeze_info_one_sample(info: dict) -> dict:
         if k in drop:
             continue
         if torch.is_tensor(v) and v.ndim >= 2:
-            out[k] = v[:, :1].contiguous() if v.size(1) > 1 else v.contiguous()
+            sl = v[:, :1] if v.size(1) > 1 else v
+            out[k] = sl.detach().contiguous().clone()
+        elif torch.is_tensor(v):
+            out[k] = v.detach().clone()
         else:
             out[k] = v
     return out

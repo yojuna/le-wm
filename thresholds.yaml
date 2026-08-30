@@ -1,0 +1,64 @@
+# Pre-registered diagnostic cuts. Do not retune after seeing numbers.
+# Source: docs/14_phase_c_alt_plan.md CA0; copied here so viz/report/CA0 share one file.
+
+ca0:
+  m1_toward_guard: 0.90
+  m1_d_end_guard: 1.0
+  accum_toward_at_m5: 0.60
+  accum_d_end_at_m5: 3.0
+  infidelity_toward_at_m3: 0.60
+  infidelity_d_end_at_m3: 5.0
+
+a1:
+  # in-plane fraction below this → overlay is decorative; trust the full-space curve
+  in_plane_decorative_below: 0.35
+
+a2:
+  # median one-step error above this (relative to d_start scale, or absolute) → infidelity
+  median_onestep_abs: 0.8
+
+b1:
+  # signed_gap = cost(oracle) - cost(selected); > 0 → model scores oracle worse
+  signed_gap_model_if_gt: 0.0
+
+a3:
+  contact_ratio_spike_if_gt: 1.5
+
+d1:
+  dead_dim_hard_elbow_if_gt: 0.4
+
+# Part A (doc 16). Frozen before the GPU bracket run. Do not retune after seeing frac.
+encoder_floor:
+  frac_accum_at_or_below: 0.25
+  frac_infidelity_at_or_above: 0.5
+  determinism_median_max: 0.01
+  dump_vs_fresh_rel_max: 0.10
+
+# Pre-retrain confirmation (frozen before the confirm GPU suite). Same frac cuts.
+# These do not retune encoder_floor. They only classify *why* / *where*.
+infidelity_confirm:
+  frac_accum_at_or_below: 0.25
+  frac_infidelity_at_or_above: 0.5
+  # adjacent ‖Δz‖ vs sim pose delta; below this, z-steps may be encoder jitter not physics
+  pose_z_spearman_min: 0.30
+  # median ‖ẑ_{t+1}−z_t‖ / adjacent; below this, P is frozen (emits ~no motion)
+  predicted_move_over_adjacent_identity_below: 0.25
+  # (shuffle_onestep − true_onestep) / adjacent; below this, action-deaf on that bank
+  shuffle_gap_over_adjacent_deaf_below: 0.10
+
+# B.eval-block / B.eval-tercile (doc 16). Frozen BEFORE collecting the block-moving
+# bank and BEFORE reading its frac. Do not retune after seeing numbers.
+b_eval_block:
+  # px per env step. Typical step in the window is a push, not a parked block.
+  # Live-bank seed-0 median was 0.0 with only 1/50 pairs ≥ 2.
+  median_step_block_xy_min: 2.0
+  n_pairs: 50
+  window: 25
+  stride: 25
+
+b_eval_tercile:
+  # Adjacent-‖Δz‖ tercile edges from seed-0 live-bank (ca0.npz), frozen as the
+  # pre distribution. Apply to later banks; do not re-fit quantiles.
+  adj_q33: 0.83155
+  adj_q67: 1.74008
+

@@ -268,6 +268,27 @@ def test_oracle_window_band_and_action_len():
     np.testing.assert_allclose(loaded[0].oracle_actions, p.oracle_actions)
 
 
+def test_window_block_moving_pairs_filters_parked_block():
+    from eval_logging.oracle_bank import window_block_moving_pairs
+    from eval_logging.pairs import EpisodeTraj, TrajectoryBank
+
+    moving = EpisodeTraj(seed=0)
+    parked = EpisodeTraj(seed=1)
+    for t in range(30):
+        moving.state.append(np.asarray([0.0, 0.0, 3.0 * t, 0.0, 0.0, 0.0, 0.0], dtype=np.float32))
+        moving.proprio.append(np.zeros(2, dtype=np.float32))
+        moving.pixels.append(np.zeros((4, 4, 3), dtype=np.uint8))
+        moving.action.append(np.zeros(2, dtype=np.float32))
+        parked.state.append(np.asarray([float(t), 0.0, 10.0, 0.0, 0.0, 0.0, 0.0], dtype=np.float32))
+        parked.proprio.append(np.zeros(2, dtype=np.float32))
+        parked.pixels.append(np.zeros((4, 4, 3), dtype=np.uint8))
+        parked.action.append(np.zeros(2, dtype=np.float32))
+    bank = TrajectoryBank(episodes=[moving, parked], env_name="swm/PushT-v1", collector="goal")
+    pairs = window_block_moving_pairs(bank, window=25, stride=25, median_step_block_xy_min=2.0)
+    assert len(pairs) == 1
+    assert pairs[0].seed == 0
+
+
 class _DummyLiveP:
     """Next z = last z + 0.1 * sum(last action token)."""
 
@@ -368,6 +389,7 @@ if __name__ == "__main__":
     test_effective_rank_identity_vs_rank1()
     test_oracle_actor_rejects_kinematic()
     test_oracle_window_band_and_action_len()
+    test_window_block_moving_pairs_filters_parked_block()
     test_imagine_path_length_and_history()
     test_imagine_closed_loop_large_m_matches_open_loop()
     test_contact_events_pusht()

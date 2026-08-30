@@ -23,6 +23,118 @@ DEFAULT_WINDOW = 25
 DEFAULT_STRIDE = 25
 
 
+def block_xy_steps(path_state: np.ndarray) -> np.ndarray:
+    """Per-step ‖Δblock_xy‖ along a window (L, ≥4)."""
+    st = np.asarray(path_state, dtype=np.float64)
+    if st.ndim != 2 or st.shape[0] < 2 or st.shape[-1] < 4:
+        return np.zeros(0, dtype=np.float64)
+    return np.linalg.norm(st[1:, 2:4] - st[:-1, 2:4], axis=-1)
+
+
+def pair_block_step_median(pair: EvalPair) -> float:
+    if pair.path_state is None:
+        return 0.0
+    d = block_xy_steps(pair.path_state)
+    if d.size == 0:
+        return 0.0
+    return float(np.median(d))
+
+
+def window_block_moving_pairs(
+    bank: TrajectoryBank,
+    *,
+    window: int = DEFAULT_WINDOW,
+    stride: int = DEFAULT_STRIDE,
+    scan_stride: int = 1,
+    median_step_block_xy_min: float = 2.0,
+    num_eval: int | None = None,
+    seed: int = 0,
+) -> list[EvalPair]:
+    """25-step windows where the *typical* env step moves the block.
+
+    No short_horizon pose band — that band selected near-settled hops
+    (live-bank per-step block-xy median 0). This is a dynamics bank for B.eval-block.
+    """
+    raw: list[tuple[int, EvalPair]] = []
+    for ep_i, ep in enumerate(bank.episodes):
+        n = len(ep)
+        if n < window + 1 or not ep.state or not ep.action or not ep.pixels:
+            continue
+        for start in range(0, n - window, scan_stride):
+            goal = start + window
+            st = np.stack(
+                [
+                    np.asarray(ep.state[i], dtype=np.float32).reshape(-1)
+                    for i in range(start, goal + 1)
+                ]
+            )
+            if float(np.median(block_xy_steps(st))) < float(median_step_block_xy_min):
+                continue
+            pos, _ang = pusht_pose_errors(ep.state[goal], ep.state[start])
+            acts = np.stack(
+                [
+                    np.asarray(ep.action[i], dtype=np.float32).reshape(-1)
+                    for i in range(start, goal)
+                ],
+                axis=0,
+            )
+            proprio_s = (
+                np.asarray(ep.proprio[start]) if ep.proprio else np.asarray(ep.state[start])[:2]
+            )
+            proprio_g = (
+                np.asarray(ep.proprio[goal]) if ep.proprio else np.asarray(ep.state[goal])[:2]
+            )
+            path_prop = None
+            if ep.proprio:
+                path_prop = np.stack(
+                    [np.asarray(ep.proprio[i]).reshape(-1) for i in range(start, goal + 1)]
+                )
+            raw.append(
+                (
+                    ep_i,
+                    EvalPair(
+                        seed=ep.seed,
+                        start_step=start,
+                        init_pixels=np.asarray(ep.pixels[start], copy=True),
+                        init_state=np.asarray(ep.state[start], copy=True),
+                        init_proprio=np.asarray(proprio_s, copy=True),
+                        goal_pixels=np.asarray(ep.pixels[goal], copy=True),
+                        goal_state=np.asarray(ep.state[goal], copy=True),
+                        goal_proprio=np.asarray(proprio_g, copy=True),
+                        pos_progress=float(pos),
+                        from_success_ep=ep.succeeded,
+                        oracle_actions=acts,
+                        path_pixels=np.stack(
+                            [np.asarray(ep.pixels[i], copy=True) for i in range(start, goal + 1)]
+                        ),
+                        path_state=st,
+                        path_proprio=path_prop,
+                    ),
+                )
+            )
+    candidates: list[EvalPair] = []
+    last_ep, last_start = -1, -10**9
+    for ep_i, pair in raw:
+        if ep_i != last_ep:
+            last_ep = ep_i
+            last_start = -10**9
+        if pair.start_step < last_start + stride:
+            continue
+        candidates.append(pair)
+        last_start = pair.start_step
+    if num_eval is None:
+        return candidates
+    if len(candidates) < num_eval:
+        raise RuntimeError(
+            f"only {len(candidates)} block-moving windows "
+            f"(median Δblock_xy ≥ {median_step_block_xy_min}, raw {len(raw)}), "
+            f"need {num_eval}"
+        )
+    rng = np.random.default_rng(seed)
+    idx = np.sort(rng.choice(len(candidates), size=num_eval, replace=False))
+    return [candidates[int(i)] for i in idx]
+
+
 class OracleReplayPolicy:
     """Play stored env-scale actions for the current pair; no scaler."""
 

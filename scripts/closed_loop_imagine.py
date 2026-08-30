@@ -35,13 +35,15 @@ from phase_b import (  # noqa: E402
 )
 from phi_data import frame_to_tensor  # noqa: E402
 
-# Pre-registered in docs/14_phase_c_alt_plan.md (do not retune after seeing numbers).
-ACCUM_TOWARD_AT_M5 = 0.60
-ACCUM_D_END_AT_M5 = 3.0
-M1_TOWARD_GUARD = 0.90
-M1_D_END_GUARD = 1.0
-INFIDELITY_TOWARD_AT_M3 = 0.60
-INFIDELITY_D_END_AT_M3 = 5.0
+from viz import load_thresholds  # noqa: E402
+
+_TH = load_thresholds().get("ca0", {})
+ACCUM_TOWARD_AT_M5 = float(_TH.get("accum_toward_at_m5", 0.60))
+ACCUM_D_END_AT_M5 = float(_TH.get("accum_d_end_at_m5", 3.0))
+M1_TOWARD_GUARD = float(_TH.get("m1_toward_guard", 0.90))
+M1_D_END_GUARD = float(_TH.get("m1_d_end_guard", 1.0))
+INFIDELITY_TOWARD_AT_M3 = float(_TH.get("infidelity_toward_at_m3", 0.60))
+INFIDELITY_D_END_AT_M3 = float(_TH.get("infidelity_d_end_at_m3", 5.0))
 
 
 @torch.no_grad()
