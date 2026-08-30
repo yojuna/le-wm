@@ -160,7 +160,7 @@ def build_privileged_policy(args):
     raise ValueError(f"build_privileged_policy got actor={actor!r}")
 
 
-def build_policy(spec: EnvSpec, args, *, process=None, on_planning_solve=None, plan_debugger=None):
+def build_policy(spec: EnvSpec, args, *, process=None, on_planning_solve=None, plan_debugger=None, cem_capture=None):
     import torch
     from eval_setup import build_world_model_policy
 
@@ -197,6 +197,7 @@ def build_policy(spec: EnvSpec, args, *, process=None, on_planning_solve=None, p
         plan_cost=getattr(args, "plan_cost", "l2_z"),
         phi_weights=phi_weights,
         cache_goal_emb=not getattr(args, "no_cache_goal_emb", False),
+        cem_capture=cem_capture,
     )
 
 
@@ -597,6 +598,21 @@ def run_eval(spec: EnvSpec, args):
         plan_debugger = PlanDebugger(debug_dir, enabled=True)
         print(f"plan-debug enabled → {debug_dir}")
 
+    cem_capture = None
+    if getattr(args, "capture_cem", False):
+        from eval_logging.cem_capture import CemCapture
+
+        cap_dir = Path(
+            getattr(args, "capture_cem_dir", None)
+            or (Path(args.log_dir) / args.env / (args.run_name or f"{args.env}_seed{args.seed}") / "cem_capture")
+        )
+        oracle_a = None
+        cap_ep = int(getattr(args, "capture_cem_episode", 0) or 0)
+        if pairs and cap_ep < len(pairs) and pairs[cap_ep].oracle_actions is not None:
+            oracle_a = pairs[cap_ep].oracle_actions
+        cem_capture = CemCapture(cap_dir, episode=cap_ep, oracle_actions=oracle_a)
+        print(f"capture-cem enabled → {cap_dir}")
+
     rollout_recorder = None
     if actor == "oracle_replay":
         from eval_logging.oracle_bank import OracleReplayPolicy
@@ -630,6 +646,7 @@ def run_eval(spec: EnvSpec, args):
             process=process,
             on_planning_solve=eval_logger.note_planning,
             plan_debugger=plan_debugger,
+            cem_capture=cem_capture,
         )
         install_mpc_buffer_fix(world)
         world.set_policy(policy)
@@ -920,6 +937,23 @@ def parse_args(argv=None):
         "--no-cache-goal-emb",
         action="store_true",
         help="disable C1 goal embedding cache (re-encode goal every CEM call)",
+    )
+    p.add_argument(
+        "--capture-cem",
+        action="store_true",
+        help="dump final-iteration CEM candidates+costs (Fig-2)",
+    )
+    p.add_argument(
+        "--capture-cem-episode",
+        type=int,
+        default=0,
+        help="which eval pair's first solve to capture (default 0)",
+    )
+    p.add_argument(
+        "--capture-cem-dir",
+        type=Path,
+        default=None,
+        help="output dir for cem_capture.npz (default log_dir/.../cem_capture)",
     )
     return p.parse_args(argv)
 

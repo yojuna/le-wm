@@ -293,6 +293,7 @@ def build_world_model_policy(
     plan_cost: str = "l2_z",
     phi_weights: str | Path | None = None,
     cache_goal_emb: bool = True,
+    cem_capture=None,
 ):
     """Build WorldModelPolicy the same way eval.py does."""
     from eval_logging import wrap_solver_timing
@@ -319,6 +320,9 @@ def build_world_model_policy(
     if hasattr(model, "interpolate_pos_encoding"):
         model.interpolate_pos_encoding = True
 
+    if cem_capture is not None:
+        model = cem_capture.wrap_model(model)
+
     cem_callbacks = None
     if plan_debugger is not None:
         cem_callbacks = [EliteCostRecorder(), BestCostRecorder()]
@@ -342,6 +346,9 @@ def build_world_model_policy(
         )
     elif on_planning_solve is not None:
         solver = wrap_solver_timing(solver, on_planning_solve)
+
+    if cem_capture is not None:
+        solver = cem_capture.wrap_solver(solver)
 
     config = swm.PlanConfig(**plan_config)
     return swm.policy.WorldModelPolicy(

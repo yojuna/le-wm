@@ -17,12 +17,15 @@ from phase_b import (  # noqa: E402
     ACTION_DIM,
     CEM_HORIZON,
     HISTORY,
+    PUSHT_CONTACT_RADIUS,
     REACHER_FACTORS,
     action_convention_for_collector,
     collector_uses_set_state,
+    contact_events,
     dump_default_out_dir,
     effective_rank,
     factor_names_for_env,
+    imagine_closed_loop,
     imagine_path,
     load_dump,
     pack_action_token,
@@ -294,6 +297,37 @@ def test_imagine_path_length_and_history():
     assert torch.allclose(out[:HISTORY], z[:HISTORY])
 
 
+def test_imagine_closed_loop_large_m_matches_open_loop():
+    model = _DummyLiveP()
+    L, D = 12, 4
+    z = torch.randn(L, D)
+    acts = np.random.randn(L, 2).astype(np.float32)
+    ol = imagine_path(model, z, acts, device=torch.device("cpu"))
+    cl = imagine_closed_loop(model, z, acts, m=99, device=torch.device("cpu"))
+    assert torch.allclose(ol, cl)
+    cl1 = imagine_closed_loop(model, z, acts, m=1, device=torch.device("cpu"))
+    assert cl1.shape == (L, D)
+    assert torch.allclose(cl1[:HISTORY], z[:HISTORY])
+
+
+def test_contact_events_pusht():
+    st = np.zeros((4, 7), dtype=np.float64)
+    st[:, :2] = 100.0
+    st[:, 2:4] = 100.0
+    ev = contact_events(st, env="pusht")
+    assert ev["contact"].all()
+    st2 = np.zeros((3, 7), dtype=np.float64)
+    st2[:, :2] = 256.0
+    st2[:, 2:4] = 256.0
+    st2[0, 2:4] = 5.0
+    ev2 = contact_events(st2, env="pusht")
+    assert ev2["wall"][0]
+    assert not ev2["contact"][0]
+    empty = contact_events(st, env="reacher")
+    assert not empty["any"].any()
+    assert PUSHT_CONTACT_RADIUS == 45.0
+
+
 def test_dummy_p_shuffle_increases_drift():
     rng = np.random.default_rng(0)
     model = _DummyLiveP()
@@ -335,5 +369,7 @@ if __name__ == "__main__":
     test_oracle_actor_rejects_kinematic()
     test_oracle_window_band_and_action_len()
     test_imagine_path_length_and_history()
+    test_imagine_closed_loop_large_m_matches_open_loop()
+    test_contact_events_pusht()
     test_dummy_p_shuffle_increases_drift()
     print("all phase_b tests passed")

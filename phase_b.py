@@ -274,6 +274,90 @@ def imagine_path(
     return torch.stack(out, dim=0)
 
 
+@torch.no_grad()
+def imagine_closed_loop(
+    model,
+    z_true: torch.Tensor,
+    actions: np.ndarray,
+    m: int,
+    *,
+    device: torch.device,
+    history: int = HISTORY,
+) -> torch.Tensor:
+    """Open-loop chunks of ``m`` predicted steps, then snap to true ``z``.
+
+    First ``history`` frames are always copies of ``z_true``. When
+    ``m >= L - history`` this is identical to :func:`imagine_path` (CA0
+    ``m=25`` open-loop). ``m=1`` teacher-forces after every predicted frame.
+    """
+    m = int(m)
+    if m < 1:
+        raise ValueError(f"re-encode interval m must be >= 1, got {m}")
+    L = z_true.size(0)
+    HS = history
+    n_pred = L - HS
+    if n_pred <= 0:
+        return z_true[:L].cpu()
+    if m >= n_pred:
+        return imagine_path(model, z_true, actions, device=device, history=history)
+
+    z_true = z_true.to(device)
+    acts = torch.from_numpy(actions_to_tokens(actions)).to(device)
+    if acts.size(0) < L:
+        pad = torch.zeros(L - acts.size(0), acts.size(-1), device=device, dtype=acts.dtype)
+        acts = torch.cat([acts, pad], dim=0)
+    elif acts.size(0) > L:
+        acts = acts[:L]
+
+    out = [z_true[i].cpu() for i in range(HS)]
+    t = HS
+    while t < L:
+        emb = z_true[t - HS : t].unsqueeze(0).clone()
+        act = acts[t - HS : t].unsqueeze(0).clone()
+        chunk = min(m, L - t)
+        for k in range(chunk):
+            act_emb = model.action_encoder(act)
+            pred = model.predict(emb[:, -HS:], act_emb[:, -HS:])[:, -1:]
+            emb = torch.cat([emb, pred], dim=1)
+            next_a = acts[t + k : t + k + 1].unsqueeze(0)
+            act = torch.cat([act, next_a], dim=1)
+            out.append(pred[0, 0].cpu())
+        t += chunk
+    return torch.stack(out, dim=0)
+
+
+# PushT contact heuristic (matches GoalPushPolicy.contact_radius).
+PUSHT_CONTACT_RADIUS = 45.0
+PUSHT_WALL_MARGIN = 40.0
+PUSHT_ARENA = 512.0
+
+
+def contact_events(state: np.ndarray, env: str = "pusht") -> dict[str, np.ndarray]:
+    """Per-step contact / wall masks from sim ``state`` (last dim = factors).
+
+    PushT: pusher–block L2 < 45 (GoalPush radius); block within 40 of [0, 512].
+    Other envs: empty False masks (Reacher stub).
+    """
+    st = np.asarray(state, dtype=np.float64)
+    if st.ndim == 1:
+        st = st.reshape(1, -1)
+    leading = st.shape[:-1]
+    empty = np.zeros(leading, dtype=bool)
+    if env != "pusht" or st.shape[-1] < 4:
+        return {"contact": empty, "wall": empty, "any": empty}
+    agent = st[..., :2]
+    block = st[..., 2:4]
+    dist = np.linalg.norm(agent - block, axis=-1)
+    contact = dist < PUSHT_CONTACT_RADIUS
+    wall = (
+        (block[..., 0] < PUSHT_WALL_MARGIN)
+        | (block[..., 0] > PUSHT_ARENA - PUSHT_WALL_MARGIN)
+        | (block[..., 1] < PUSHT_WALL_MARGIN)
+        | (block[..., 1] > PUSHT_ARENA - PUSHT_WALL_MARGIN)
+    )
+    return {"contact": contact, "wall": wall, "any": contact | wall}
+
+
 def shuffle_future_actions(
     actions: np.ndarray, history: int, rng: np.random.Generator
 ) -> np.ndarray:
