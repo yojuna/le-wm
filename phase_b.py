@@ -21,7 +21,11 @@ from phi_data import frame_to_tensor
 
 HISTORY = 3
 ACTION_DIM = 10
+ACTION_BLOCK = 5  # CEM / training frameskip; token dim = env_action * block
 CEM_HORIZON = 5  # EnvSpec / pusht.yaml default; mark on drift plots
+# CEM Box bounds are tiled with tensor.repeat(action_block) → [a0,a1]×5.
+# Dump tokens use the same tile so AdaLN does not see zero-pad OOD.
+ACTION_PACK = "tile_block"
 
 PUSHT_FACTORS = (
     "agent_x",
@@ -33,7 +37,18 @@ PUSHT_FACTORS = (
     "agent_vy",
 )
 
-DUMP_VERSION = 1
+REACHER_FACTORS = (
+    "qpos_0",
+    "qpos_1",
+    "qvel_0",
+    "qvel_1",
+    "finger_x",
+    "finger_y",
+    "target_x",
+    "target_y",
+)
+
+DUMP_VERSION = 2
 
 
 def img_transform(img_size: int = 224):
@@ -46,10 +61,130 @@ def img_transform(img_size: int = 224):
 
 
 def pad_action(a: np.ndarray, action_dim: int = ACTION_DIM) -> np.ndarray:
+    """Zero-pad env action to action_encoder dim. Prefer pack_action_token."""
     a = np.asarray(a, dtype=np.float32).reshape(-1)
     out = np.zeros(action_dim, dtype=np.float32)
     out[: min(len(a), action_dim)] = a[:action_dim]
     return out
+
+
+def pack_action_token(
+    a: np.ndarray,
+    *,
+    action_block: int = ACTION_BLOCK,
+    action_dim: int = ACTION_DIM,
+) -> np.ndarray:
+    """Pack a raw env action into one LeWM action-encoder token.
+
+    CEM flattened dim is ``env_dim * action_block``. Installed SWM tiles Box
+    bounds with ``tensor.repeat(action_block)``, i.e. ``[ax, ay]`` repeated
+    five times → length 10. Zero-padding dims 2–9 is OOD relative to that.
+    """
+    a = np.asarray(a, dtype=np.float32).reshape(-1)
+    if a.size == 0:
+        return np.zeros(action_dim, dtype=np.float32)
+    if a.size >= action_dim:
+        return a[:action_dim].copy()
+    tiled = np.tile(a, int(action_block))
+    if tiled.size < action_dim:
+        out = np.zeros(action_dim, dtype=np.float32)
+        out[: tiled.size] = tiled
+        return out
+    return tiled[:action_dim].astype(np.float32, copy=False)
+
+
+def actions_to_tokens(actions: np.ndarray) -> np.ndarray:
+    """(L, A_env|A_token) → (L, ACTION_DIM). Skip re-tile if already packed."""
+    actions = np.asarray(actions, dtype=np.float32)
+    if actions.ndim == 1:
+        actions = actions.reshape(1, -1)
+    if actions.shape[-1] == ACTION_DIM:
+        return actions
+    return np.stack([pack_action_token(a) for a in actions], axis=0)
+
+
+def collector_uses_set_state(collector: str) -> bool:
+    return collector in ("kinematic", "kin")
+
+
+def action_convention_for_collector(collector: str) -> str:
+    if collector_uses_set_state(collector):
+        return "into_state_fd"
+    return "from_state_step"
+
+
+def resolve_dump_collector(
+    env: str,
+    *,
+    collector: str = "",
+    action_mode: str = "",
+) -> str:
+    """Resolve latent_dump collector. ``--action-mode diverse`` → random."""
+    mode = (action_mode or "").strip().lower()
+    if mode:
+        aliases = {
+            "diverse": "random",
+            "random": "random",
+            "kinematic": "kinematic",
+            "kin": "kinematic",
+            "weak": "weak",
+            "goal": "goal",
+            "goal_push": "goal",
+        }
+        if mode not in aliases:
+            raise ValueError(
+                f"unknown --action-mode {action_mode!r}; "
+                "use diverse, random, kinematic, weak, or goal"
+            )
+        return aliases[mode]
+    col = (collector or "").strip().lower()
+    if col:
+        if col in ("diverse",):
+            return "random"
+        return col
+    return "kinematic" if env == "pusht" else "random"
+
+
+def dump_default_out_dir(root: Path, env: str, collector: str, seed: int) -> Path:
+    folder = "phase_b_dump_diverse" if collector == "random" else "phase_b_dump"
+    return Path(root) / "eval_results" / env / folder / f"seed{seed}"
+
+
+def validate_oracle_actor(actor: str) -> str:
+    """C0.3 actors must take real env.step actions, not kinematic FD."""
+    name = (actor or "").strip().lower()
+    if name in ("cem_l2",):
+        return "cem"
+    if name in ("kinematic", "kin"):
+        raise ValueError(
+            f"oracle actor {actor!r} is invalid: do not replay kinematic "
+            "finite-difference / _set_state actions"
+        )
+    if name not in ("goal_push", "weak", "cem", "oracle_replay"):
+        raise ValueError(
+            f"unknown actor {actor!r}; use goal_push, weak, cem, cem_l2, or oracle_replay"
+        )
+    return name
+
+
+def effective_rank(x: np.ndarray, *, eps: float = 1e-12) -> float:
+    """Participation ratio of covariance eigenvalues (LeVLJEPA-style)."""
+    arr = np.asarray(x, dtype=np.float64)
+    if arr.ndim != 2 or arr.shape[0] < 2 or arr.shape[1] < 1:
+        return float("nan")
+    centered = arr - arr.mean(axis=0, keepdims=True)
+    # (D, D) covariance; eigvalsh is ascending
+    cov = np.cov(centered, rowvar=False)
+    if cov.ndim == 0:
+        eig = np.array([float(cov)], dtype=np.float64)
+    else:
+        eig = np.linalg.eigvalsh(cov)
+    eig = np.maximum(eig, 0.0)
+    total = float(eig.sum())
+    if total < eps:
+        return 0.0
+    p = eig / total
+    return float(1.0 / np.sum(p * p))
 
 
 def factor_names_for_env(env: str, state_dim: int) -> tuple[str, ...]:
@@ -58,14 +193,11 @@ def factor_names_for_env(env: str, state_dim: int) -> tuple[str, ...]:
         while len(names) < state_dim:
             names.append(f"state_{len(names)}")
         return tuple(names)
-    # Reacher: qpos, qvel, finger, target concatenated in dump collector
-    generic = []
-    for i in range(state_dim):
-        generic.append(f"factor_{i}")
-    if state_dim >= 2:
-        generic[0] = "qpos_0"
-        generic[1] = "qpos_1"
-    return tuple(generic)
+    # Reacher dump concat: qpos + qvel + finger_pos + target_pos (pairs.py)
+    names = list(REACHER_FACTORS[:state_dim])
+    while len(names) < state_dim:
+        names.append(f"factor_{len(names)}")
+    return tuple(names)
 
 
 def remaining_pose_error(env: str, states: np.ndarray) -> np.ndarray:
@@ -116,15 +248,17 @@ def imagine_path(
 ) -> torch.Tensor:
     """Autoregressive predict from true history embeddings + given actions.
 
-    z_true: (L, D). actions: (L, A) raw env actions (padded internally).
+    z_true: (L, D). actions: (L, A) raw env actions (tiled to ACTION_DIM).
     First ``history`` frames of the return are copies of z_true.
+
+    Matches the *loop* of LeWM.rollout, not the extra final predict
+    (``n_steps + 1`` in installed ``wm/lewm/lewm.py``). Dump shuffle vs true
+    is internally consistent; dump at_h5 is per-frame, not CEM token-horizon.
     """
     L = z_true.size(0)
     HS = history
     z_true = z_true.to(device)
-    acts = torch.from_numpy(
-        np.stack([pad_action(a) for a in actions], axis=0)
-    ).to(device)
+    acts = torch.from_numpy(actions_to_tokens(actions)).to(device)
 
     emb = z_true[:HS].unsqueeze(0).clone()
     act = acts[:HS].unsqueeze(0).clone()

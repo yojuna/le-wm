@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 os.environ.setdefault("STABLEWM_HOME", str(ROOT.parent / "stablewm"))
 
-from phase_b import HISTORY, load_dump  # noqa: E402
+from phase_b import HISTORY, effective_rank, factor_names_for_env, load_dump  # noqa: E402
 
 
 def _flatten_holdout(dump: dict, val_frac: float, seed: int):
@@ -227,6 +227,56 @@ def intervene_live(
     }
 
 
+def phi_project_dump(dump: dict, phi_weights: Path) -> np.ndarray:
+    """u = φ(z) using a saved ReachabilityHead (v2 reach.pt)."""
+    import torch
+    from reachability import ReachabilityHead
+
+    blob = torch.load(phi_weights, map_location="cpu", weights_only=True)
+    meta: dict = {}
+    weight_state = blob
+    if isinstance(blob, dict) and "reach" in blob:
+        weight_state = blob["reach"]
+        meta = blob.get("meta") or {}
+    head = ReachabilityHead(
+        input_dim=int(meta.get("input_dim", 192)),
+        hidden_dim=int(meta.get("hidden_dim", 256)),
+        output_dim=int(meta.get("output_dim", 64)),
+        distance_mode=str(meta.get("distance_mode", "euclidean")),
+        iqe_k=int(meta.get("iqe_k", 8)),
+        iqe_l=int(meta.get("iqe_l", 8)),
+    )
+    head.load_state_dict(weight_state)
+    head.eval()
+    z = dump["z"]
+    flat = torch.from_numpy(z.reshape(-1, z.shape[-1]).astype(np.float32))
+    with torch.no_grad():
+        return head.project(flat, detach_z=True).cpu().numpy()
+
+
+def rank_report(dump: dict, phi_weights: Path | None) -> dict:
+    z = dump["z"]
+    flat_z = z.reshape(-1, z.shape[-1])
+    out = {
+        "z_shape": list(z.shape),
+        "effective_rank_z": effective_rank(flat_z),
+        "z_dim": int(flat_z.shape[-1]),
+        "n_tokens": int(flat_z.shape[0]),
+    }
+    if phi_weights is not None and Path(phi_weights).exists():
+        u = phi_project_dump(dump, Path(phi_weights))
+        out["effective_rank_u"] = effective_rank(u)
+        out["u_dim"] = int(u.shape[-1])
+        out["rank_u_over_rank_z"] = (
+            out["effective_rank_u"] / max(out["effective_rank_z"], 1e-6)
+        )
+        out["phi_weights"] = str(phi_weights)
+    else:
+        out["effective_rank_u"] = None
+        out["note_u"] = f"phi weights missing at {phi_weights}"
+    return out
+
+
 def plot_r2(rows: list[dict], out: Path) -> None:
     names = [r["name"] for r in rows]
     lin = [r["linear_r2"] for r in rows]
@@ -254,6 +304,12 @@ def main(argv=None) -> None:
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--skip-mlp", action="store_true")
     p.add_argument("--intervene-live", action="store_true")
+    p.add_argument("--effective-rank", action="store_true", help="C0.4 participation ratio of z vs φ(z)")
+    p.add_argument(
+        "--phi-weights",
+        default="",
+        help="reach.pt for u=φ(z); default stablewm/checkpoints/pusht/lewm_phi_v2/reach.pt",
+    )
     p.add_argument("--device", default="cuda")
     p.add_argument("--out-dir", type=Path, default=None)
     args = p.parse_args(argv)
@@ -262,6 +318,8 @@ def main(argv=None) -> None:
     meta = dump.get("meta") or {}
     env = str(meta.get("env", "pusht"))
     names = [str(x) for x in dump["factor_names"].tolist()]
+    if env == "reacher" or any(n.startswith("factor_") for n in names):
+        names = list(factor_names_for_env(env, dump["state"].shape[-1]))
     split = _flatten_holdout(dump, args.val_frac, args.seed)
 
     rows = []
@@ -372,15 +430,28 @@ def main(argv=None) -> None:
             "Flip D6 only if MLP>>linear on state factors and/or live intervention misses."
         ),
     }
+    if args.effective_rank:
+        phi = args.phi_weights or str(
+            Path(os.environ["STABLEWM_HOME"])
+            / "checkpoints"
+            / "pusht"
+            / "lewm_phi_v2"
+            / "reach.pt"
+        )
+        summary["effective_rank"] = rank_report(dump, Path(phi) if phi else None)
     (out_dir / "probe_summary.json").write_text(json.dumps(summary, indent=2))
-    print(json.dumps({k: summary[k] for k in (
+    print_keys = [
         "env",
         "mean_state_linear_r2",
         "mean_state_mlp_r2",
         "d6_recommendation",
         "d6_reason",
         "intervention_target",
-    )}, indent=2))
+    ]
+    printable = {k: summary[k] for k in print_keys}
+    if "effective_rank" in summary:
+        printable["effective_rank"] = summary["effective_rank"]
+    print(json.dumps(printable, indent=2))
     print(f"wrote {out_dir / 'probe_summary.json'}")
 
 

@@ -25,16 +25,20 @@ from eval_live import ENV_REGISTRY, cache_dir, download_spec  # noqa: E402
 from eval_logging.pairs import collect_trajectory_bank  # noqa: E402
 from eval_setup import load_lewm_checkpoint  # noqa: E402
 from phase_b import (  # noqa: E402
+    ACTION_BLOCK,
+    ACTION_PACK,
     CEM_HORIZON,
     DUMP_VERSION,
     HISTORY,
+    action_convention_for_collector,
+    dump_default_out_dir,
     encode_episode_frames,
     factor_names_for_env,
     imagine_path,
     img_transform,
     per_step_drift,
-    pad_action,
     remaining_pose_error,
+    resolve_dump_collector,
     save_dump,
     shuffle_future_actions,
     summarize_drift,
@@ -88,7 +92,7 @@ def sample_segments(
     return out
 
 
-def main(argv=None) -> None:
+def parse_args(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--env", choices=["pusht", "reacher"], default="pusht")
     p.add_argument("--seed", type=int, default=0)
@@ -100,7 +104,40 @@ def main(argv=None) -> None:
     p.add_argument("--segment-len", type=int, default=26, help="GOAL_OFFSET+1 default")
     p.add_argument("--img-size", type=int, default=224)
     p.add_argument("--out-dir", type=Path, default=None)
-    args = p.parse_args(argv)
+    p.add_argument(
+        "--collector",
+        default="",
+        help="kinematic | weak | goal | random (default: pusht=kinematic, reacher=random)",
+    )
+    p.add_argument(
+        "--action-mode",
+        default="",
+        help="alias: diverse/random → random collector (C0.2); kinematic keeps B1 bank",
+    )
+    return p.parse_args(argv)
+
+
+def _episode_actions(ep, start: int, length: int) -> np.ndarray:
+    rows = []
+    for t in range(start, start + length):
+        if t < len(ep.action):
+            rows.append(np.asarray(ep.action[t], dtype=np.float32).reshape(-1))
+        else:
+            dim = int(rows[0].size) if rows else 2
+            rows.append(np.zeros(dim, dtype=np.float32))
+    # ragged env dims → stack
+    width = max(int(r.size) for r in rows)
+    out = np.zeros((length, width), dtype=np.float32)
+    for i, r in enumerate(rows):
+        out[i, : r.size] = r
+    return out
+
+
+def main(argv=None) -> None:
+    args = parse_args(argv)
+    collector = resolve_dump_collector(
+        args.env, collector=args.collector, action_mode=args.action_mode
+    )
 
     spec = ENV_REGISTRY[args.env]
     device = _require_cuda(args.device, args.allow_cpu)
@@ -118,26 +155,17 @@ def main(argv=None) -> None:
         image_shape=(spec.img_size, spec.img_size),
         **spec.world_kwargs,
     )
-    if args.env == "pusht":
-        bank = collect_trajectory_bank(
-            world,
-            num_steps=args.collect_steps,
-            seed=args.seed,
-            env_name=spec.env_name,
-            min_episode_len=args.segment_len,
-            collector="kinematic",
-            num_episodes=args.collect_episodes,
-            kinematic_horizon=80,
-        )
-    else:
-        bank = collect_trajectory_bank(
-            world,
-            num_steps=args.collect_steps,
-            seed=args.seed,
-            env_name=spec.env_name,
-            min_episode_len=args.segment_len,
-            collector="weak",  # non-PushT → random actions
-        )
+    print(f"collecting bank env={args.env} collector={collector}")
+    bank = collect_trajectory_bank(
+        world,
+        num_steps=args.collect_steps,
+        seed=args.seed,
+        env_name=spec.env_name,
+        min_episode_len=args.segment_len,
+        collector=collector,
+        num_episodes=args.collect_episodes if collector in ("kinematic", "kin") else None,
+        kinematic_horizon=80,
+    )
     world.close()
 
     model = load_lewm_checkpoint(spec.ckpt_dir)
@@ -164,13 +192,7 @@ def main(argv=None) -> None:
         ep = bank.episodes[ep_i]
         L = args.segment_len
         z = encode_episode_frames(model, ep, start, L, transform, device)
-        acts = np.stack(
-            [
-                pad_action(ep.action[t] if t < len(ep.action) else np.zeros(1))
-                for t in range(start, start + L)
-            ],
-            axis=0,
-        )
+        acts = _episode_actions(ep, start, L)
         z_hat = imagine_path(model, z, acts, device=device)
         acts_shuf = shuffle_future_actions(acts, HISTORY, rng)
         z_shuf = imagine_path(model, z, acts_shuf, device=device)
@@ -197,9 +219,7 @@ def main(argv=None) -> None:
     mean_drift = drift.mean(axis=0)
     mean_shuf = shuf_drift.mean(axis=0)
 
-    out_dir = args.out_dir or (
-        ROOT / "eval_results" / args.env / "phase_b_dump" / f"seed{args.seed}"
-    )
+    out_dir = args.out_dir or dump_default_out_dir(ROOT, args.env, collector, args.seed)
     dump_path = Path(out_dir) / "dump.npz"
     meta = {
         "version": DUMP_VERSION,
@@ -212,11 +232,19 @@ def main(argv=None) -> None:
         "history": HISTORY,
         "cem_horizon": CEM_HORIZON,
         "factor_names": list(names),
-        "collector": bank.collector,
+        "collector": collector,
+        "bank_collector": bank.collector,
         "n_bank_episodes": len(bank.episodes),
+        "action_pack": ACTION_PACK,
+        "action_block": ACTION_BLOCK,
+        "action_convention": action_convention_for_collector(collector),
+        "imagine_includes_jepa_extra_predict": False,
         "drift_true": summarize_drift(mean_drift),
         "drift_shuffled": summarize_drift(mean_shuf),
         "action_liveness_end_gap": float(mean_shuf[-1] - mean_drift[-1]),
+        "action_liveness_predicted_gap": float(
+            (mean_shuf - mean_drift)[HISTORY:].mean()
+        ),
     }
     save_dump(
         dump_path,
@@ -241,6 +269,11 @@ def main(argv=None) -> None:
         "at_h5={at_h5_index:.3f} end={end:.3f}".format(**meta["drift_true"])
     )
     print(f"action liveness end gap (shuf - true)={meta['action_liveness_end_gap']:.3f}")
+    print(
+        "action liveness predicted-only gap="
+        f"{meta['action_liveness_predicted_gap']:.3f} "
+        f"collector={collector} pack={ACTION_PACK}"
+    )
 
 
 if __name__ == "__main__":

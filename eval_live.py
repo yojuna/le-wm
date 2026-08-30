@@ -142,6 +142,24 @@ def load_lewm(spec: EnvSpec):
     return load_lewm_checkpoint(spec.ckpt_dir)
 
 
+def build_privileged_policy(args):
+    """C0.3 GoalPush / Weak — real env.step, never kinematic FD actions."""
+    from phase_b import validate_oracle_actor
+
+    actor = validate_oracle_actor(getattr(args, "actor", "cem"))
+    if actor == "goal_push":
+        from eval_logging.collect_policy import GoalPushPolicy
+
+        policy = GoalPushPolicy(seed=args.seed)
+        return policy
+    if actor == "weak":
+        from stable_worldmodel.envs.pusht.expert_policy import WeakPolicy
+
+        policy = WeakPolicy(seed=args.seed)
+        return policy
+    raise ValueError(f"build_privileged_policy got actor={actor!r}")
+
+
 def build_policy(spec: EnvSpec, args, *, process=None, on_planning_solve=None, plan_debugger=None):
     import torch
     from eval_setup import build_world_model_policy
@@ -318,6 +336,7 @@ def _log_config(args):
 def run_eval(spec: EnvSpec, args):
     import stable_worldmodel as swm
     from eval_logging import (
+        ActionRolloutRecorder,
         EvalRunLogger,
         evaluate_goal_offset,
         evaluate_logged,
@@ -338,6 +357,10 @@ def run_eval(spec: EnvSpec, args):
 
     protocol = _resolve_protocol(spec, args)
     spec = _apply_horizon(spec, args)
+    if getattr(args, "oracle_bank", None):
+        if protocol != "online_offset":
+            print("warning: --oracle-bank forces protocol=online_offset")
+        protocol = "online_offset"
     if protocol == "online_offset" and args.num_envs != 1:
         print("warning: online_offset requires num_envs=1; overriding")
         args.num_envs = 1
@@ -377,8 +400,52 @@ def run_eval(spec: EnvSpec, args):
     process = {}
     pairs = None
     bank_meta = {}
+    oracle_path = getattr(args, "oracle_bank", None)
 
-    if protocol == "online_offset":
+    if oracle_path:
+        from eval_logging.oracle_bank import (
+            fit_process_from_oracle_pairs,
+            load_oracle_bank,
+        )
+
+        if protocol != "online_offset":
+            protocol = "online_offset"
+        if args.num_envs != 1:
+            print("warning: --oracle-bank requires num_envs=1; overriding")
+            args.num_envs = 1
+        pairs, ob_meta = load_oracle_bank(Path(oracle_path))
+        if args.episodes < len(pairs):
+            pairs = pairs[: args.episodes]
+        elif args.episodes > len(pairs):
+            print(
+                f"warning: oracle bank has {len(pairs)} pairs < --episodes {args.episodes}"
+            )
+            args.episodes = len(pairs)
+        mean_prog = sum(p.pos_progress for p in pairs) / max(len(pairs), 1)
+        print(
+            f"oracle-bank {oracle_path}: {len(pairs)} pairs "
+            f"source={ob_meta.get('oracle_source')} band={ob_meta.get('pair_band')} "
+            f"mean_pos_progress={mean_prog:.1f}"
+        )
+        if spec.keys_to_cache and not args.no_normalize:
+            process = fit_process_from_oracle_pairs(pairs, spec.keys_to_cache)
+            summary = process_summary(process)
+            for key, stats in summary.items():
+                print(f"  {key}: mean={stats['mean']} std={stats['std']}")
+        elif args.no_normalize:
+            print("warning: running without action/state normalization")
+        bank_meta = {
+            "pair_source": "oracle_livebank",
+            "oracle_bank": str(oracle_path),
+            "oracle_source": ob_meta.get("oracle_source"),
+            "pair_band": ob_meta.get("pair_band", "short_horizon"),
+            "action_pack": ob_meta.get("action_pack", "tile_block"),
+            "window": ob_meta.get("window"),
+            "eval_budget": spec.eval_budget,
+            "pairs_mean_pos_progress": mean_prog,
+            **{k: v for k, v in ob_meta.items() if k not in ("n_pairs",)},
+        }
+    elif protocol == "online_offset":
         collect_steps = max(args.stats_steps, args.episodes * (spec.goal_offset_steps + 5) * 4)
         n_kin_eps = (
             int(args.collect_episodes)
@@ -490,7 +557,30 @@ def run_eval(spec: EnvSpec, args):
         process_summary=process_summary(process) if process else None,
         extra=bank_meta or None,
     )
-    # Logger meta.protocol used in prints; keep consistent
+    actor = getattr(args, "actor", "cem") or "cem"
+    from phase_b import validate_oracle_actor
+
+    if actor not in ("cem",):
+        actor = validate_oracle_actor(actor)
+        if actor != "cem":
+            print(f"actor={actor} (privileged / replay; skipping CEM)")
+
+    eval_budget = int(getattr(args, "eval_budget", 0) or 0)
+    if eval_budget <= 0:
+        if (
+            actor == "oracle_replay"
+            and pairs
+            and pairs[0].oracle_actions is not None
+        ):
+            eval_budget = int(pairs[0].oracle_actions.shape[0])
+        else:
+            eval_budget = spec.eval_budget
+    if bank_meta is not None:
+        bank_meta["eval_budget"] = eval_budget
+    run_meta["actor"] = actor
+    if isinstance(run_meta.get("plan_config"), dict):
+        run_meta["plan_config"]["eval_budget"] = eval_budget
+
     eval_logger = EvalRunLogger(
         env_key=args.env,
         config=log_config,
@@ -507,15 +597,46 @@ def run_eval(spec: EnvSpec, args):
         plan_debugger = PlanDebugger(debug_dir, enabled=True)
         print(f"plan-debug enabled → {debug_dir}")
 
-    policy = build_policy(
-        spec,
-        args,
-        process=process,
-        on_planning_solve=eval_logger.note_planning,
-        plan_debugger=plan_debugger,
-    )
-    install_mpc_buffer_fix(world)
-    world.set_policy(policy)
+    rollout_recorder = None
+    if actor == "oracle_replay":
+        from eval_logging.oracle_bank import OracleReplayPolicy
+
+        if not pairs:
+            raise SystemExit("--actor oracle_replay requires --oracle-bank")
+        seqs = []
+        for p in pairs:
+            if p.oracle_actions is None:
+                raise SystemExit("oracle pair missing actions")
+            seqs.append(p.oracle_actions)
+        policy = OracleReplayPolicy(seqs)
+        if getattr(args, "log_actions", False):
+            rollout_recorder = ActionRolloutRecorder()
+            policy = rollout_recorder.wrap_policy(policy)
+        world.set_policy(policy)
+        if hasattr(policy, "set_env"):
+            policy.set_env(world.envs)
+    elif actor != "cem":
+        policy = build_privileged_policy(args)
+        if getattr(args, "log_actions", False) or actor != "cem":
+            rollout_recorder = ActionRolloutRecorder()
+            policy = rollout_recorder.wrap_policy(policy)
+        world.set_policy(policy)
+        if hasattr(policy, "set_env"):
+            policy.set_env(world.envs)
+    else:
+        policy = build_policy(
+            spec,
+            args,
+            process=process,
+            on_planning_solve=eval_logger.note_planning,
+            plan_debugger=plan_debugger,
+        )
+        install_mpc_buffer_fix(world)
+        world.set_policy(policy)
+        if getattr(args, "log_actions", False):
+            rollout_recorder = ActionRolloutRecorder()
+            policy = rollout_recorder.wrap_policy(world.policy)
+            world.set_policy(policy)
 
     if not supports_viewer(world) and args.viewer:
         world.close()
@@ -545,9 +666,9 @@ def run_eval(spec: EnvSpec, args):
             video_dir.mkdir(parents=True, exist_ok=True)
 
         print(
-            f"evaluate env={args.env} protocol={protocol} "
-            f"episodes={args.episodes} num_envs={args.num_envs} "
-            f"viewer={args.viewer} ({spec.notes})"
+            f"evaluate env={args.env} protocol={protocol} actor={actor} "
+            f"episodes={args.episodes} eval_budget={eval_budget} "
+            f"num_envs={args.num_envs} viewer={args.viewer} ({spec.notes})"
         )
 
         if protocol == "online_offset":
@@ -555,9 +676,10 @@ def run_eval(spec: EnvSpec, args):
                 world,
                 eval_logger,
                 pairs,
-                eval_budget=spec.eval_budget,
+                eval_budget=eval_budget,
                 video_dir=video_dir,
                 plan_debugger=plan_debugger,
+                rollout_recorder=rollout_recorder,
             )
         elif args.viewer:
             viewer_session = WorldViewer.open_prepared(
@@ -596,6 +718,32 @@ def run_eval(spec: EnvSpec, args):
         if viewer_session is not None:
             viewer_session.close()
         world.close()
+
+    if rollout_recorder is not None and protocol == "online_offset" and pairs:
+        import numpy as np
+
+        run_dir = Path(args.log_dir) / args.env / (
+            args.run_name or f"{args.env}_seed{args.seed}"
+        )
+        out = run_dir / "oracle_rollouts.npz"
+        rollout_recorder.save(
+            out,
+            pairs=pairs,
+            success=np.asarray(
+                [ep.success for ep in eval_logger.episodes], dtype=np.bool_
+            )
+            if eval_logger.episodes
+            else None,
+            extra={
+                "actor": actor,
+                "env": args.env,
+                "seed": args.seed,
+                "episodes": args.episodes,
+                "pair_mode": args.pair_mode,
+                "collector": args.collector,
+            },
+        )
+        print(f"wrote {out}")
 
     return metrics or {}
 
@@ -737,6 +885,31 @@ def parse_args(argv=None):
         choices=["l2_z", "phi_d"],
         default="l2_z",
         help="CEM cost: legacy L2 in z, or Euclidean in φ (lewm-phi)",
+    )
+    p.add_argument(
+        "--actor",
+        choices=["cem", "cem_l2", "goal_push", "weak", "oracle_replay"],
+        default="cem",
+        help="cem/cem_l2, privileged GoalPush/Weak, or oracle_replay of a live bank",
+    )
+    p.add_argument(
+        "--oracle-bank",
+        type=Path,
+        default=None,
+        help="C0.3-redo: load live-bank (t, t+25) pairs; skip kinematic collect",
+    )
+    p.add_argument(
+        "--eval-budget",
+        "--eval_budget",
+        type=int,
+        default=0,
+        dest="eval_budget",
+        help="env steps per pair (0 = spec 50, or oracle action length for replay)",
+    )
+    p.add_argument(
+        "--log-actions",
+        action="store_true",
+        help="write oracle_rollouts.npz (actions+pixels) for C0.3b imagination",
     )
     p.add_argument(
         "--phi-weights",

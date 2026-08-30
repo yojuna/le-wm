@@ -7,12 +7,130 @@ from collections.abc import Callable, Sequence
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
+import json
 
 import numpy as np
 from PIL import Image
 
 from eval_logging.logger import EvalRunLogger
 from eval_logging.pairs import EvalPair
+
+
+class ActionRolloutRecorder:
+    """Capture per-step physics actions + pixels during evaluate_goal_offset.
+
+    Used by C0.3: privileged GoalPush/Weak on kinematic offset pairs.
+    Must never be fed kinematic finite-difference actions.
+    """
+
+    def __init__(self):
+        self.episodes: list[dict] = []
+        self._actions: list[np.ndarray] = []
+        self._pixels: list[np.ndarray] = []
+        self._states: list[np.ndarray] = []
+        self._policy = None
+
+    def wrap_policy(self, policy):
+        recorder = self
+        inner_get = policy.get_action
+
+        def get_action(obs, **kwargs):
+            act = inner_get(obs, **kwargs)
+            arr = np.asarray(act, copy=True)
+            recorder._actions.append(np.asarray(arr[0] if arr.ndim > 1 else arr).reshape(-1))
+            return act
+
+        policy.get_action = get_action
+        self._policy = policy
+        return policy
+
+    def on_step(self, world, env_idx: int = 0) -> None:
+        infos = world.infos
+        pixels = infos.get("pixels")
+        if pixels is not None:
+            frame = np.asarray(pixels[env_idx])
+            if frame.ndim > 3:
+                frame = frame[-1]
+            self._pixels.append(np.asarray(frame, copy=True))
+        state = infos.get("state")
+        if state is not None:
+            self._states.append(np.asarray(state[env_idx]).reshape(-1).copy())
+
+    def end_episode(self) -> None:
+        acts = (
+            np.stack(self._actions, axis=0).astype(np.float32)
+            if self._actions
+            else np.zeros((0, 2), dtype=np.float32)
+        )
+        pix = (
+            np.stack(self._pixels, axis=0)
+            if self._pixels
+            else np.zeros((0, 1, 1, 3), dtype=np.uint8)
+        )
+        st = (
+            np.stack(self._states, axis=0).astype(np.float32)
+            if self._states
+            else np.zeros((0, 1), dtype=np.float32)
+        )
+        self.episodes.append({"action": acts, "pixels": pix, "state": st})
+        self._actions = []
+        self._pixels = []
+        self._states = []
+
+    def save(
+        self,
+        path: Path,
+        *,
+        pairs: Sequence[EvalPair],
+        extra: dict | None = None,
+        success: np.ndarray | None = None,
+    ) -> None:
+        path = Path(path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        n = len(self.episodes)
+        lengths = np.asarray([len(ep["action"]) for ep in self.episodes], dtype=np.int32)
+        max_t = int(lengths.max()) if n else 0
+        act_dim = int(self.episodes[0]["action"].shape[-1]) if n and self.episodes[0]["action"].size else 2
+        actions = np.zeros((n, max_t, act_dim), dtype=np.float32)
+        for i, ep in enumerate(self.episodes):
+            t = ep["action"].shape[0]
+            if t:
+                actions[i, :t] = ep["action"]
+        payload = {
+            "action": actions,
+            "length": lengths,
+            "success": np.asarray(success, dtype=np.bool_)
+            if success is not None
+            else np.zeros(n, dtype=np.bool_),
+            "init_state": np.stack([np.asarray(p.init_state).reshape(-1) for p in pairs[:n]]),
+            "goal_state": np.stack([np.asarray(p.goal_state).reshape(-1) for p in pairs[:n]]),
+            "init_pixels": np.stack([np.asarray(p.init_pixels) for p in pairs[:n]]),
+            "goal_pixels": np.stack([np.asarray(p.goal_pixels) for p in pairs[:n]]),
+        }
+        # per-episode pixel/state stacks are ragged; store as object arrays
+        payload["rollout_pixels"] = np.array(
+            [ep["pixels"] for ep in self.episodes], dtype=object
+        )
+        payload["rollout_state"] = np.array(
+            [ep["state"] for ep in self.episodes], dtype=object
+        )
+        np.savez_compressed(path, **payload)
+        meta = {"n_episodes": n, "max_t": max_t, **(extra or {})}
+        path.with_suffix(".meta.json").write_text(
+            json.dumps(meta, indent=2, default=str)
+        )
+
+
+def load_oracle_rollouts(path: Path) -> dict:
+    path = Path(path)
+    blob = np.load(path, allow_pickle=True)
+    data = {k: blob[k] for k in blob.files}
+    meta_path = path.with_suffix(".meta.json")
+    if meta_path.exists():
+        data["meta"] = json.loads(meta_path.read_text())
+    else:
+        data["meta"] = {}
+    return data
 
 
 def evaluate_logged(
@@ -122,6 +240,7 @@ def evaluate_goal_offset(
     video_dir: Path | None = None,
     plan_debugger=None,
     interrupt_exceptions: tuple[type[BaseException], ...] = (),
+    rollout_recorder: ActionRolloutRecorder | None = None,
 ) -> dict:
     """Paper-style eval: fixed start/goal pairs, budget-capped wait rollouts.
 
@@ -147,6 +266,8 @@ def evaluate_goal_offset(
             if model is not None and hasattr(model, "clear_goal_cache"):
                 model.clear_goal_cache()
                 model._forced_goal_cache_key = f"pair:{ep_idx}:seed:{pair.seed}"
+            if hasattr(policy, "begin_pair"):
+                policy.begin_pair(ep_idx)
 
             world.reset(seed=pair.seed)
             env = world.envs.envs[0].unwrapped
@@ -167,6 +288,8 @@ def evaluate_goal_offset(
                 w.infos.update(deepcopy(_snap))
                 saw_success = saw_success or bool(w.terminateds[0])
                 logger.on_step(w, 0)
+                if rollout_recorder is not None:
+                    rollout_recorder.on_step(w, 0)
                 if plan_debugger is not None:
                     plan_debugger.on_step(w, 0)
                 if video_frames is not None:
@@ -180,6 +303,8 @@ def evaluate_goal_offset(
                 if saw_success:
                     w.terminateds[env_idx] = True
                 logger.on_episode_done(env_idx, ep_idx, w)
+                if rollout_recorder is not None:
+                    rollout_recorder.end_episode()
                 if plan_debugger is not None:
                     plan_debugger.end_episode(
                         success=bool(w.terminateds[env_idx]),
@@ -205,6 +330,8 @@ def evaluate_goal_offset(
                 else:
                     world.truncateds[0] = True
                 logger.on_episode_done(0, ep_idx, world)
+                if rollout_recorder is not None:
+                    rollout_recorder.end_episode()
                 if plan_debugger is not None:
                     plan_debugger.end_episode(
                         success=bool(world.terminateds[0]),

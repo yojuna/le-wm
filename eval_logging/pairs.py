@@ -43,6 +43,10 @@ class EvalPair:
     goal_proprio: np.ndarray
     pos_progress: float = 0.0
     from_success_ep: bool = False
+    oracle_actions: np.ndarray | None = None
+    path_pixels: np.ndarray | None = None
+    path_state: np.ndarray | None = None
+    path_proprio: np.ndarray | None = None
 
 
 @dataclass
@@ -88,6 +92,8 @@ def _vector(value: np.ndarray, env_idx: int = 0) -> np.ndarray:
 def _make_collection_policy(world, *, env_name: str, seed: int, collector: str):
     if "PushT" not in env_name:
         return None
+    if collector in ("random", "diverse"):
+        return None  # live env.step via _sample_actions
     if collector in ("weak", "weak_policy"):
         from stable_worldmodel.envs.pusht.expert_policy import WeakPolicy
 
@@ -103,7 +109,7 @@ def _make_collection_policy(world, *, env_name: str, seed: int, collector: str):
     if collector in ("kinematic", "kin"):
         return None  # handled by collect_kinematic_bank
     raise ValueError(
-        f"unknown collector={collector!r}; use 'kinematic', 'goal', or 'weak'"
+        f"unknown collector={collector!r}; use 'kinematic', 'goal', 'weak', or 'random'"
     )
 
 
