@@ -1,0 +1,19 @@
+# Local / generated
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+MUJOCO_LOG.TXT
+
+# Eval artifacts (metrics may be force-added selectively)
+eval_results/
+*.mp4
+*.png
+
+# Training / Hydra
+outputs/
+multirun/
+wandb/
+*.ckpt
+*.pt
+.venv
