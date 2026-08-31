@@ -1,0 +1,153 @@
+{
+  "aggregate": {
+    "mean_episode_length": 200.0,
+    "mean_final_state_distance": 1327.2834942045954,
+    "mean_min_state_distance": 195.69664378134158,
+    "mean_planning_time_s": 0.5414049189985235,
+    "mean_replans": 8.0,
+    "mean_steps_to_success": null,
+    "num_episodes": 2,
+    "num_successes": 0,
+    "std_min_state_distance": 100.35948286287173,
+    "success_rate": 0.0,
+    "total_planning_time_s": 1.082809837997047,
+    "total_replans": 16,
+    "wall_time_s": 2.628726502000063
+  },
+  "episode_successes": [
+    false,
+    false
+  ],
+  "episodes": [
+    {
+      "episode_idx": 0,
+      "final_state_distance": 1777.8995659944335,
+      "final_task_score": null,
+      "length": 200,
+      "min_angle_error": 0.31668557216461757,
+      "min_pos_error": 253.47876433898256,
+      "min_state_distance": 266.6615146700533,
+      "min_task_score": null,
+      "planning_time_s": 0.6511024119972717,
+      "replans": 8,
+      "seed": 0,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 205,
+      "truncated": true
+    },
+    {
+      "episode_idx": 1,
+      "final_state_distance": 876.6674224147574,
+      "final_task_score": null,
+      "length": 200,
+      "min_angle_error": 2.3681301026340984,
+      "min_pos_error": 113.970360529733,
+      "min_state_distance": 124.73177289262988,
+      "min_task_score": null,
+      "planning_time_s": 0.4317074259997753,
+      "replans": 8,
+      "seed": 1,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 23,
+      "truncated": true
+    }
+  ],
+  "meta": {
+    "cem": {
+      "n_steps": 5,
+      "num_samples": 50,
+      "topk": 10,
+      "var_scale": 1.0
+    },
+    "checkpoint": "/home/aj/code/ssd_repos/robo_ops/ws_lewm/stablewm/checkpoints/hf_pusht",
+    "completed_episodes": 2,
+    "device": "cuda",
+    "env": "pusht",
+    "env_name": "swm/PushT-v1",
+    "episodes": 2,
+    "hf_repo": "quentinll/lewm-pusht",
+    "interrupted": false,
+    "metric_notes": {
+      "min_state_distance": "Best (lowest) L2 distance to goal state during the episode. Analogous to max progress / best coverage in manipulation benchmarks.",
+      "steps_to_success": "Env step index at first success; None if the episode failed.",
+      "success_rate": "Fraction of episodes with env terminated=True (PushT: pose tolerance; Reacher: qpos_match success)."
+    },
+    "normalization": {
+      "keys": [
+        "action",
+        "proprio",
+        "state"
+      ],
+      "scalers": {
+        "action": {
+          "mean": [
+            0.013507824948198542,
+            0.012638005126320141
+          ],
+          "n_features": 2,
+          "std": [
+            0.4902658422188964,
+            0.49271947740544225
+          ]
+        },
+        "proprio": {
+          "mean": [
+            298.1093863673459,
+            284.65120812821783,
+            4.984138806521893,
+            4.663876265048981
+          ],
+          "n_features": 4,
+          "std": [
+            158.39479348983946,
+            112.89926602940938,
+            182.92000420217087,
+            183.79014744692407
+          ]
+        },
+        "state": {
+          "mean": [
+            298.1093863673459,
+            284.65120812821783,
+            266.4099674772971,
+            302.5809092202187,
+            3.681871112293187,
+            4.984138806521893,
+            4.663876265048981
+          ],
+          "n_features": 7,
+          "std": [
+            158.39479348983946,
+            112.89926602940938,
+            151.976087823952,
+            122.02115416365413,
+            1.421556048235473,
+            182.92000420217087,
+            183.79014744692407
+          ]
+        }
+      },
+      "source": "live_rollout",
+      "stats_steps": 500
+    },
+    "notes": "Pymunk 2D push-T. Live goal is the canonical green T pose.",
+    "num_envs": 1,
+    "plan_config": {
+      "action_block": 5,
+      "horizon": 5,
+      "max_episode_steps": 200,
+      "receding_horizon": 5,
+      "steps_per_replan": 25
+    },
+    "protocol": "live_reset",
+    "seed": 0,
+    "timestamp_utc": "2026-08-27T18:46:44.334989+00:00"
+  },
+  "seeds": [
+    0,
+    1
+  ],
+  "success_rate": 0.0
+}

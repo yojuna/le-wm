@@ -1,0 +1,107 @@
+{
+  "dump": "eval_results/reacher/phase_b_dump/seed0/dump.npz",
+  "env": "reacher",
+  "split": {
+    "n_train_eps": 19,
+    "n_val_eps": 6,
+    "same_episode_fallback": false
+  },
+  "probes": [
+    {
+      "name": "qpos_0",
+      "kind": "state",
+      "sanity_only": false,
+      "linear_r2": 0.5647420883178711,
+      "mlp_r2": NaN,
+      "gap_mlp_minus_linear": NaN
+    },
+    {
+      "name": "qpos_1",
+      "kind": "state",
+      "sanity_only": false,
+      "linear_r2": -0.5505297183990479,
+      "mlp_r2": NaN,
+      "gap_mlp_minus_linear": NaN
+    },
+    {
+      "name": "qvel_0",
+      "kind": "state",
+      "sanity_only": false,
+      "linear_r2": -1.4390130043029785,
+      "mlp_r2": NaN,
+      "gap_mlp_minus_linear": NaN
+    },
+    {
+      "name": "qvel_1",
+      "kind": "state",
+      "sanity_only": false,
+      "linear_r2": -0.7735223770141602,
+      "mlp_r2": NaN,
+      "gap_mlp_minus_linear": NaN
+    },
+    {
+      "name": "finger_x",
+      "kind": "state",
+      "sanity_only": false,
+      "linear_r2": 0.41392505168914795,
+      "mlp_r2": NaN,
+      "gap_mlp_minus_linear": NaN
+    },
+    {
+      "name": "finger_y",
+      "kind": "state",
+      "sanity_only": false,
+      "linear_r2": 0.8183012008666992,
+      "mlp_r2": NaN,
+      "gap_mlp_minus_linear": NaN
+    },
+    {
+      "name": "target_x",
+      "kind": "state",
+      "sanity_only": false,
+      "linear_r2": -0.5102288722991943,
+      "mlp_r2": NaN,
+      "gap_mlp_minus_linear": NaN
+    },
+    {
+      "name": "target_y",
+      "kind": "state",
+      "sanity_only": false,
+      "linear_r2": -1.221773386001587,
+      "mlp_r2": NaN,
+      "gap_mlp_minus_linear": NaN
+    },
+    {
+      "name": "remaining_k",
+      "kind": "path",
+      "sanity_only": true,
+      "linear_r2": -0.8032848834991455,
+      "mlp_r2": NaN,
+      "gap_mlp_minus_linear": NaN
+    },
+    {
+      "name": "remaining_pose",
+      "kind": "path",
+      "sanity_only": false,
+      "linear_r2": -1.3599002361297607,
+      "mlp_r2": NaN,
+      "gap_mlp_minus_linear": NaN
+    }
+  ],
+  "mean_state_linear_r2": -0.3372623771429062,
+  "mean_state_mlp_r2": NaN,
+  "intervention_target": "qpos_0",
+  "intervention_offline": {
+    "factor_index": 0,
+    "eps": 0.5,
+    "n_trials": 24,
+    "imagined_step_sign_hit": 0.625,
+    "mean_imag_minus_real": 0.24637090293687833,
+    "probe_increases_on_plus_eps": true,
+    "note": "Sign hit: imagined one-step \u0394probe matches real \u0394probe. Live P(z+eps d) is in latent_probe.intervene_live()."
+  },
+  "intervention_live": null,
+  "d6_recommendation": "information_may_be_absent",
+  "d6_reason": "mean linear=-0.337 MLP=nan",
+  "note": "remaining_k is a sanity check (time-smooth z), not the D6 gate. Flip D6 only if MLP>>linear on state factors and/or live intervention misses."
+}

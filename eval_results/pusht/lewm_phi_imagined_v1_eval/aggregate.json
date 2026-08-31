@@ -1,0 +1,287 @@
+{
+  "protocols": {
+    "short": {
+      "conditions": {
+        "E1_l2_c1": {
+          "per_seed": [
+            {
+              "seed": 0,
+              "success_rate": 25.0,
+              "num_successes": 5,
+              "num_episodes": 20,
+              "mean_min_pos": 27.341829158001353,
+              "mean_min_state": 107.08423227962018
+            },
+            {
+              "seed": 1,
+              "success_rate": 15.0,
+              "num_successes": 3,
+              "num_episodes": 20,
+              "mean_min_pos": 27.432014853589664,
+              "mean_min_state": 103.2731362546181
+            },
+            {
+              "seed": 2,
+              "success_rate": 10.0,
+              "num_successes": 2,
+              "num_episodes": 20,
+              "mean_min_pos": 29.49354026315273,
+              "mean_min_state": 92.84245289470395
+            }
+          ],
+          "success_mean": 16.666666666666668,
+          "success_std": 7.637626158259733,
+          "mean_min_pos_mean": 28.089128091581248,
+          "mean_min_state_mean": 101.06660714298074
+        },
+        "E2_phi_v2": {
+          "per_seed": [
+            {
+              "seed": 0,
+              "success_rate": 35.0,
+              "num_successes": 7,
+              "num_episodes": 20,
+              "mean_min_pos": 23.85887980243337,
+              "mean_min_state": 85.337239184241
+            },
+            {
+              "seed": 1,
+              "success_rate": 30.0,
+              "num_successes": 6,
+              "num_episodes": 20,
+              "mean_min_pos": 25.025739119742283,
+              "mean_min_state": 86.9306284294818
+            },
+            {
+              "seed": 2,
+              "success_rate": 45.0,
+              "num_successes": 9,
+              "num_episodes": 20,
+              "mean_min_pos": 24.16844981446679,
+              "mean_min_state": 111.3454870890981
+            }
+          ],
+          "success_mean": 36.666666666666664,
+          "success_std": 7.637626158259733,
+          "mean_min_pos_mean": 24.351022912214148,
+          "mean_min_state_mean": 94.53778490094028
+        },
+        "E2_phi_imagined": {
+          "per_seed": [
+            {
+              "seed": 0,
+              "success_rate": 20.0,
+              "num_successes": 4,
+              "num_episodes": 20,
+              "mean_min_pos": 26.457954624984392,
+              "mean_min_state": 108.05549414532098
+            },
+            {
+              "seed": 1,
+              "success_rate": 35.0,
+              "num_successes": 7,
+              "num_episodes": 20,
+              "mean_min_pos": 24.23742339075402,
+              "mean_min_state": 89.86028289868388
+            },
+            {
+              "seed": 2,
+              "success_rate": 40.0,
+              "num_successes": 8,
+              "num_episodes": 20,
+              "mean_min_pos": 23.596554257752548,
+              "mean_min_state": 101.36627090971804
+            }
+          ],
+          "success_mean": 31.666666666666668,
+          "success_std": 10.408329997330664,
+          "mean_min_pos_mean": 24.763977424496986,
+          "mean_min_state_mean": 99.76068265124097
+        },
+        "E4_random": {
+          "per_seed": [
+            {
+              "seed": 0,
+              "success_rate": 25.0,
+              "num_successes": 5,
+              "num_episodes": 20,
+              "mean_min_pos": 30.019158446166937,
+              "mean_min_state": 102.78388770912889
+            },
+            {
+              "seed": 1,
+              "success_rate": 25.0,
+              "num_successes": 5,
+              "num_episodes": 20,
+              "mean_min_pos": 24.87412952669998,
+              "mean_min_state": 104.3723528197362
+            },
+            {
+              "seed": 2,
+              "success_rate": 30.0,
+              "num_successes": 6,
+              "num_episodes": 20,
+              "mean_min_pos": 24.14399744298669,
+              "mean_min_state": 107.57231997936535
+            }
+          ],
+          "success_mean": 26.666666666666668,
+          "success_std": 2.886751345948129,
+          "mean_min_pos_mean": 26.345761805284535,
+          "mean_min_state_mean": 104.90952016941014
+        }
+      },
+      "checks": {
+        "imagined_gt_v2": false,
+        "imagined_ge_e1": true,
+        "imagined_ge_e4": true,
+        "delta_imagined_minus_v2_pp": -4.9999999999999964,
+        "delta_imagined_minus_e1_pp": 15.0
+      }
+    },
+    "offset": {
+      "conditions": {
+        "E1_l2_c1": {
+          "per_seed": [
+            {
+              "seed": 0,
+              "success_rate": 8.0,
+              "num_successes": 4,
+              "num_episodes": 50,
+              "mean_min_pos": 45.427605928202745,
+              "mean_min_state": 139.3522758124397
+            },
+            {
+              "seed": 1,
+              "success_rate": 4.0,
+              "num_successes": 2,
+              "num_episodes": 50,
+              "mean_min_pos": 49.87097286496636,
+              "mean_min_state": 158.72614935657018
+            },
+            {
+              "seed": 2,
+              "success_rate": 2.0,
+              "num_successes": 1,
+              "num_episodes": 50,
+              "mean_min_pos": 46.44693755897561,
+              "mean_min_state": 154.87787773233796
+            }
+          ],
+          "success_mean": 4.666666666666667,
+          "success_std": 3.055050463303893,
+          "mean_min_pos_mean": 47.2485054507149,
+          "mean_min_state_mean": 150.98543430044927
+        },
+        "E2_phi_v2": {
+          "per_seed": [
+            {
+              "seed": 0,
+              "success_rate": 6.0,
+              "num_successes": 3,
+              "num_episodes": 50,
+              "mean_min_pos": 44.979474034643744,
+              "mean_min_state": 130.61274273242245
+            },
+            {
+              "seed": 1,
+              "success_rate": 8.0,
+              "num_successes": 4,
+              "num_episodes": 50,
+              "mean_min_pos": 44.884389855791945,
+              "mean_min_state": 135.1151156246497
+            },
+            {
+              "seed": 2,
+              "success_rate": 6.0,
+              "num_successes": 3,
+              "num_episodes": 50,
+              "mean_min_pos": 44.47422586202253,
+              "mean_min_state": 122.30515244778321
+            }
+          ],
+          "success_mean": 6.666666666666667,
+          "success_std": 1.1547005383792517,
+          "mean_min_pos_mean": 44.77936325081941,
+          "mean_min_state_mean": 129.34433693495177
+        },
+        "E2_phi_imagined": {
+          "per_seed": [
+            {
+              "seed": 0,
+              "success_rate": 2.0,
+              "num_successes": 1,
+              "num_episodes": 50,
+              "mean_min_pos": 48.557621764768285,
+              "mean_min_state": 149.05066818645756
+            },
+            {
+              "seed": 1,
+              "success_rate": 2.0,
+              "num_successes": 1,
+              "num_episodes": 50,
+              "mean_min_pos": 51.932483634859274,
+              "mean_min_state": 173.3714206223045
+            },
+            {
+              "seed": 2,
+              "success_rate": 2.0,
+              "num_successes": 1,
+              "num_episodes": 50,
+              "mean_min_pos": 50.449787290781984,
+              "mean_min_state": 142.34772140768598
+            }
+          ],
+          "success_mean": 2.0,
+          "success_std": 0.0,
+          "mean_min_pos_mean": 50.31329756346985,
+          "mean_min_state_mean": 154.92327007214934
+        },
+        "E4_random": {
+          "per_seed": [
+            {
+              "seed": 0,
+              "success_rate": 2.0,
+              "num_successes": 1,
+              "num_episodes": 50,
+              "mean_min_pos": 49.29550804012478,
+              "mean_min_state": 158.35898723412612
+            },
+            {
+              "seed": 1,
+              "success_rate": 4.0,
+              "num_successes": 2,
+              "num_episodes": 50,
+              "mean_min_pos": 50.13912333079991,
+              "mean_min_state": 157.86812493582076
+            },
+            {
+              "seed": 2,
+              "success_rate": 6.0,
+              "num_successes": 3,
+              "num_episodes": 50,
+              "mean_min_pos": 43.517857909367194,
+              "mean_min_state": 145.8237454376448
+            }
+          ],
+          "success_mean": 4.0,
+          "success_std": 2.0,
+          "mean_min_pos_mean": 47.6508297600973,
+          "mean_min_state_mean": 154.01695253586388
+        }
+      },
+      "checks": {
+        "imagined_gt_v2": false,
+        "imagined_ge_e1": false,
+        "imagined_ge_e4": false,
+        "delta_imagined_minus_v2_pp": -4.666666666666667,
+        "delta_imagined_minus_e1_pp": -2.666666666666667
+      }
+    }
+  },
+  "go_nogo": {
+    "offset_imagined_gt_v2": false,
+    "offset_imagined_ge_e1": false,
+    "short_not_collapsed": true
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "env": "reacher",
+  "seed": 0,
+  "ckpt": "hf_reacher",
+  "n_segments": 48,
+  "segment_len": 26,
+  "z_dim": 192,
+  "history": 3,
+  "cem_horizon": 5,
+  "factor_names": [
+    "qpos_0",
+    "qpos_1",
+    "factor_2",
+    "factor_3",
+    "factor_4",
+    "factor_5",
+    "factor_6",
+    "factor_7"
+  ],
+  "collector": "weak",
+  "n_bank_episodes": 40,
+  "drift_true": {
+    "mean_all_frames": 11.894046710087704,
+    "mean_predicted_only": 13.445444107055664,
+    "at_h5_index": 11.860443115234375,
+    "end": 15.413115501403809,
+    "history": 3.0,
+    "cem_horizon": 5.0
+  },
+  "drift_shuffled": {
+    "mean_all_frames": 12.410705162928654,
+    "mean_predicted_only": 14.029492792875871,
+    "at_h5_index": 12.213915824890137,
+    "end": 15.840104103088379,
+    "history": 3.0,
+    "cem_horizon": 5.0
+  },
+  "action_liveness_end_gap": 0.4269886016845703
+}

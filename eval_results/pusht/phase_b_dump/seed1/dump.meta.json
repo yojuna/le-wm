@@ -1,0 +1,45 @@
+{
+  "version": 2,
+  "env": "pusht",
+  "seed": 1,
+  "ckpt": "hf_pusht",
+  "n_segments": 48,
+  "segment_len": 26,
+  "z_dim": 192,
+  "history": 3,
+  "cem_horizon": 5,
+  "factor_names": [
+    "agent_x",
+    "agent_y",
+    "block_x",
+    "block_y",
+    "block_angle",
+    "agent_vx",
+    "agent_vy"
+  ],
+  "collector": "kinematic",
+  "bank_collector": "kinematic",
+  "n_bank_episodes": 64,
+  "action_pack": "tile_block",
+  "action_block": 5,
+  "action_convention": "into_state_fd",
+  "imagine_includes_jepa_extra_predict": false,
+  "drift_true": {
+    "mean_all_frames": 9.036239518569065,
+    "mean_predicted_only": 10.214879455773726,
+    "at_h5_index": 5.523656845092773,
+    "end": 15.749249458312988,
+    "history": 3.0,
+    "cem_horizon": 5.0
+  },
+  "drift_shuffled": {
+    "mean_all_frames": 9.040027549633614,
+    "mean_predicted_only": 10.219161577846693,
+    "at_h5_index": 5.531431674957275,
+    "end": 15.74593448638916,
+    "history": 3.0,
+    "cem_horizon": 5.0
+  },
+  "action_liveness_end_gap": -0.003314971923828125,
+  "action_liveness_predicted_gap": 0.004282122012227774
+}

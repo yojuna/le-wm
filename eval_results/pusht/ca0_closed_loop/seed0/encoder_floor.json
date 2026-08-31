@@ -1,0 +1,94 @@
+{
+  "calib_ok": true,
+  "calib_notes": [],
+  "units": {
+    "tensor": "phase_b.encode_frames \u2192 encode({'pixels'})['emb'][:, 0]",
+    "norm": "L2 (numpy / torch.linalg.vector_norm)",
+    "normalization": "none (raw encoder embedding, no SIGReg reshape at eval)",
+    "same_space_as_ca0": true
+  },
+  "perfect_floor": 0.0,
+  "same_state_reencode_median": 0.0,
+  "determinism": {
+    "n_frames": 32,
+    "same_state_reencode_median": 0.0,
+    "same_state_reencode_mean": 0.0,
+    "same_state_reencode_max": 0.0,
+    "batch_position_pair_l2": 0.0,
+    "eval_mode": true,
+    "cudnn_deterministic": true,
+    "tensor": "phase_b.encode_frames \u2192 encode({'pixels'})['emb'][:, 0]",
+    "norm": "L2",
+    "normalization": "none (raw encoder embedding, no SIGReg reshape at eval)",
+    "dump_vs_reencode_mean_l2": 0.0,
+    "dump_vs_reencode_rel": 0.0
+  },
+  "fresh_P": {
+    "onestep_mean": 1.4188470301964762,
+    "onestep_median": 1.2052068585853437,
+    "dump_onestep_mean_aligned": 1.4188470301964762,
+    "dump_vs_fresh_rel": 0.0,
+    "n_pairs": 50
+  },
+  "dump_vs_fresh_P": 0.0,
+  "fork_metric": {
+    "name": "mean \u2016\u1e91_end\u2212z*\u2016 at m=1",
+    "value": 1.425669151544571,
+    "summary_json": 1.4256690740585327,
+    "mean_last_true_vs_zstar": 0.0,
+    "note": "This is CA0's 1.43. It is distance-to-goal, not one-step residual."
+  },
+  "bracket_metric": {
+    "name": "median \u2016\u1e91_{t+1}\u2212z_{t+1}\u2016 (m=1 teacher-force, t\u2265history)",
+    "onestep_median": 1.2052068585853437,
+    "onestep_mean": 1.4188470301964762,
+    "onestep_dist": {
+      "mean": 1.4188470301964762,
+      "median": 1.2052068585853437,
+      "p10": 0.8146122859650402,
+      "p50": 1.2052068585853437,
+      "p90": 2.23742636733792
+    },
+    "adjacent_median": 1.22549329979613,
+    "adjacent_mean": 1.5075138083826787,
+    "perfect_floor": 0.0,
+    "null_identity": 1.22549329979613,
+    "random_pair_spread_median": 18.742816303309617,
+    "frac": 0.9834463058964409,
+    "frac_from_medians": 0.9834463058964409,
+    "frac_per_step_median": 1.018914102715723,
+    "frac_per_step_mean": 1.4921871131919378,
+    "frac_per_step_dist": {
+      "p10": 0.5081133895139305,
+      "p50": 1.018914102715723,
+      "p90": 2.657612677214746
+    },
+    "n_steps": 1150
+  },
+  "frac": 0.9834463058964409,
+  "xcheck_reproduces_d_end": true,
+  "xcheck_onestep_vs_d_end": {
+    "onestep_median": 1.2052068585853437,
+    "fork_mean_d_end_m1": 1.425669151544571,
+    "same": false,
+    "note": "Must stay two columns. frac uses one-step, not d_end."
+  },
+  "compounding_descriptive": {
+    "onestep_over_adjacent": 0.9834463058964409,
+    "naive_linear_T5": 4.917231529482205,
+    "naive_sqrt_T5": 2.199052792205494,
+    "note": "Not a gate. Independent isotropic errors would look more like sqrt(T); a bias more like T."
+  },
+  "thresholds": {
+    "frac_accum_at_or_below": 0.25,
+    "frac_infidelity_at_or_above": 0.5,
+    "determinism_median_max": 0.01,
+    "dump_vs_fresh_rel_max": 0.1
+  },
+  "guard_decision": "INFIDELITY",
+  "gate_part_b": true,
+  "n_pairs": 50,
+  "ckpt": "hf_pusht",
+  "ca0": "eval_results/pusht/ca0_closed_loop/seed0",
+  "oracle_bank": "eval_results/pusht/c0_oracle_livebank/seed0"
+}

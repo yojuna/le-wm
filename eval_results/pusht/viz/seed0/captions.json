@@ -1,0 +1,88 @@
+{
+  "oracle_overlay": {
+    "motivates": "\u2016\u1e91_end\u2212z*\u2016 and toward-goal fraction vs m (CA0 curve)",
+    "scalars": {
+      "d_end_open": 18.841596603393555,
+      "d_end_closed": 2.5733795166015625,
+      "d_start": 2.6254725456237793,
+      "toward_open": false,
+      "toward_closed": true,
+      "fork": "CA0-INFIDELITY",
+      "pair": 0
+    },
+    "captured_variance": 0.8191557708666692,
+    "png": "eval_results/pusht/viz/seed0/oracle_overlay.png",
+    "pdf": "eval_results/pusht/viz/seed0/oracle_overlay.pdf"
+  },
+  "cem_landscape": {
+    "motivates": "cost(oracle actions) \u2212 cost(CEM-selected) (planner regret)",
+    "scalars": {
+      "selected_cost": 5.688507556915283,
+      "oracle_cost": 21.755271911621094,
+      "regret": 16.06676435470581,
+      "n_candidates": 300
+    },
+    "captured_variance": null,
+    "png": "eval_results/pusht/viz/seed0/cem_landscape.png",
+    "pdf": "eval_results/pusht/viz/seed0/cem_landscape.pdf"
+  },
+  "drift_contacts": {
+    "motivates": "free-space vs contact mean-drift scalars",
+    "scalars": {
+      "free_mean_drift": 9.77547827533393,
+      "contact_mean_drift": 11.503300003103307,
+      "ratio": 1.1767506079092949,
+      "segment": 0
+    },
+    "captured_variance": null,
+    "png": "eval_results/pusht/viz/seed0/drift_contacts.png",
+    "pdf": "eval_results/pusht/viz/seed0/drift_contacts.pdf"
+  },
+  "rank_spectrum": {
+    "motivates": "elbow index and dead-dim fraction (CA2)",
+    "scalars": {
+      "participation_ratio": 22.45205206549647,
+      "elbow_90": 29,
+      "dead_dim_fraction": 0.578125,
+      "z_dim": 192
+    },
+    "captured_variance": null,
+    "png": "eval_results/pusht/viz/seed0/rank_spectrum.png",
+    "pdf": "eval_results/pusht/viz/seed0/rank_spectrum.pdf"
+  },
+  "probe_faithfulness": {
+    "motivates": "conditional R\u00b2 by region (near-wall vs center)",
+    "scalars": {
+      "r2_all": 0.9983716011047363,
+      "r2_wall": null,
+      "r2_center": 0.9983716011047363,
+      "factor": "block_x"
+    },
+    "captured_variance": null,
+    "png": "eval_results/pusht/viz/seed0/probe_faithfulness.png",
+    "pdf": "eval_results/pusht/viz/seed0/probe_faithfulness.pdf"
+  },
+  "rollout_filmstrip": {
+    "motivates": "step index where NN-retrieval distance crosses a threshold",
+    "scalars": {
+      "nn_cross_step": 19,
+      "nn_threshold": 16.051511609653318,
+      "mean_nn_dist": 9.383233987745443
+    },
+    "captured_variance": null,
+    "png": "eval_results/pusht/viz/seed0/rollout_filmstrip.png",
+    "pdf": "eval_results/pusht/viz/seed0/rollout_filmstrip.pdf"
+  },
+  "intervention_sweep": {
+    "motivates": "slope + linearity (R\u00b2 of the \u03b5\u2192movement fit) per region",
+    "scalars": {
+      "slope_free": 0.25487919833388306,
+      "linearity_free": 0.9997807571299042,
+      "slope_contact": 0.252406311067906,
+      "linearity_contact": 0.9998915437057058
+    },
+    "captured_variance": null,
+    "png": "eval_results/pusht/viz/seed0/intervention_sweep.png",
+    "pdf": "eval_results/pusht/viz/seed0/intervention_sweep.pdf"
+  }
+}

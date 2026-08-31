@@ -1,0 +1,29 @@
+{
+  "bluf": "Bank-mean open-loop end-dist 8.23 exceeds start 2.61: the imagined rollout drifts. Median one-step error 1.21 (cut 0.8). Fork CA0-INFIDELITY: m=1 not near-perfect (toward=0.840, d_end=1.426) \u2014 single-step prediction fails the guard. Signed cost gap 16.1 is positive: the model scores the oracle worse than the CEM pick (model problem, not a search miss). CEM is still lowering cost; more iterations would move further from the oracle, not toward it. Next: CA-train is motivated; C1 stays gated. Do not retune the CA0 cuts.",
+  "verdicts": {
+    "qa": {
+      "verdict": "DRIFT",
+      "text": "Bank-mean open-loop end-dist 8.23 exceeds start 2.61: the imagined rollout drifts."
+    },
+    "qb": {
+      "verdict": "CA0-INFIDELITY",
+      "text": "Median one-step error 1.21 (cut 0.8). Fork CA0-INFIDELITY: m=1 not near-perfect (toward=0.840, d_end=1.426) \u2014 single-step prediction fails the guard."
+    },
+    "qc": {
+      "verdict": "MODEL",
+      "text": "Signed cost gap 16.1 is positive: the model scores the oracle worse than the CEM pick (model problem, not a search miss). CEM is still lowering cost; more iterations would move further from the oracle, not toward it."
+    },
+    "qd": {
+      "verdict": "STEADY",
+      "text": "Contact/free drift ratio 1.25 \u2014 not a contact spike. Linear pose-probe directions explain 0.00995 of drift energy (not a block-vs-agent split). A3 bank: ca0-livebank. Bank-mean full-space action-effect angle 42.5\u00b0."
+    },
+    "qe": {
+      "verdict": "HARD-ELBOW",
+      "text": "Participation ratio 22.5, nonlinear ID 0.337, dead-dim 0.578 \u2014 hard elbow, do not scale."
+    },
+    "qf": {
+      "verdict": "MAPPED",
+      "text": "CEM success rate 0.5 over live-bank goal poses."
+    }
+  }
+}

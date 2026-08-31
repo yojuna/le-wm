@@ -1,0 +1,59 @@
+{
+  "frac": 0.9877682388817542,
+  "guard": "INFIDELITY",
+  "onestep_median": 1.2052068585853437,
+  "adjacent_median": 1.2201312121047243,
+  "predicted_move_median": 1.707174888852954,
+  "predicted_move_over_adjacent": 1.3991731970433576,
+  "mean_angle_deg": 46.41077597480595,
+  "median_angle_deg": 40.664526214538355,
+  "n_angles": 1085,
+  "n_steps": 1150,
+  "terciles": {
+    "small": {
+      "n": 384,
+      "adjacent_median": 0.458948809895097,
+      "onestep_median": 0.9981982481021721,
+      "frac": 2.174966415819517
+    },
+    "mid": {
+      "n": 383,
+      "adjacent_median": 1.2206738554220764,
+      "onestep_median": 1.1657483184919684,
+      "frac": 0.9550039212471572
+    },
+    "large": {
+      "n": 383,
+      "adjacent_median": 2.5198915217514184,
+      "onestep_median": 1.6613622013109977,
+      "frac": 0.6592990956040398
+    }
+  },
+  "pose": {
+    "agent_xy_step_median": 18.88107876804323,
+    "block_xy_step_median": 0.0,
+    "spearman_adj_vs_block": 0.10143425505014765,
+    "spearman_adj_vs_agent": 0.6529073072036843,
+    "spearman_adj_vs_pose": 0.6679331135846671
+  },
+  "strata": {
+    "contact": {
+      "n": 104,
+      "frac": 0.8245181610192118,
+      "onestep_median": 1.6662114616690453,
+      "adjacent_median": 2.0208305170736214
+    },
+    "wall": {
+      "n": 69,
+      "frac": null,
+      "onestep_median": 1.1178595313054924,
+      "adjacent_median": 0.0
+    },
+    "free": {
+      "n": 1000,
+      "frac": 0.9714275637803912,
+      "onestep_median": 1.1746521347368095,
+      "adjacent_median": 1.2092019812218968
+    }
+  }
+}

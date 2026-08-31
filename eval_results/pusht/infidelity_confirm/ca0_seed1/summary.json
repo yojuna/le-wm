@@ -1,0 +1,69 @@
+{
+  "seed": 1,
+  "oracle_bank": "/workspace/ws_le-wm/le-wm/eval_results/pusht/c0_oracle_livebank/seed1",
+  "n_pairs": 50,
+  "fork_mean_d_end_m1": 1.3057390916347504,
+  "onestep_median": 1.1767676766626383,
+  "adjacent_median": 1.0777966229512679,
+  "frac": 1.091827207103659,
+  "guard": "INFIDELITY",
+  "geometry": {
+    "frac": 1.0971575979203403,
+    "guard": "INFIDELITY",
+    "onestep_median": 1.1767676766626383,
+    "adjacent_median": 1.0725602947955688,
+    "predicted_move_median": 1.5681146702777864,
+    "predicted_move_over_adjacent": 1.4620293869601717,
+    "mean_angle_deg": 50.557315505481036,
+    "median_angle_deg": 44.72467628496295,
+    "n_angles": 1075,
+    "n_steps": 1150,
+    "terciles": {
+      "small": {
+        "n": 384,
+        "adjacent_median": 0.43561974676396814,
+        "onestep_median": 0.9697238603836194,
+        "frac": 2.2260787477778066
+      },
+      "mid": {
+        "n": 383,
+        "adjacent_median": 1.0742986427384502,
+        "onestep_median": 1.126100498895381,
+        "frac": 1.0482192326194184
+      },
+      "large": {
+        "n": 383,
+        "adjacent_median": 2.186208839532004,
+        "onestep_median": 1.5417923059805958,
+        "frac": 0.7052356015130938
+      }
+    },
+    "pose": {
+      "agent_xy_step_median": 18.277745187942664,
+      "block_xy_step_median": 0.0,
+      "spearman_adj_vs_block": 0.04379096530589963,
+      "spearman_adj_vs_agent": 0.6309067132688224,
+      "spearman_adj_vs_pose": 0.6355927429484043
+    },
+    "strata": {
+      "contact": {
+        "n": 94,
+        "frac": 1.1127205562007931,
+        "onestep_median": 1.5263531858107378,
+        "adjacent_median": 1.3717309142038565
+      },
+      "wall": {
+        "n": 161,
+        "frac": 3.015792684882677,
+        "onestep_median": 1.1208089146725897,
+        "adjacent_median": 0.37164653932973923
+      },
+      "free": {
+        "n": 931,
+        "frac": 1.0297421886174767,
+        "onestep_median": 1.175264811014495,
+        "adjacent_median": 1.141319472005314
+      }
+    }
+  }
+}

@@ -1,0 +1,331 @@
+{
+  "decision": {
+    "overall": "CONFIRMED_INFIDELITY",
+    "gate_part_b": true,
+    "flags": [],
+    "reason": "frac \u2265 0.5 on live-bank and every extra bank that ran. Part B is still gated on, not started.",
+    "live_frac": 0.9877682388817542,
+    "diverse_frac": 1.404463058157858,
+    "seed_fracs": [
+      1.091827207103659,
+      0.9895178778873303
+    ],
+    "pose_spearman": 0.6679331135846671,
+    "predicted_move_over_adjacent": 1.3991731970433576,
+    "shuffle_gap_over_adjacent": 0.5841659237398137,
+    "cuts": {
+      "frac_accum_at_or_below": 0.25,
+      "frac_infidelity_at_or_above": 0.5,
+      "pose_z_spearman_min": 0.3
+    }
+  },
+  "geometry": {
+    "frac": 0.9877682388817542,
+    "guard": "INFIDELITY",
+    "onestep_median": 1.2052068585853437,
+    "adjacent_median": 1.2201312121047243,
+    "predicted_move_median": 1.707174888852954,
+    "predicted_move_over_adjacent": 1.3991731970433576,
+    "mean_angle_deg": 46.41077597480595,
+    "median_angle_deg": 40.664526214538355,
+    "n_angles": 1085,
+    "n_steps": 1150,
+    "terciles": {
+      "small": {
+        "n": 384,
+        "adjacent_median": 0.458948809895097,
+        "onestep_median": 0.9981982481021721,
+        "frac": 2.174966415819517
+      },
+      "mid": {
+        "n": 383,
+        "adjacent_median": 1.2206738554220764,
+        "onestep_median": 1.1657483184919684,
+        "frac": 0.9550039212471572
+      },
+      "large": {
+        "n": 383,
+        "adjacent_median": 2.5198915217514184,
+        "onestep_median": 1.6613622013109977,
+        "frac": 0.6592990956040398
+      }
+    },
+    "pose": {
+      "agent_xy_step_median": 18.88107876804323,
+      "block_xy_step_median": 0.0,
+      "spearman_adj_vs_block": 0.10143425505014765,
+      "spearman_adj_vs_agent": 0.6529073072036843,
+      "spearman_adj_vs_pose": 0.6679331135846671
+    },
+    "strata": {
+      "contact": {
+        "n": 104,
+        "frac": 0.8245181610192118,
+        "onestep_median": 1.6662114616690453,
+        "adjacent_median": 2.0208305170736214
+      },
+      "wall": {
+        "n": 69,
+        "frac": null,
+        "onestep_median": 1.1178595313054924,
+        "adjacent_median": 0.0
+      },
+      "free": {
+        "n": 1000,
+        "frac": 0.9714275637803912,
+        "onestep_median": 1.1746521347368095,
+        "adjacent_median": 1.2092019812218968
+      }
+    }
+  },
+  "shuffle": {
+    "frac": 1.571934162621568,
+    "onestep_median": 1.9179659351882785,
+    "true_onestep_median": 1.2052068585853437,
+    "gap_over_adjacent": 0.5841659237398137,
+    "n_steps": 1150
+  },
+  "zero": {
+    "frac": 1.2099069457138385,
+    "onestep_median": 1.4762452282077505,
+    "true_onestep_median": 1.2052068585853437,
+    "gap_over_adjacent": 0.22213870683208412,
+    "n_steps": 1150
+  },
+  "diverse": {
+    "n_segments": 80,
+    "n_bank_episodes": 80,
+    "collector": "random",
+    "frac": 1.404463058157858,
+    "guard": "INFIDELITY",
+    "onestep_median": 1.3302458386008587,
+    "adjacent_median": 0.9471561611208591,
+    "n_steps": 1840,
+    "shuffle_onestep_median": 1.8603021211729684,
+    "shuffle_frac": 1.9640922981185043,
+    "gap_over_adjacent": 0.5596292399606463,
+    "geometry": {
+      "frac": 1.404463058157858,
+      "guard": "INFIDELITY",
+      "onestep_median": 1.3302458386008587,
+      "adjacent_median": 0.9471561611208591,
+      "predicted_move_median": 1.6041305786760685,
+      "predicted_move_over_adjacent": 1.6936284052439141,
+      "mean_angle_deg": 52.60831278412983,
+      "median_angle_deg": 47.64674102434272,
+      "n_angles": 1451,
+      "n_steps": 1840,
+      "terciles": {
+        "small": {
+          "n": 615,
+          "adjacent_median": 0.0,
+          "onestep_median": 1.3108709077222545,
+          "frac": null
+        },
+        "mid": {
+          "n": 612,
+          "adjacent_median": 0.9497883574785284,
+          "onestep_median": 1.2344376172182012,
+          "frac": 1.29969756682989
+        },
+        "large": {
+          "n": 613,
+          "adjacent_median": 2.2225750865632223,
+          "onestep_median": 1.5526649698681771,
+          "frac": 0.6985883083343069
+        }
+      },
+      "pose": {
+        "agent_xy_step_median": 24.0865475911405,
+        "block_xy_step_median": 0.0,
+        "spearman_adj_vs_block": 0.18334324102714494,
+        "spearman_adj_vs_agent": 0.342601493535721,
+        "spearman_adj_vs_pose": 0.35618233351732237
+      },
+      "strata": {
+        "contact": {
+          "n": 39,
+          "frac": 0.5752203296832714,
+          "onestep_median": 1.677624601070333,
+          "adjacent_median": 2.9164904550471453
+        },
+        "wall": {
+          "n": 0,
+          "frac": null,
+          "onestep_median": null,
+          "adjacent_median": null
+        },
+        "free": {
+          "n": 1801,
+          "frac": 1.4368086295779516,
+          "onestep_median": 1.322922290688483,
+          "adjacent_median": 0.9207365987752164
+        }
+      }
+    }
+  },
+  "seeds": [
+    {
+      "seed": 1,
+      "oracle_bank": "/workspace/ws_le-wm/le-wm/eval_results/pusht/c0_oracle_livebank/seed1",
+      "n_pairs": 50,
+      "bank_meta": {
+        "n_pairs": 50,
+        "window": 25,
+        "pair_band": "short_horizon",
+        "action_pack": "tile_block",
+        "oracle_source": "goal+weak",
+        "controller": "goalpush",
+        "stride": 25,
+        "scan_stride": 1,
+        "seed": 1,
+        "n_bank_episodes": 260
+      },
+      "fork_mean_d_end_m1": 1.3057390916347504,
+      "onestep_median": 1.1767676766626383,
+      "adjacent_median": 1.0777966229512679,
+      "frac": 1.091827207103659,
+      "guard": "INFIDELITY",
+      "geometry": {
+        "frac": 1.0971575979203403,
+        "guard": "INFIDELITY",
+        "onestep_median": 1.1767676766626383,
+        "adjacent_median": 1.0725602947955688,
+        "predicted_move_median": 1.5681146702777864,
+        "predicted_move_over_adjacent": 1.4620293869601717,
+        "mean_angle_deg": 50.557315505481036,
+        "median_angle_deg": 44.72467628496295,
+        "n_angles": 1075,
+        "n_steps": 1150,
+        "terciles": {
+          "small": {
+            "n": 384,
+            "adjacent_median": 0.43561974676396814,
+            "onestep_median": 0.9697238603836194,
+            "frac": 2.2260787477778066
+          },
+          "mid": {
+            "n": 383,
+            "adjacent_median": 1.0742986427384502,
+            "onestep_median": 1.126100498895381,
+            "frac": 1.0482192326194184
+          },
+          "large": {
+            "n": 383,
+            "adjacent_median": 2.186208839532004,
+            "onestep_median": 1.5417923059805958,
+            "frac": 0.7052356015130938
+          }
+        },
+        "pose": {
+          "agent_xy_step_median": 18.277745187942664,
+          "block_xy_step_median": 0.0,
+          "spearman_adj_vs_block": 0.04379096530589963,
+          "spearman_adj_vs_agent": 0.6309067132688224,
+          "spearman_adj_vs_pose": 0.6355927429484043
+        },
+        "strata": {
+          "contact": {
+            "n": 94,
+            "frac": 1.1127205562007931,
+            "onestep_median": 1.5263531858107378,
+            "adjacent_median": 1.3717309142038565
+          },
+          "wall": {
+            "n": 161,
+            "frac": 3.015792684882677,
+            "onestep_median": 1.1208089146725897,
+            "adjacent_median": 0.37164653932973923
+          },
+          "free": {
+            "n": 931,
+            "frac": 1.0297421886174767,
+            "onestep_median": 1.175264811014495,
+            "adjacent_median": 1.141319472005314
+          }
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "oracle_bank": "/workspace/ws_le-wm/le-wm/eval_results/pusht/c0_oracle_livebank/seed2",
+      "n_pairs": 50,
+      "bank_meta": {
+        "n_pairs": 50,
+        "window": 25,
+        "pair_band": "short_horizon",
+        "action_pack": "tile_block",
+        "oracle_source": "goal+weak",
+        "controller": "goalpush",
+        "stride": 25,
+        "scan_stride": 1,
+        "seed": 2,
+        "n_bank_episodes": 260
+      },
+      "fork_mean_d_end_m1": 1.3015095794200897,
+      "onestep_median": 1.2219856844697872,
+      "adjacent_median": 1.2349303754660677,
+      "frac": 0.9895178778873303,
+      "guard": "INFIDELITY",
+      "geometry": {
+        "frac": 1.0019833793778679,
+        "guard": "INFIDELITY",
+        "onestep_median": 1.2219856844697872,
+        "adjacent_median": 1.2195668207875054,
+        "predicted_move_median": 1.6436134755926002,
+        "predicted_move_over_adjacent": 1.3477026822780214,
+        "mean_angle_deg": 48.961309358844304,
+        "median_angle_deg": 43.20334819343207,
+        "n_angles": 1146,
+        "n_steps": 1150,
+        "terciles": {
+          "small": {
+            "n": 384,
+            "adjacent_median": 0.5663647164413852,
+            "onestep_median": 1.0333418728789683,
+            "frac": 1.8245166813563534
+          },
+          "mid": {
+            "n": 383,
+            "adjacent_median": 1.2202662382789602,
+            "onestep_median": 1.2354434403646883,
+            "frac": 1.0124376153413321
+          },
+          "large": {
+            "n": 383,
+            "adjacent_median": 2.1159332396440136,
+            "onestep_median": 1.4802124016907734,
+            "frac": 0.6995553422752627
+          }
+        },
+        "pose": {
+          "agent_xy_step_median": 17.506710981986622,
+          "block_xy_step_median": 0.0,
+          "spearman_adj_vs_block": 0.07833340418076094,
+          "spearman_adj_vs_agent": 0.6737591904811829,
+          "spearman_adj_vs_pose": 0.6797979003978535
+        },
+        "strata": {
+          "contact": {
+            "n": 81,
+            "frac": 0.9298966842549788,
+            "onestep_median": 1.6239532175048552,
+            "adjacent_median": 1.7463802646053583
+          },
+          "wall": {
+            "n": 69,
+            "frac": 1.8392855557702552,
+            "onestep_median": 1.3361028186724795,
+            "adjacent_median": 0.7264248960585932
+          },
+          "free": {
+            "n": 1026,
+            "frac": 0.9855651261489852,
+            "onestep_median": 1.2019625275765546,
+            "adjacent_median": 1.2195668207875054
+          }
+        }
+      }
+    }
+  ]
+}

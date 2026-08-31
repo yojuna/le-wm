@@ -1,0 +1,177 @@
+{
+  "decision": {
+    "overall": "BLOCK_INFIDELITY",
+    "gate_part_b": true,
+    "reason": "Block-moving windows are also infidelity. Claim strengthens to pusher and block.",
+    "block_frac": 0.8873971275335549,
+    "small_step_frac": 1.696195737703006,
+    "small_step_note": "Small-step tercile frac 1.70 is worse than bank-median 0.89; B.eval-tercile remains load-bearing.",
+    "cuts": {
+      "frac_accum_at_or_below": 0.25,
+      "frac_infidelity_at_or_above": 0.5,
+      "median_step_block_xy_min": 2.0,
+      "adj_q33": 0.83155,
+      "adj_q67": 1.74008
+    }
+  },
+  "livebank": {
+    "geometry_frozen_terciles": {
+      "frac": 0.9877682388817542,
+      "guard": "INFIDELITY",
+      "onestep_median": 1.2052068585853437,
+      "adjacent_median": 1.2201312121047243,
+      "predicted_move_median": 1.707174888852954,
+      "predicted_move_over_adjacent": 1.3991731970433576,
+      "mean_angle_deg": 46.41077597480595,
+      "median_angle_deg": 40.664526214538355,
+      "n_angles": 1085,
+      "n_steps": 1150,
+      "tercile_edges": [
+        0.83155,
+        1.74008
+      ],
+      "terciles": {
+        "small": {
+          "n": 383,
+          "adjacent_median": 0.45798949998182154,
+          "onestep_median": 0.9981534736417722,
+          "frac": 2.179424361653249
+        },
+        "mid": {
+          "n": 384,
+          "adjacent_median": 1.2201312121047243,
+          "onestep_median": 1.1659153183127509,
+          "frac": 0.9555655217618348
+        },
+        "large": {
+          "n": 383,
+          "adjacent_median": 2.5198915217514184,
+          "onestep_median": 1.6613622013109977,
+          "frac": 0.6592990956040398
+        }
+      },
+      "pose": {
+        "agent_xy_step_median": 18.88107876804323,
+        "block_xy_step_median": 0.0,
+        "spearman_adj_vs_block": 0.10143425505014765,
+        "spearman_adj_vs_agent": 0.6529073072036843,
+        "spearman_adj_vs_pose": 0.6679331135846671,
+        "frac_on_block_moving_steps": 0.7482539901513108,
+        "frac_on_block_parked_steps": 1.0272913222160809,
+        "n_block_moving_steps": 104,
+        "n_block_parked_steps": 1046
+      },
+      "strata": {
+        "contact": {
+          "n": 104,
+          "frac": 0.8245181610192118,
+          "onestep_median": 1.6662114616690453,
+          "adjacent_median": 2.0208305170736214
+        },
+        "wall": {
+          "n": 69,
+          "frac": null,
+          "onestep_median": 1.1178595313054924,
+          "adjacent_median": 0.0
+        },
+        "free": {
+          "n": 1000,
+          "frac": 0.9714275637803912,
+          "onestep_median": 1.1746521347368095,
+          "adjacent_median": 1.2092019812218968
+        }
+      }
+    },
+    "block_xy_step_median": 0.0,
+    "frac_on_block_moving_steps": 0.7482539901513108,
+    "frac_on_block_parked_steps": 1.0272913222160809,
+    "n_block_moving_steps": 104,
+    "n_block_parked_steps": 1046,
+    "small_step_frac": 2.179424361653249,
+    "mid_step_frac": 0.9555655217618348,
+    "large_step_frac": 0.6592990956040398
+  },
+  "block_bank": {
+    "meta": {
+      "oracle_source": "goal:80",
+      "pair_band": "block_moving",
+      "median_step_block_xy_min": 2.0,
+      "window": 25,
+      "stride": 25,
+      "n_bank_episodes": 80,
+      "n_pairs": 50,
+      "seed": 0,
+      "mean_block_step_median": 7.336594037778497
+    },
+    "geometry": {
+      "frac": 0.8873971275335549,
+      "guard": "INFIDELITY",
+      "onestep_median": 1.5741286121019156,
+      "adjacent_median": 1.7738716559485295,
+      "predicted_move_median": 1.8522542579523793,
+      "predicted_move_over_adjacent": 1.0441873016804797,
+      "mean_angle_deg": 51.2004451983705,
+      "median_angle_deg": 47.906698898356495,
+      "n_angles": 1150,
+      "n_steps": 1150,
+      "tercile_edges": [
+        0.83155,
+        1.74008
+      ],
+      "terciles": {
+        "small": {
+          "n": 100,
+          "adjacent_median": 0.6942247931815372,
+          "onestep_median": 1.1775411352022742,
+          "frac": 1.696195737703006
+        },
+        "mid": {
+          "n": 453,
+          "adjacent_median": 1.2713946963023701,
+          "onestep_median": 1.3890554431252713,
+          "frac": 1.0925446261220824
+        },
+        "large": {
+          "n": 597,
+          "adjacent_median": 2.674272162529681,
+          "onestep_median": 1.9301797489141277,
+          "frac": 0.7217589054542257
+        }
+      },
+      "pose": {
+        "agent_xy_step_median": 14.67137150453257,
+        "block_xy_step_median": 5.255344697895827,
+        "spearman_adj_vs_block": 0.43306481336371194,
+        "spearman_adj_vs_agent": 0.6924438723172208,
+        "spearman_adj_vs_pose": 0.7091392609584286,
+        "frac_on_block_moving_steps": 0.901123446551626,
+        "frac_on_block_parked_steps": 0.8344077817200944,
+        "n_block_moving_steps": 912,
+        "n_block_parked_steps": 238
+      },
+      "strata": {
+        "contact": {
+          "n": 916,
+          "frac": 0.9380021611702329,
+          "onestep_median": 1.4873491298164971,
+          "adjacent_median": 1.5856563997261048
+        },
+        "wall": {
+          "n": 142,
+          "frac": 1.115282744785126,
+          "onestep_median": 1.943663983551784,
+          "adjacent_median": 1.7427544653049005
+        },
+        "free": {
+          "n": 190,
+          "frac": 0.525925286159502,
+          "onestep_median": 2.1346668788060583,
+          "adjacent_median": 4.05887858025267
+        }
+      }
+    },
+    "n_pairs": 50,
+    "mean_pair_block_step_median": 7.336594037778497,
+    "guard": "INFIDELITY"
+  }
+}

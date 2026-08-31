@@ -1,0 +1,3 @@
+episode_idx,seed,success,length,truncated,steps_to_success,min_state_distance,final_state_distance,min_pos_error,min_angle_error,min_task_score,final_task_score,total_contacts,replans,planning_time_s
+0,0,False,200,True,,266.6615146700533,1777.8995659944335,253.47876433898256,0.31668557216461757,,,205,8,0.6511024119972717
+1,1,False,200,True,,124.73177289262988,876.6674224147574,113.970360529733,2.3681301026340984,,,23,8,0.4317074259997753

@@ -1,0 +1,1224 @@
+======== SHORT_HORIZON n=20 ========
+--- E1 l2_z ---
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+
+=== pusht ===
+creating world {'env_name': 'swm/PushT-v1', 'num_envs': 1, 'max_episode_steps': 100, 'image_shape': (224, 224)}
+collecting kinematic bank for scalers + 20 goal_offset=25 pairs (collect_episodes=320)
+  bank: 320 episodes, 25600 steps, collector_success=320 (100.0%)
+  refitting action StandardScaler from WeakPolicy rollouts
+  action: mean=[0.002898091975832358, -0.00030644586921456114] std=[0.5057301335118259, 0.48495394910140793]
+  proprio: mean=[242.84156835350458, 234.19741857856152, 0.0, 0.0] std=[102.12327034435278, 99.70948172628935, 0.0, 0.0]
+  state: mean=[242.84156835350458, 234.19741857856152, 252.79534517240327, 246.60538208432297, 3.095577315625542, 0.0, 0.0] std=[102.12327034435278, 99.70948172628935, 75.03734144029262, 73.82773593874478, 1.8128061988880644, 0.0, 0.0]
+  pairs: 20 mode=short_horizon (from_success_ep=20, mean_pos_progress=16.0)
+20:36:45 | INFO  | utils.py    | Loading checkpoint from folder ../stablewm/checkpoints/hf_pusht...
+20:36:48 | INFO  | __init__.py | JAX version 0.6.2 available.
+20:36:48 | INFO  | atomic_chec~| [atomic_save] installed crash-safe checkpoint plugin (write to sibling .tmp + fsync + atomic rename)
+20:36:48 | INFO  | utils.py    | Created ViT-tiny from scratch with config: {'hidden_size': 192, 'num_hidden_layers': 12, 'num_attention_heads': 3, 'intermediate_size': 768, 'image_size': 224, 'patch_size': 14}
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+evaluate env=pusht protocol=online_offset episodes=20 num_envs=1 viewer=False (Pymunk PushT. online_offset: kinematic start→goal pairs (goal_offset=25, budget=50) + WeakPolicy action scaler. Success = pose match to goal_state, not green-T coverage.)
+CEM solve time: 1.1011 seconds
+episode 1 | seed=32 | success=True | length=25 | steps_to_success=25 | min_dist=27.84 | final_dist=189.39 | min_pos_err=19.04 | min_angle_err=0.170 | replans=1 | planning_s=1.10
+CEM solve time: 0.8713 seconds
+CEM solve time: 0.8620 seconds
+episode 2 | seed=32 | success=False | length=50 | min_dist=73.27 | final_dist=108.45 | min_pos_err=18.78 | min_angle_err=0.191 | replans=2 | planning_s=1.73
+CEM solve time: 0.8682 seconds
+CEM solve time: 0.8626 seconds
+episode 3 | seed=32 | success=False | length=50 | min_dist=73.72 | final_dist=291.77 | min_pos_err=27.37 | min_angle_err=0.010 | replans=2 | planning_s=1.73
+CEM solve time: 0.8651 seconds
+episode 4 | seed=32 | success=True | length=25 | steps_to_success=25 | min_dist=77.80 | final_dist=117.71 | min_pos_err=16.99 | min_angle_err=0.217 | replans=1 | planning_s=0.87
+CEM solve time: 0.8659 seconds
+CEM solve time: 0.8620 seconds
+episode 5 | seed=32 | success=False | length=50 | min_dist=74.16 | final_dist=1091.58 | min_pos_err=23.32 | min_angle_err=0.179 | replans=2 | planning_s=1.73
+CEM solve time: 0.8654 seconds
+episode 6 | seed=32 | success=True | length=25 | steps_to_success=25 | min_dist=84.87 | final_dist=342.69 | min_pos_err=17.56 | min_angle_err=0.186 | replans=1 | planning_s=0.87
+CEM solve time: 0.8641 seconds
+CEM solve time: 0.8664 seconds
+episode 7 | seed=32 | success=False | length=50 | min_dist=107.09 | final_dist=341.31 | min_pos_err=27.63 | min_angle_err=0.179 | replans=2 | planning_s=1.73
+CEM solve time: 0.8688 seconds
+CEM solve time: 0.8628 seconds
+episode 8 | seed=32 | success=False | length=50 | min_dist=152.50 | final_dist=432.31 | min_pos_err=41.14 | min_angle_err=0.202 | replans=2 | planning_s=1.73
+CEM solve time: 0.8662 seconds
+CEM solve time: 0.8639 seconds
+episode 9 | seed=32 | success=False | length=50 | min_dist=138.68 | final_dist=514.09 | min_pos_err=30.99 | min_angle_err=0.029 | replans=2 | planning_s=1.73
+CEM solve time: 0.8688 seconds
+CEM solve time: 0.8629 seconds
+episode 10 | seed=32 | success=False | length=50 | min_dist=102.33 | final_dist=432.39 | min_pos_err=40.64 | min_angle_err=0.162 | replans=2 | planning_s=1.73
+CEM solve time: 0.8673 seconds
+CEM solve time: 0.8658 seconds
+episode 11 | seed=32 | success=False | length=50 | min_dist=150.04 | final_dist=519.64 | min_pos_err=34.87 | min_angle_err=0.154 | replans=2 | planning_s=1.73
+CEM solve time: 0.8686 seconds
+CEM solve time: 0.8688 seconds
+episode 12 | seed=32 | success=False | length=50 | min_dist=149.18 | final_dist=368.12 | min_pos_err=41.47 | min_angle_err=0.042 | replans=2 | planning_s=1.74
+CEM solve time: 0.8685 seconds
+CEM solve time: 0.8664 seconds
+episode 13 | seed=32 | success=False | length=50 | min_dist=153.47 | final_dist=556.13 | min_pos_err=37.94 | min_angle_err=0.163 | replans=2 | planning_s=1.74
+CEM solve time: 0.8765 seconds
+CEM solve time: 0.8666 seconds
+episode 14 | seed=32 | success=False | length=50 | min_dist=134.35 | final_dist=538.02 | min_pos_err=25.18 | min_angle_err=0.002 | replans=2 | planning_s=1.74
+CEM solve time: 0.8690 seconds
+CEM solve time: 0.8644 seconds
+episode 15 | seed=32 | success=False | length=50 | min_dist=134.80 | final_dist=349.01 | min_pos_err=27.34 | min_angle_err=0.191 | replans=2 | planning_s=1.73
+CEM solve time: 0.8687 seconds
+CEM solve time: 0.8681 seconds
+episode 16 | seed=32 | success=False | length=50 | min_dist=119.23 | final_dist=500.02 | min_pos_err=25.99 | min_angle_err=0.063 | replans=2 | planning_s=1.74
+CEM solve time: 0.8753 seconds
+CEM solve time: 0.8669 seconds
+episode 17 | seed=32 | success=False | length=50 | min_dist=167.73 | final_dist=690.26 | min_pos_err=42.21 | min_angle_err=0.008 | replans=2 | planning_s=1.74
+CEM solve time: 0.8796 seconds
+CEM solve time: 0.8743 seconds
+episode 18 | seed=32 | success=False | length=50 | min_dist=106.34 | final_dist=686.85 | min_pos_err=28.06 | min_angle_err=0.009 | replans=2 | planning_s=1.75
+CEM solve time: 0.8682 seconds
+CEM solve time: 0.8665 seconds
+episode 19 | seed=279 | success=True | length=26 | steps_to_success=26 | min_dist=49.21 | final_dist=276.41 | min_pos_err=17.80 | min_angle_err=0.219 | replans=2 | planning_s=1.73
+CEM solve time: 0.8713 seconds
+episode 20 | seed=279 | success=True | length=5 | steps_to_success=5 | min_dist=65.09 | final_dist=207.84 | min_pos_err=2.51 | min_angle_err=0.219 | replans=1 | planning_s=0.87
+
+=== eval summary (pusht, online_offset) ===
+success_rate: 25.0% (5/20)
+mean_episode_length: 42.8
+mean_steps_to_success: 21.2
+mean_min_state_distance: 107.08 ± 39.92
+mean_final_state_distance: 427.70
+planning: 36 solves, 31.47s total (0.874s/solve), mean 1.574s/episode
+wall_time: 34.7s
+saved metrics: eval_results/pusht/lewm_phi_iql_v1/short/E1_l2_c1/pusht/pusht_seed0/metrics.json
+saved episodes: eval_results/pusht/lewm_phi_iql_v1/short/E1_l2_c1/pusht/pusht_seed0/episodes.csv
+--- E2 iql ---
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+
+=== pusht ===
+creating world {'env_name': 'swm/PushT-v1', 'num_envs': 1, 'max_episode_steps': 100, 'image_shape': (224, 224)}
+collecting kinematic bank for scalers + 20 goal_offset=25 pairs (collect_episodes=320)
+  bank: 320 episodes, 25600 steps, collector_success=320 (100.0%)
+  refitting action StandardScaler from WeakPolicy rollouts
+  action: mean=[0.002898091975832358, -0.00030644586921456114] std=[0.5057301335118259, 0.48495394910140793]
+  proprio: mean=[242.84156835350458, 234.19741857856152, 0.0, 0.0] std=[102.12327034435278, 99.70948172628935, 0.0, 0.0]
+  state: mean=[242.84156835350458, 234.19741857856152, 252.79534517240327, 246.60538208432297, 3.095577315625542, 0.0, 0.0] std=[102.12327034435278, 99.70948172628935, 75.03734144029262, 73.82773593874478, 1.8128061988880644, 0.0, 0.0]
+  pairs: 20 mode=short_horizon (from_success_ep=20, mean_pos_progress=16.0)
+20:38:10 | INFO  | utils.py    | Loading checkpoint from folder ../stablewm/checkpoints/hf_pusht...
+20:38:13 | INFO  | __init__.py | JAX version 0.6.2 available.
+20:38:13 | INFO  | atomic_chec~| [atomic_save] installed crash-safe checkpoint plugin (write to sibling .tmp + fsync + atomic rename)
+20:38:13 | INFO  | utils.py    | Created ViT-tiny from scratch with config: {'hidden_size': 192, 'num_hidden_layers': 12, 'num_attention_heads': 3, 'intermediate_size': 768, 'image_size': 224, 'patch_size': 14}
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+evaluate env=pusht protocol=online_offset episodes=20 num_envs=1 viewer=False (Pymunk PushT. online_offset: kinematic start→goal pairs (goal_offset=25, budget=50) + WeakPolicy action scaler. Success = pose match to goal_state, not green-T coverage.)
+CEM solve time: 1.2538 seconds
+CEM solve time: 0.8680 seconds
+episode 1 | seed=32 | success=False | length=50 | min_dist=43.48 | final_dist=145.78 | min_pos_err=25.75 | min_angle_err=0.119 | replans=2 | planning_s=2.12
+CEM solve time: 0.8695 seconds
+CEM solve time: 0.8642 seconds
+episode 2 | seed=32 | success=False | length=50 | min_dist=63.42 | final_dist=143.72 | min_pos_err=22.30 | min_angle_err=0.191 | replans=2 | planning_s=1.73
+CEM solve time: 0.8743 seconds
+CEM solve time: 0.8694 seconds
+episode 3 | seed=32 | success=False | length=50 | min_dist=73.87 | final_dist=81.73 | min_pos_err=21.91 | min_angle_err=0.134 | replans=2 | planning_s=1.74
+CEM solve time: 0.8672 seconds
+CEM solve time: 0.8662 seconds
+episode 4 | seed=32 | success=False | length=50 | min_dist=127.42 | final_dist=825.28 | min_pos_err=29.27 | min_angle_err=0.171 | replans=2 | planning_s=1.73
+CEM solve time: 0.8699 seconds
+CEM solve time: 0.8714 seconds
+episode 5 | seed=32 | success=False | length=50 | min_dist=136.41 | final_dist=602.45 | min_pos_err=26.83 | min_angle_err=0.071 | replans=2 | planning_s=1.74
+CEM solve time: 0.8823 seconds
+CEM solve time: 0.8762 seconds
+episode 6 | seed=32 | success=False | length=50 | min_dist=112.53 | final_dist=252.24 | min_pos_err=32.11 | min_angle_err=0.265 | replans=2 | planning_s=1.76
+CEM solve time: 0.8836 seconds
+CEM solve time: 0.8778 seconds
+episode 7 | seed=32 | success=False | length=50 | min_dist=119.91 | final_dist=255.68 | min_pos_err=32.24 | min_angle_err=0.202 | replans=2 | planning_s=1.76
+CEM solve time: 0.8723 seconds
+CEM solve time: 0.8727 seconds
+episode 8 | seed=32 | success=False | length=50 | min_dist=68.89 | final_dist=273.83 | min_pos_err=32.68 | min_angle_err=0.084 | replans=2 | planning_s=1.75
+CEM solve time: 0.8834 seconds
+CEM solve time: 0.8755 seconds
+episode 9 | seed=32 | success=False | length=50 | min_dist=96.82 | final_dist=301.30 | min_pos_err=29.47 | min_angle_err=0.021 | replans=2 | planning_s=1.76
+CEM solve time: 0.8847 seconds
+CEM solve time: 0.8756 seconds
+episode 10 | seed=32 | success=False | length=50 | min_dist=112.32 | final_dist=352.62 | min_pos_err=29.74 | min_angle_err=0.079 | replans=2 | planning_s=1.76
+CEM solve time: 0.8833 seconds
+CEM solve time: 0.8763 seconds
+episode 11 | seed=32 | success=False | length=50 | min_dist=118.22 | final_dist=277.91 | min_pos_err=33.36 | min_angle_err=0.164 | replans=2 | planning_s=1.76
+CEM solve time: 0.8817 seconds
+CEM solve time: 0.8766 seconds
+episode 12 | seed=32 | success=False | length=50 | min_dist=137.13 | final_dist=557.59 | min_pos_err=28.32 | min_angle_err=0.198 | replans=2 | planning_s=1.76
+CEM solve time: 0.8764 seconds
+CEM solve time: 0.8765 seconds
+episode 13 | seed=32 | success=False | length=50 | min_dist=149.11 | final_dist=279.27 | min_pos_err=43.32 | min_angle_err=0.196 | replans=2 | planning_s=1.75
+CEM solve time: 0.8783 seconds
+CEM solve time: 0.8724 seconds
+episode 14 | seed=32 | success=False | length=50 | min_dist=177.31 | final_dist=310.73 | min_pos_err=21.81 | min_angle_err=0.189 | replans=2 | planning_s=1.75
+CEM solve time: 0.8754 seconds
+CEM solve time: 0.8719 seconds
+episode 15 | seed=32 | success=False | length=50 | min_dist=55.54 | final_dist=284.73 | min_pos_err=27.25 | min_angle_err=0.055 | replans=2 | planning_s=1.75
+CEM solve time: 0.8786 seconds
+CEM solve time: 0.8804 seconds
+episode 16 | seed=32 | success=False | length=50 | min_dist=65.28 | final_dist=234.35 | min_pos_err=28.27 | min_angle_err=0.052 | replans=2 | planning_s=1.76
+CEM solve time: 0.8852 seconds
+CEM solve time: 0.8721 seconds
+episode 17 | seed=32 | success=False | length=50 | min_dist=114.27 | final_dist=292.14 | min_pos_err=27.56 | min_angle_err=0.002 | replans=2 | planning_s=1.76
+CEM solve time: 0.8756 seconds
+episode 18 | seed=32 | success=True | length=1 | steps_to_success=1 | min_dist=151.30 | final_dist=151.30 | min_pos_err=18.03 | min_angle_err=0.160 | replans=1 | planning_s=0.88
+CEM solve time: 0.8720 seconds
+episode 19 | seed=279 | success=True | length=1 | steps_to_success=1 | min_dist=403.89 | final_dist=403.89 | min_pos_err=10.01 | min_angle_err=0.219 | replans=1 | planning_s=0.87
+CEM solve time: 0.8668 seconds
+CEM solve time: 0.8656 seconds
+episode 20 | seed=279 | success=False | length=50 | min_dist=81.62 | final_dist=99.00 | min_pos_err=34.31 | min_angle_err=0.219 | replans=2 | planning_s=1.73
+
+=== eval summary (pusht, online_offset) ===
+success_rate: 10.0% (2/20)
+mean_episode_length: 45.1
+mean_steps_to_success: 1.0
+mean_min_state_distance: 120.44 ± 75.89
+mean_final_state_distance: 306.28
+planning: 38 solves, 33.63s total (0.885s/solve), mean 1.681s/episode
+wall_time: 37.4s
+saved metrics: eval_results/pusht/lewm_phi_iql_v1/short/E2_phi_iql/pusht/pusht_seed0/metrics.json
+saved episodes: eval_results/pusht/lewm_phi_iql_v1/short/E2_phi_iql/pusht/pusht_seed0/episodes.csv
+--- E4 random ---
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+
+=== pusht ===
+creating world {'env_name': 'swm/PushT-v1', 'num_envs': 1, 'max_episode_steps': 100, 'image_shape': (224, 224)}
+collecting kinematic bank for scalers + 20 goal_offset=25 pairs (collect_episodes=320)
+  bank: 320 episodes, 25600 steps, collector_success=320 (100.0%)
+  refitting action StandardScaler from WeakPolicy rollouts
+  action: mean=[0.002898091975832358, -0.00030644586921456114] std=[0.5057301335118259, 0.48495394910140793]
+  proprio: mean=[242.84156835350458, 234.19741857856152, 0.0, 0.0] std=[102.12327034435278, 99.70948172628935, 0.0, 0.0]
+  state: mean=[242.84156835350458, 234.19741857856152, 252.79534517240327, 246.60538208432297, 3.095577315625542, 0.0, 0.0] std=[102.12327034435278, 99.70948172628935, 75.03734144029262, 73.82773593874478, 1.8128061988880644, 0.0, 0.0]
+  pairs: 20 mode=short_horizon (from_success_ep=20, mean_pos_progress=16.0)
+20:39:37 | INFO  | utils.py    | Loading checkpoint from folder ../stablewm/checkpoints/hf_pusht...
+20:39:40 | INFO  | __init__.py | JAX version 0.6.2 available.
+20:39:40 | INFO  | atomic_chec~| [atomic_save] installed crash-safe checkpoint plugin (write to sibling .tmp + fsync + atomic rename)
+20:39:40 | INFO  | utils.py    | Created ViT-tiny from scratch with config: {'hidden_size': 192, 'num_hidden_layers': 12, 'num_attention_heads': 3, 'intermediate_size': 768, 'image_size': 224, 'patch_size': 14}
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+evaluate env=pusht protocol=online_offset episodes=20 num_envs=1 viewer=False (Pymunk PushT. online_offset: kinematic start→goal pairs (goal_offset=25, budget=50) + WeakPolicy action scaler. Success = pose match to goal_state, not green-T coverage.)
+CEM solve time: 1.1312 seconds
+CEM solve time: 0.8661 seconds
+episode 1 | seed=32 | success=True | length=47 | steps_to_success=47 | min_dist=69.15 | final_dist=181.92 | min_pos_err=17.53 | min_angle_err=0.184 | replans=2 | planning_s=2.00
+CEM solve time: 0.8687 seconds
+CEM solve time: 0.8562 seconds
+episode 2 | seed=32 | success=True | length=48 | steps_to_success=48 | min_dist=41.26 | final_dist=50.90 | min_pos_err=17.74 | min_angle_err=0.190 | replans=2 | planning_s=1.73
+CEM solve time: 0.8616 seconds
+CEM solve time: 0.8636 seconds
+episode 3 | seed=32 | success=False | length=50 | min_dist=77.34 | final_dist=187.13 | min_pos_err=23.64 | min_angle_err=0.162 | replans=2 | planning_s=1.73
+CEM solve time: 0.8743 seconds
+CEM solve time: 0.8669 seconds
+episode 4 | seed=32 | success=True | length=44 | steps_to_success=44 | min_dist=52.94 | final_dist=200.51 | min_pos_err=16.03 | min_angle_err=0.220 | replans=2 | planning_s=1.74
+CEM solve time: 0.8690 seconds
+CEM solve time: 0.8684 seconds
+episode 5 | seed=32 | success=True | length=36 | steps_to_success=36 | min_dist=64.73 | final_dist=77.53 | min_pos_err=18.35 | min_angle_err=0.104 | replans=2 | planning_s=1.74
+CEM solve time: 0.8701 seconds
+CEM solve time: 0.8702 seconds
+episode 6 | seed=32 | success=False | length=50 | min_dist=92.59 | final_dist=119.95 | min_pos_err=24.43 | min_angle_err=0.147 | replans=2 | planning_s=1.74
+CEM solve time: 0.8818 seconds
+CEM solve time: 0.8793 seconds
+episode 7 | seed=32 | success=False | length=50 | min_dist=72.60 | final_dist=293.28 | min_pos_err=28.91 | min_angle_err=0.129 | replans=2 | planning_s=1.76
+CEM solve time: 0.8828 seconds
+CEM solve time: 0.8755 seconds
+episode 8 | seed=32 | success=False | length=50 | min_dist=103.96 | final_dist=415.91 | min_pos_err=30.11 | min_angle_err=0.060 | replans=2 | planning_s=1.76
+CEM solve time: 0.8734 seconds
+CEM solve time: 0.8691 seconds
+episode 9 | seed=32 | success=False | length=50 | min_dist=108.38 | final_dist=233.02 | min_pos_err=32.40 | min_angle_err=0.007 | replans=2 | planning_s=1.74
+CEM solve time: 0.8816 seconds
+CEM solve time: 0.8747 seconds
+episode 10 | seed=32 | success=False | length=50 | min_dist=89.83 | final_dist=298.07 | min_pos_err=33.33 | min_angle_err=0.096 | replans=2 | planning_s=1.76
+CEM solve time: 0.8847 seconds
+CEM solve time: 0.8656 seconds
+episode 11 | seed=32 | success=False | length=50 | min_dist=73.95 | final_dist=277.34 | min_pos_err=30.71 | min_angle_err=0.172 | replans=2 | planning_s=1.75
+CEM solve time: 0.8690 seconds
+CEM solve time: 0.8636 seconds
+episode 12 | seed=32 | success=False | length=50 | min_dist=129.23 | final_dist=270.93 | min_pos_err=26.66 | min_angle_err=0.028 | replans=2 | planning_s=1.73
+CEM solve time: 0.8702 seconds
+CEM solve time: 0.8655 seconds
+episode 13 | seed=32 | success=False | length=50 | min_dist=80.57 | final_dist=247.08 | min_pos_err=29.19 | min_angle_err=0.179 | replans=2 | planning_s=1.74
+CEM solve time: 0.8679 seconds
+CEM solve time: 0.8735 seconds
+episode 14 | seed=32 | success=False | length=50 | min_dist=155.80 | final_dist=270.33 | min_pos_err=26.24 | min_angle_err=0.162 | replans=2 | planning_s=1.74
+CEM solve time: 0.8814 seconds
+CEM solve time: 0.8747 seconds
+episode 15 | seed=32 | success=False | length=50 | min_dist=149.65 | final_dist=320.57 | min_pos_err=31.63 | min_angle_err=0.094 | replans=2 | planning_s=1.76
+CEM solve time: 0.8714 seconds
+CEM solve time: 0.8696 seconds
+episode 16 | seed=32 | success=False | length=50 | min_dist=102.98 | final_dist=248.67 | min_pos_err=31.85 | min_angle_err=0.032 | replans=2 | planning_s=1.74
+CEM solve time: 0.8712 seconds
+CEM solve time: 0.8679 seconds
+episode 17 | seed=32 | success=False | length=50 | min_dist=130.83 | final_dist=304.24 | min_pos_err=26.24 | min_angle_err=0.020 | replans=2 | planning_s=1.74
+CEM solve time: 0.8791 seconds
+CEM solve time: 0.8767 seconds
+episode 18 | seed=32 | success=False | length=50 | min_dist=51.01 | final_dist=478.53 | min_pos_err=20.49 | min_angle_err=0.165 | replans=2 | planning_s=1.76
+CEM solve time: 0.8747 seconds
+episode 19 | seed=279 | success=True | length=1 | steps_to_success=1 | min_dist=212.52 | final_dist=212.52 | min_pos_err=18.34 | min_angle_err=0.219 | replans=1 | planning_s=0.87
+CEM solve time: 0.8720 seconds
+episode 20 | seed=279 | success=True | length=23 | steps_to_success=23 | min_dist=76.65 | final_dist=98.51 | min_pos_err=12.83 | min_angle_err=0.219 | replans=1 | planning_s=0.87
+
+=== eval summary (pusht, online_offset) ===
+success_rate: 30.0% (6/20)
+mean_episode_length: 45.0
+mean_steps_to_success: 33.2
+mean_min_state_distance: 96.80 ± 41.81
+mean_final_state_distance: 239.35
+planning: 38 solves, 33.39s total (0.879s/solve), mean 1.669s/episode
+wall_time: 37.1s
+saved metrics: eval_results/pusht/lewm_phi_iql_v1/short/E4_random/pusht/pusht_seed0/metrics.json
+saved episodes: eval_results/pusht/lewm_phi_iql_v1/short/E4_random/pusht/pusht_seed0/episodes.csv
+======== OFFSET n=50 ========
+--- E1 l2_z ---
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+
+=== pusht ===
+creating world {'env_name': 'swm/PushT-v1', 'num_envs': 1, 'max_episode_steps': 100, 'image_shape': (224, 224)}
+collecting kinematic bank for scalers + 50 goal_offset=25 pairs (collect_episodes=200)
+  bank: 200 episodes, 16000 steps, collector_success=200 (100.0%)
+  refitting action StandardScaler from WeakPolicy rollouts
+  action: mean=[0.002898091975832358, -0.00030644586921456114] std=[0.5057301335118259, 0.48495394910140793]
+  proprio: mean=[249.07934472393904, 235.17203689034173, 0.0, 0.0] std=[99.6445341949937, 98.70842778448493, 0.0, 0.0]
+  state: mean=[249.07934472393904, 235.17203689034173, 255.54297118670345, 245.45145849388524, 3.027466259567334, 0.0, 0.0] std=[99.6445341949937, 98.70842778448493, 73.29152587270916, 71.06169612635296, 1.827698322381, 0.0, 0.0]
+  pairs: 50 mode=offset (from_success_ep=50, mean_pos_progress=45.0)
+20:40:50 | INFO  | utils.py    | Loading checkpoint from folder ../stablewm/checkpoints/hf_pusht...
+20:40:53 | INFO  | __init__.py | JAX version 0.6.2 available.
+20:40:53 | INFO  | atomic_chec~| [atomic_save] installed crash-safe checkpoint plugin (write to sibling .tmp + fsync + atomic rename)
+20:40:53 | INFO  | utils.py    | Created ViT-tiny from scratch with config: {'hidden_size': 192, 'num_hidden_layers': 12, 'num_attention_heads': 3, 'intermediate_size': 768, 'image_size': 224, 'patch_size': 14}
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+evaluate env=pusht protocol=online_offset episodes=50 num_envs=1 viewer=False (Pymunk PushT. online_offset: kinematic start→goal pairs (goal_offset=25, budget=50) + WeakPolicy action scaler. Success = pose match to goal_state, not green-T coverage.)
+CEM solve time: 1.1205 seconds
+CEM solve time: 0.8680 seconds
+episode 1 | seed=1 | success=False | length=50 | min_dist=91.09 | final_dist=270.99 | min_pos_err=16.01 | min_angle_err=0.566 | replans=2 | planning_s=1.99
+CEM solve time: 0.8697 seconds
+CEM solve time: 0.8712 seconds
+episode 2 | seed=2 | success=False | length=50 | min_dist=108.51 | final_dist=575.22 | min_pos_err=58.66 | min_angle_err=0.114 | replans=2 | planning_s=1.74
+CEM solve time: 0.8724 seconds
+CEM solve time: 0.8660 seconds
+episode 3 | seed=5 | success=False | length=50 | min_dist=154.12 | final_dist=2081.97 | min_pos_err=62.20 | min_angle_err=0.049 | replans=2 | planning_s=1.74
+CEM solve time: 0.8688 seconds
+CEM solve time: 0.8654 seconds
+episode 4 | seed=10 | success=False | length=50 | min_dist=57.30 | final_dist=214.62 | min_pos_err=26.40 | min_angle_err=0.011 | replans=2 | planning_s=1.73
+CEM solve time: 0.8741 seconds
+CEM solve time: 0.8652 seconds
+episode 5 | seed=10 | success=False | length=50 | min_dist=180.41 | final_dist=910.12 | min_pos_err=61.83 | min_angle_err=0.010 | replans=2 | planning_s=1.74
+CEM solve time: 0.8681 seconds
+CEM solve time: 0.8678 seconds
+episode 6 | seed=13 | success=False | length=50 | min_dist=242.60 | final_dist=814.10 | min_pos_err=35.78 | min_angle_err=0.516 | replans=2 | planning_s=1.74
+CEM solve time: 0.8688 seconds
+CEM solve time: 0.8667 seconds
+episode 7 | seed=30 | success=False | length=50 | min_dist=165.95 | final_dist=431.84 | min_pos_err=60.86 | min_angle_err=0.200 | replans=2 | planning_s=1.74
+CEM solve time: 0.8691 seconds
+CEM solve time: 0.8683 seconds
+episode 8 | seed=31 | success=False | length=50 | min_dist=76.69 | final_dist=588.16 | min_pos_err=48.89 | min_angle_err=0.698 | replans=2 | planning_s=1.74
+CEM solve time: 0.8706 seconds
+CEM solve time: 0.8665 seconds
+episode 9 | seed=32 | success=False | length=50 | min_dist=83.62 | final_dist=469.15 | min_pos_err=27.77 | min_angle_err=0.064 | replans=2 | planning_s=1.74
+CEM solve time: 0.8722 seconds
+CEM solve time: 0.8681 seconds
+episode 10 | seed=35 | success=False | length=50 | min_dist=261.42 | final_dist=814.48 | min_pos_err=59.36 | min_angle_err=0.282 | replans=2 | planning_s=1.74
+CEM solve time: 0.8719 seconds
+CEM solve time: 0.8671 seconds
+episode 11 | seed=35 | success=False | length=50 | min_dist=294.96 | final_dist=973.91 | min_pos_err=91.08 | min_angle_err=0.293 | replans=2 | planning_s=1.74
+CEM solve time: 0.8705 seconds
+CEM solve time: 0.8716 seconds
+episode 12 | seed=35 | success=False | length=50 | min_dist=190.91 | final_dist=720.42 | min_pos_err=46.45 | min_angle_err=0.217 | replans=2 | planning_s=1.74
+CEM solve time: 0.8801 seconds
+episode 13 | seed=43 | success=True | length=23 | steps_to_success=23 | min_dist=42.71 | final_dist=95.02 | min_pos_err=18.89 | min_angle_err=0.122 | replans=1 | planning_s=0.88
+CEM solve time: 0.8900 seconds
+CEM solve time: 0.8785 seconds
+episode 14 | seed=44 | success=False | length=50 | min_dist=72.68 | final_dist=203.67 | min_pos_err=52.42 | min_angle_err=0.511 | replans=2 | planning_s=1.77
+CEM solve time: 0.8718 seconds
+CEM solve time: 0.8778 seconds
+episode 15 | seed=44 | success=False | length=50 | min_dist=103.64 | final_dist=115.44 | min_pos_err=44.97 | min_angle_err=0.572 | replans=2 | planning_s=1.75
+CEM solve time: 0.8764 seconds
+CEM solve time: 0.8754 seconds
+episode 16 | seed=44 | success=False | length=50 | min_dist=45.28 | final_dist=132.05 | min_pos_err=35.69 | min_angle_err=0.388 | replans=2 | planning_s=1.75
+CEM solve time: 0.8697 seconds
+CEM solve time: 0.8686 seconds
+episode 17 | seed=45 | success=False | length=50 | min_dist=182.03 | final_dist=450.92 | min_pos_err=37.03 | min_angle_err=0.164 | replans=2 | planning_s=1.74
+CEM solve time: 0.8713 seconds
+CEM solve time: 0.8700 seconds
+episode 18 | seed=45 | success=False | length=50 | min_dist=191.12 | final_dist=619.14 | min_pos_err=45.77 | min_angle_err=0.207 | replans=2 | planning_s=1.74
+CEM solve time: 0.8811 seconds
+CEM solve time: 0.8759 seconds
+episode 19 | seed=45 | success=False | length=50 | min_dist=117.63 | final_dist=303.46 | min_pos_err=46.98 | min_angle_err=0.208 | replans=2 | planning_s=1.76
+CEM solve time: 0.8760 seconds
+CEM solve time: 0.8700 seconds
+episode 20 | seed=45 | success=False | length=50 | min_dist=174.00 | final_dist=581.70 | min_pos_err=56.29 | min_angle_err=0.209 | replans=2 | planning_s=1.75
+CEM solve time: 0.8724 seconds
+CEM solve time: 0.8694 seconds
+episode 21 | seed=45 | success=False | length=50 | min_dist=68.43 | final_dist=279.93 | min_pos_err=46.85 | min_angle_err=0.173 | replans=2 | planning_s=1.74
+CEM solve time: 0.8770 seconds
+CEM solve time: 0.8703 seconds
+episode 22 | seed=72 | success=False | length=50 | min_dist=75.48 | final_dist=231.41 | min_pos_err=60.52 | min_angle_err=0.335 | replans=2 | planning_s=1.75
+CEM solve time: 0.8785 seconds
+CEM solve time: 0.8758 seconds
+episode 23 | seed=82 | success=False | length=50 | min_dist=135.75 | final_dist=625.07 | min_pos_err=49.24 | min_angle_err=0.397 | replans=2 | planning_s=1.75
+CEM solve time: 0.8769 seconds
+CEM solve time: 0.8775 seconds
+episode 24 | seed=84 | success=False | length=50 | min_dist=105.16 | final_dist=235.42 | min_pos_err=48.64 | min_angle_err=0.023 | replans=2 | planning_s=1.75
+CEM solve time: 0.8743 seconds
+CEM solve time: 0.8706 seconds
+episode 25 | seed=84 | success=False | length=50 | min_dist=101.01 | final_dist=338.78 | min_pos_err=50.00 | min_angle_err=0.320 | replans=2 | planning_s=1.75
+CEM solve time: 0.8728 seconds
+CEM solve time: 0.8703 seconds
+episode 26 | seed=84 | success=False | length=50 | min_dist=259.95 | final_dist=734.09 | min_pos_err=74.71 | min_angle_err=0.303 | replans=2 | planning_s=1.74
+CEM solve time: 0.8727 seconds
+episode 27 | seed=92 | success=True | length=9 | steps_to_success=9 | min_dist=97.65 | final_dist=512.33 | min_pos_err=16.80 | min_angle_err=0.248 | replans=1 | planning_s=0.87
+CEM solve time: 0.8677 seconds
+CEM solve time: 0.8689 seconds
+episode 28 | seed=92 | success=False | length=50 | min_dist=155.71 | final_dist=204.63 | min_pos_err=20.09 | min_angle_err=0.340 | replans=2 | planning_s=1.74
+CEM solve time: 0.8750 seconds
+CEM solve time: 0.8713 seconds
+episode 29 | seed=92 | success=False | length=50 | min_dist=172.12 | final_dist=311.53 | min_pos_err=38.02 | min_angle_err=0.351 | replans=2 | planning_s=1.75
+CEM solve time: 0.8726 seconds
+CEM solve time: 0.8711 seconds
+episode 30 | seed=92 | success=False | length=50 | min_dist=138.98 | final_dist=216.80 | min_pos_err=39.85 | min_angle_err=0.154 | replans=2 | planning_s=1.74
+CEM solve time: 0.8750 seconds
+CEM solve time: 0.8697 seconds
+episode 31 | seed=92 | success=False | length=50 | min_dist=79.56 | final_dist=304.09 | min_pos_err=41.09 | min_angle_err=0.308 | replans=2 | planning_s=1.74
+CEM solve time: 0.8701 seconds
+CEM solve time: 0.8731 seconds
+episode 32 | seed=92 | success=False | length=50 | min_dist=75.62 | final_dist=213.32 | min_pos_err=29.86 | min_angle_err=0.138 | replans=2 | planning_s=1.74
+CEM solve time: 0.8867 seconds
+CEM solve time: 0.8717 seconds
+episode 33 | seed=94 | success=False | length=50 | min_dist=340.38 | final_dist=2211.42 | min_pos_err=101.52 | min_angle_err=0.569 | replans=2 | planning_s=1.76
+CEM solve time: 0.8755 seconds
+CEM solve time: 0.8743 seconds
+episode 34 | seed=112 | success=False | length=50 | min_dist=92.33 | final_dist=585.16 | min_pos_err=39.42 | min_angle_err=0.016 | replans=2 | planning_s=1.75
+CEM solve time: 0.8816 seconds
+CEM solve time: 0.8717 seconds
+episode 35 | seed=121 | success=False | length=50 | min_dist=74.70 | final_dist=768.92 | min_pos_err=39.50 | min_angle_err=0.060 | replans=2 | planning_s=1.75
+CEM solve time: 0.8846 seconds
+CEM solve time: 0.8703 seconds
+episode 36 | seed=121 | success=False | length=50 | min_dist=55.55 | final_dist=926.20 | min_pos_err=42.95 | min_angle_err=0.066 | replans=2 | planning_s=1.76
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+CEM solve time: 0.8726 seconds
+CEM solve time: 0.8691 seconds
+episode 37 | seed=128 | success=False | length=50 | min_dist=273.28 | final_dist=995.05 | min_pos_err=72.27 | min_angle_err=0.141 | replans=2 | planning_s=1.74
+CEM solve time: 0.8691 seconds
+CEM solve time: 0.8690 seconds
+episode 38 | seed=131 | success=False | length=50 | min_dist=184.35 | final_dist=307.00 | min_pos_err=39.84 | min_angle_err=0.370 | replans=2 | planning_s=1.74
+CEM solve time: 0.8704 seconds
+CEM solve time: 0.8696 seconds
+episode 39 | seed=148 | success=False | length=50 | min_dist=71.11 | final_dist=743.51 | min_pos_err=42.57 | min_angle_err=0.089 | replans=2 | planning_s=1.74
+CEM solve time: 0.8816 seconds
+CEM solve time: 0.8741 seconds
+episode 40 | seed=151 | success=False | length=50 | min_dist=108.64 | final_dist=888.00 | min_pos_err=54.66 | min_angle_err=0.295 | replans=2 | planning_s=1.76
+CEM solve time: 0.8723 seconds
+CEM solve time: 0.8717 seconds
+episode 41 | seed=151 | success=False | length=50 | min_dist=199.33 | final_dist=479.85 | min_pos_err=49.62 | min_angle_err=0.086 | replans=2 | planning_s=1.74
+CEM solve time: 0.8838 seconds
+CEM solve time: 0.8746 seconds
+episode 42 | seed=151 | success=False | length=50 | min_dist=177.25 | final_dist=391.85 | min_pos_err=87.55 | min_angle_err=0.598 | replans=2 | planning_s=1.76
+CEM solve time: 0.8763 seconds
+CEM solve time: 0.8688 seconds
+episode 43 | seed=151 | success=False | length=50 | min_dist=107.52 | final_dist=107.52 | min_pos_err=37.65 | min_angle_err=0.363 | replans=2 | planning_s=1.75
+CEM solve time: 0.8712 seconds
+CEM solve time: 0.8665 seconds
+episode 44 | seed=164 | success=False | length=50 | min_dist=152.82 | final_dist=393.68 | min_pos_err=52.54 | min_angle_err=0.093 | replans=2 | planning_s=1.74
+CEM solve time: 0.8716 seconds
+CEM solve time: 0.8690 seconds
+episode 45 | seed=171 | success=False | length=50 | min_dist=41.40 | final_dist=178.09 | min_pos_err=21.49 | min_angle_err=0.058 | replans=2 | planning_s=1.74
+CEM solve time: 0.8686 seconds
+CEM solve time: 0.8691 seconds
+episode 46 | seed=182 | success=False | length=50 | min_dist=36.48 | final_dist=1160.81 | min_pos_err=23.45 | min_angle_err=0.440 | replans=2 | planning_s=1.74
+CEM solve time: 0.8723 seconds
+CEM solve time: 0.8706 seconds
+episode 47 | seed=191 | success=True | length=27 | steps_to_success=27 | min_dist=66.22 | final_dist=394.74 | min_pos_err=18.37 | min_angle_err=0.023 | replans=2 | planning_s=1.74
+CEM solve time: 0.8700 seconds
+episode 48 | seed=191 | success=True | length=16 | steps_to_success=16 | min_dist=169.85 | final_dist=294.57 | min_pos_err=14.61 | min_angle_err=0.055 | replans=1 | planning_s=0.87
+CEM solve time: 0.8720 seconds
+CEM solve time: 0.8679 seconds
+episode 49 | seed=199 | success=False | length=50 | min_dist=303.68 | final_dist=802.98 | min_pos_err=55.32 | min_angle_err=0.470 | replans=2 | planning_s=1.74
+CEM solve time: 0.8693 seconds
+CEM solve time: 0.8684 seconds
+episode 50 | seed=199 | success=False | length=50 | min_dist=210.68 | final_dist=776.90 | min_pos_err=29.05 | min_angle_err=0.419 | replans=2 | planning_s=1.74
+
+=== eval summary (pusht, online_offset) ===
+success_rate: 8.0% (4/50)
+mean_episode_length: 47.5
+mean_steps_to_success: 18.8
+mean_min_state_distance: 139.35 ± 76.04
+mean_final_state_distance: 559.60
+planning: 97 solves, 84.87s total (0.875s/solve), mean 1.697s/episode
+wall_time: 93.4s
+saved metrics: eval_results/pusht/lewm_phi_iql_v1/offset/E1_l2_c1/pusht/pusht_seed0/metrics.json
+saved episodes: eval_results/pusht/lewm_phi_iql_v1/offset/E1_l2_c1/pusht/pusht_seed0/episodes.csv
+--- E2 iql ---
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+
+=== pusht ===
+creating world {'env_name': 'swm/PushT-v1', 'num_envs': 1, 'max_episode_steps': 100, 'image_shape': (224, 224)}
+collecting kinematic bank for scalers + 50 goal_offset=25 pairs (collect_episodes=200)
+  bank: 200 episodes, 16000 steps, collector_success=200 (100.0%)
+  refitting action StandardScaler from WeakPolicy rollouts
+  action: mean=[0.002898091975832358, -0.00030644586921456114] std=[0.5057301335118259, 0.48495394910140793]
+  proprio: mean=[249.07934472393904, 235.17203689034173, 0.0, 0.0] std=[99.6445341949937, 98.70842778448493, 0.0, 0.0]
+  state: mean=[249.07934472393904, 235.17203689034173, 255.54297118670345, 245.45145849388524, 3.027466259567334, 0.0, 0.0] std=[99.6445341949937, 98.70842778448493, 73.29152587270916, 71.06169612635296, 1.827698322381, 0.0, 0.0]
+  pairs: 50 mode=offset (from_success_ep=50, mean_pos_progress=45.0)
+20:42:58 | INFO  | utils.py    | Loading checkpoint from folder ../stablewm/checkpoints/hf_pusht...
+20:43:01 | INFO  | __init__.py | JAX version 0.6.2 available.
+20:43:01 | INFO  | atomic_chec~| [atomic_save] installed crash-safe checkpoint plugin (write to sibling .tmp + fsync + atomic rename)
+20:43:01 | INFO  | utils.py    | Created ViT-tiny from scratch with config: {'hidden_size': 192, 'num_hidden_layers': 12, 'num_attention_heads': 3, 'intermediate_size': 768, 'image_size': 224, 'patch_size': 14}
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+evaluate env=pusht protocol=online_offset episodes=50 num_envs=1 viewer=False (Pymunk PushT. online_offset: kinematic start→goal pairs (goal_offset=25, budget=50) + WeakPolicy action scaler. Success = pose match to goal_state, not green-T coverage.)
+CEM solve time: 1.2259 seconds
+CEM solve time: 0.8693 seconds
+episode 1 | seed=1 | success=False | length=50 | min_dist=52.25 | final_dist=787.23 | min_pos_err=29.21 | min_angle_err=0.566 | replans=2 | planning_s=2.10
+CEM solve time: 0.8726 seconds
+CEM solve time: 0.8608 seconds
+episode 2 | seed=2 | success=False | length=50 | min_dist=106.04 | final_dist=545.04 | min_pos_err=61.73 | min_angle_err=0.202 | replans=2 | planning_s=1.73
+CEM solve time: 0.8696 seconds
+CEM solve time: 0.8654 seconds
+episode 3 | seed=5 | success=False | length=50 | min_dist=140.94 | final_dist=813.92 | min_pos_err=43.10 | min_angle_err=0.207 | replans=2 | planning_s=1.74
+CEM solve time: 0.8704 seconds
+CEM solve time: 0.8708 seconds
+episode 4 | seed=10 | success=False | length=50 | min_dist=82.83 | final_dist=226.60 | min_pos_err=27.43 | min_angle_err=0.005 | replans=2 | planning_s=1.74
+CEM solve time: 0.8734 seconds
+CEM solve time: 0.8764 seconds
+episode 5 | seed=10 | success=False | length=50 | min_dist=126.54 | final_dist=1055.95 | min_pos_err=52.98 | min_angle_err=0.010 | replans=2 | planning_s=1.75
+CEM solve time: 0.8734 seconds
+CEM solve time: 0.8721 seconds
+episode 6 | seed=13 | success=False | length=50 | min_dist=65.62 | final_dist=381.74 | min_pos_err=35.66 | min_angle_err=0.016 | replans=2 | planning_s=1.75
+CEM solve time: 0.8732 seconds
+CEM solve time: 0.8709 seconds
+episode 7 | seed=30 | success=False | length=50 | min_dist=193.30 | final_dist=438.79 | min_pos_err=33.69 | min_angle_err=0.158 | replans=2 | planning_s=1.74
+CEM solve time: 0.8739 seconds
+CEM solve time: 0.8730 seconds
+episode 8 | seed=31 | success=False | length=50 | min_dist=61.43 | final_dist=656.07 | min_pos_err=42.00 | min_angle_err=0.514 | replans=2 | planning_s=1.75
+CEM solve time: 0.8772 seconds
+CEM solve time: 0.8705 seconds
+episode 9 | seed=32 | success=False | length=50 | min_dist=113.03 | final_dist=403.24 | min_pos_err=34.90 | min_angle_err=0.343 | replans=2 | planning_s=1.75
+CEM solve time: 0.8732 seconds
+CEM solve time: 0.8777 seconds
+episode 10 | seed=35 | success=False | length=50 | min_dist=178.73 | final_dist=1390.47 | min_pos_err=67.13 | min_angle_err=0.294 | replans=2 | planning_s=1.75
+CEM solve time: 0.8756 seconds
+CEM solve time: 0.8736 seconds
+episode 11 | seed=35 | success=False | length=50 | min_dist=256.49 | final_dist=1031.94 | min_pos_err=71.90 | min_angle_err=0.293 | replans=2 | planning_s=1.75
+CEM solve time: 0.8817 seconds
+CEM solve time: 0.8778 seconds
+episode 12 | seed=35 | success=False | length=50 | min_dist=85.21 | final_dist=1170.28 | min_pos_err=38.91 | min_angle_err=0.217 | replans=2 | planning_s=1.76
+CEM solve time: 0.8769 seconds
+CEM solve time: 0.8749 seconds
+episode 13 | seed=43 | success=False | length=50 | min_dist=140.03 | final_dist=611.23 | min_pos_err=48.69 | min_angle_err=0.355 | replans=2 | planning_s=1.75
+CEM solve time: 0.8723 seconds
+CEM solve time: 0.8703 seconds
+episode 14 | seed=44 | success=False | length=50 | min_dist=78.55 | final_dist=480.53 | min_pos_err=41.16 | min_angle_err=0.188 | replans=2 | planning_s=1.74
+CEM solve time: 0.8711 seconds
+CEM solve time: 0.8702 seconds
+episode 15 | seed=44 | success=False | length=50 | min_dist=135.97 | final_dist=1221.63 | min_pos_err=48.46 | min_angle_err=0.572 | replans=2 | planning_s=1.74
+CEM solve time: 0.8744 seconds
+CEM solve time: 0.8741 seconds
+episode 16 | seed=44 | success=False | length=50 | min_dist=98.13 | final_dist=262.63 | min_pos_err=36.50 | min_angle_err=0.165 | replans=2 | planning_s=1.75
+CEM solve time: 0.8815 seconds
+CEM solve time: 0.8731 seconds
+episode 17 | seed=45 | success=False | length=50 | min_dist=105.25 | final_dist=116.63 | min_pos_err=47.38 | min_angle_err=0.164 | replans=2 | planning_s=1.75
+CEM solve time: 0.8751 seconds
+CEM solve time: 0.8731 seconds
+episode 18 | seed=45 | success=False | length=50 | min_dist=63.09 | final_dist=63.09 | min_pos_err=47.75 | min_angle_err=0.207 | replans=2 | planning_s=1.75
+CEM solve time: 0.8753 seconds
+CEM solve time: 0.8704 seconds
+episode 19 | seed=45 | success=False | length=50 | min_dist=136.74 | final_dist=136.74 | min_pos_err=48.04 | min_angle_err=0.208 | replans=2 | planning_s=1.75
+CEM solve time: 0.8900 seconds
+CEM solve time: 0.8825 seconds
+episode 20 | seed=45 | success=False | length=50 | min_dist=93.96 | final_dist=226.50 | min_pos_err=52.21 | min_angle_err=0.209 | replans=2 | planning_s=1.77
+CEM solve time: 0.8804 seconds
+CEM solve time: 0.8816 seconds
+episode 21 | seed=45 | success=False | length=50 | min_dist=167.23 | final_dist=409.14 | min_pos_err=40.44 | min_angle_err=0.173 | replans=2 | planning_s=1.76
+CEM solve time: 0.8756 seconds
+CEM solve time: 0.8741 seconds
+episode 22 | seed=72 | success=False | length=50 | min_dist=26.73 | final_dist=579.12 | min_pos_err=19.15 | min_angle_err=0.048 | replans=2 | planning_s=1.75
+CEM solve time: 0.8743 seconds
+CEM solve time: 0.8746 seconds
+episode 23 | seed=82 | success=False | length=50 | min_dist=185.65 | final_dist=870.44 | min_pos_err=44.42 | min_angle_err=0.099 | replans=2 | planning_s=1.75
+CEM solve time: 0.8756 seconds
+CEM solve time: 0.8730 seconds
+episode 24 | seed=84 | success=False | length=50 | min_dist=128.47 | final_dist=131.18 | min_pos_err=45.56 | min_angle_err=0.185 | replans=2 | planning_s=1.75
+CEM solve time: 0.8738 seconds
+CEM solve time: 0.8710 seconds
+episode 25 | seed=84 | success=False | length=50 | min_dist=122.83 | final_dist=145.70 | min_pos_err=45.73 | min_angle_err=0.345 | replans=2 | planning_s=1.75
+CEM solve time: 0.8711 seconds
+CEM solve time: 0.8718 seconds
+episode 26 | seed=84 | success=False | length=50 | min_dist=328.22 | final_dist=618.23 | min_pos_err=55.05 | min_angle_err=0.217 | replans=2 | planning_s=1.74
+CEM solve time: 0.8745 seconds
+episode 27 | seed=92 | success=True | length=13 | steps_to_success=13 | min_dist=168.35 | final_dist=171.80 | min_pos_err=16.68 | min_angle_err=0.248 | replans=1 | planning_s=0.87
+CEM solve time: 0.8725 seconds
+CEM solve time: 0.8780 seconds
+episode 28 | seed=92 | success=False | length=50 | min_dist=75.10 | final_dist=184.13 | min_pos_err=28.68 | min_angle_err=0.334 | replans=2 | planning_s=1.75
+CEM solve time: 0.8730 seconds
+CEM solve time: 0.8715 seconds
+episode 29 | seed=92 | success=False | length=50 | min_dist=84.88 | final_dist=283.14 | min_pos_err=46.21 | min_angle_err=0.001 | replans=2 | planning_s=1.74
+CEM solve time: 0.8775 seconds
+CEM solve time: 0.8742 seconds
+episode 30 | seed=92 | success=False | length=50 | min_dist=63.13 | final_dist=433.08 | min_pos_err=32.43 | min_angle_err=0.182 | replans=2 | planning_s=1.75
+CEM solve time: 0.8732 seconds
+CEM solve time: 0.8749 seconds
+episode 31 | seed=92 | success=False | length=50 | min_dist=58.25 | final_dist=58.25 | min_pos_err=44.49 | min_angle_err=0.339 | replans=2 | planning_s=1.75
+CEM solve time: 0.8739 seconds
+CEM solve time: 0.8746 seconds
+episode 32 | seed=92 | success=False | length=50 | min_dist=136.28 | final_dist=242.49 | min_pos_err=41.76 | min_angle_err=0.114 | replans=2 | planning_s=1.75
+CEM solve time: 0.8763 seconds
+CEM solve time: 0.8763 seconds
+episode 33 | seed=94 | success=False | length=50 | min_dist=305.43 | final_dist=842.26 | min_pos_err=110.94 | min_angle_err=0.569 | replans=2 | planning_s=1.75
+CEM solve time: 0.8758 seconds
+CEM solve time: 0.8735 seconds
+episode 34 | seed=112 | success=False | length=50 | min_dist=101.95 | final_dist=192.32 | min_pos_err=39.64 | min_angle_err=0.005 | replans=2 | planning_s=1.75
+CEM solve time: 0.8752 seconds
+CEM solve time: 0.8802 seconds
+episode 35 | seed=121 | success=False | length=50 | min_dist=111.12 | final_dist=1841.85 | min_pos_err=40.59 | min_angle_err=0.060 | replans=2 | planning_s=1.76
+CEM solve time: 0.8861 seconds
+CEM solve time: 0.8735 seconds
+episode 36 | seed=121 | success=False | length=50 | min_dist=77.61 | final_dist=2035.14 | min_pos_err=42.01 | min_angle_err=0.066 | replans=2 | planning_s=1.76
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+CEM solve time: 0.8896 seconds
+CEM solve time: 0.8740 seconds
+episode 37 | seed=128 | success=False | length=50 | min_dist=181.06 | final_dist=1069.32 | min_pos_err=88.97 | min_angle_err=0.141 | replans=2 | planning_s=1.76
+CEM solve time: 0.8750 seconds
+CEM solve time: 0.8707 seconds
+episode 38 | seed=131 | success=False | length=50 | min_dist=113.33 | final_dist=278.82 | min_pos_err=57.57 | min_angle_err=0.370 | replans=2 | planning_s=1.75
+CEM solve time: 0.8740 seconds
+CEM solve time: 0.8790 seconds
+episode 39 | seed=148 | success=False | length=50 | min_dist=837.80 | final_dist=839.76 | min_pos_err=189.27 | min_angle_err=0.417 | replans=2 | planning_s=1.75
+CEM solve time: 0.8770 seconds
+CEM solve time: 0.8724 seconds
+episode 40 | seed=151 | success=False | length=50 | min_dist=117.93 | final_dist=1256.39 | min_pos_err=44.79 | min_angle_err=0.159 | replans=2 | planning_s=1.75
+CEM solve time: 0.8846 seconds
+CEM solve time: 0.8792 seconds
+episode 41 | seed=151 | success=False | length=50 | min_dist=237.83 | final_dist=883.96 | min_pos_err=72.90 | min_angle_err=0.420 | replans=2 | planning_s=1.76
+CEM solve time: 0.8780 seconds
+CEM solve time: 0.8792 seconds
+episode 42 | seed=151 | success=False | length=50 | min_dist=110.54 | final_dist=704.98 | min_pos_err=16.29 | min_angle_err=0.598 | replans=2 | planning_s=1.76
+CEM solve time: 0.8857 seconds
+CEM solve time: 0.8856 seconds
+episode 43 | seed=151 | success=False | length=50 | min_dist=59.13 | final_dist=576.73 | min_pos_err=23.32 | min_angle_err=0.363 | replans=2 | planning_s=1.77
+CEM solve time: 0.8747 seconds
+CEM solve time: 0.8707 seconds
+episode 44 | seed=164 | success=False | length=50 | min_dist=180.28 | final_dist=1758.11 | min_pos_err=57.83 | min_angle_err=0.157 | replans=2 | planning_s=1.75
+CEM solve time: 0.8741 seconds
+CEM solve time: 0.8688 seconds
+episode 45 | seed=171 | success=False | length=50 | min_dist=107.27 | final_dist=210.29 | min_pos_err=22.60 | min_angle_err=0.322 | replans=2 | planning_s=1.74
+CEM solve time: 0.8749 seconds
+CEM solve time: 0.8726 seconds
+episode 46 | seed=182 | success=False | length=50 | min_dist=74.43 | final_dist=432.01 | min_pos_err=21.87 | min_angle_err=0.374 | replans=2 | planning_s=1.75
+CEM solve time: 0.8757 seconds
+CEM solve time: 0.8786 seconds
+episode 47 | seed=191 | success=False | length=50 | min_dist=40.30 | final_dist=622.61 | min_pos_err=27.37 | min_angle_err=0.021 | replans=2 | planning_s=1.75
+CEM solve time: 0.8867 seconds
+episode 48 | seed=191 | success=True | length=3 | steps_to_success=3 | min_dist=327.19 | final_dist=945.96 | min_pos_err=15.16 | min_angle_err=0.055 | replans=1 | planning_s=0.89
+CEM solve time: 0.8826 seconds
+CEM solve time: 0.8766 seconds
+episode 49 | seed=199 | success=False | length=50 | min_dist=260.07 | final_dist=524.65 | min_pos_err=44.50 | min_angle_err=0.331 | replans=2 | planning_s=1.76
+CEM solve time: 0.8815 seconds
+CEM solve time: 0.8781 seconds
+episode 50 | seed=199 | success=False | length=50 | min_dist=105.29 | final_dist=507.14 | min_pos_err=56.46 | min_angle_err=0.393 | replans=2 | planning_s=1.76
+
+=== eval summary (pusht, online_offset) ===
+success_rate: 4.0% (2/50)
+mean_episode_length: 48.3
+mean_steps_to_success: 8.0
+mean_min_state_distance: 144.16 ± 122.86
+mean_final_state_distance: 633.39
+planning: 98 solves, 86.15s total (0.879s/solve), mean 1.723s/episode
+wall_time: 95.4s
+saved metrics: eval_results/pusht/lewm_phi_iql_v1/offset/E2_phi_iql/pusht/pusht_seed0/metrics.json
+saved episodes: eval_results/pusht/lewm_phi_iql_v1/offset/E2_phi_iql/pusht/pusht_seed0/episodes.csv
+--- E4 random ---
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+
+=== pusht ===
+creating world {'env_name': 'swm/PushT-v1', 'num_envs': 1, 'max_episode_steps': 100, 'image_shape': (224, 224)}
+collecting kinematic bank for scalers + 50 goal_offset=25 pairs (collect_episodes=200)
+  bank: 200 episodes, 16000 steps, collector_success=200 (100.0%)
+  refitting action StandardScaler from WeakPolicy rollouts
+  action: mean=[0.002898091975832358, -0.00030644586921456114] std=[0.5057301335118259, 0.48495394910140793]
+  proprio: mean=[249.07934472393904, 235.17203689034173, 0.0, 0.0] std=[99.6445341949937, 98.70842778448493, 0.0, 0.0]
+  state: mean=[249.07934472393904, 235.17203689034173, 255.54297118670345, 245.45145849388524, 3.027466259567334, 0.0, 0.0] std=[99.6445341949937, 98.70842778448493, 73.29152587270916, 71.06169612635296, 1.827698322381, 0.0, 0.0]
+  pairs: 50 mode=offset (from_success_ep=50, mean_pos_progress=45.0)
+20:45:09 | INFO  | utils.py    | Loading checkpoint from folder ../stablewm/checkpoints/hf_pusht...
+20:45:12 | INFO  | __init__.py | JAX version 0.6.2 available.
+20:45:12 | INFO  | atomic_chec~| [atomic_save] installed crash-safe checkpoint plugin (write to sibling .tmp + fsync + atomic rename)
+20:45:12 | INFO  | utils.py    | Created ViT-tiny from scratch with config: {'hidden_size': 192, 'num_hidden_layers': 12, 'num_attention_heads': 3, 'intermediate_size': 768, 'image_size': 224, 'patch_size': 14}
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+evaluate env=pusht protocol=online_offset episodes=50 num_envs=1 viewer=False (Pymunk PushT. online_offset: kinematic start→goal pairs (goal_offset=25, budget=50) + WeakPolicy action scaler. Success = pose match to goal_state, not green-T coverage.)
+CEM solve time: 1.1537 seconds
+CEM solve time: 0.8689 seconds
+episode 1 | seed=1 | success=False | length=50 | min_dist=83.22 | final_dist=253.78 | min_pos_err=13.30 | min_angle_err=0.566 | replans=2 | planning_s=2.02
+CEM solve time: 0.8664 seconds
+CEM solve time: 0.8610 seconds
+episode 2 | seed=2 | success=False | length=50 | min_dist=228.38 | final_dist=539.81 | min_pos_err=60.71 | min_angle_err=0.069 | replans=2 | planning_s=1.73
+CEM solve time: 0.8653 seconds
+CEM solve time: 0.8640 seconds
+episode 3 | seed=5 | success=False | length=50 | min_dist=174.19 | final_dist=1231.62 | min_pos_err=35.25 | min_angle_err=0.016 | replans=2 | planning_s=1.73
+CEM solve time: 0.8785 seconds
+CEM solve time: 0.8688 seconds
+episode 4 | seed=10 | success=False | length=50 | min_dist=63.93 | final_dist=324.08 | min_pos_err=20.56 | min_angle_err=0.004 | replans=2 | planning_s=1.75
+CEM solve time: 0.8696 seconds
+CEM solve time: 0.8682 seconds
+episode 5 | seed=10 | success=False | length=50 | min_dist=252.19 | final_dist=358.95 | min_pos_err=93.30 | min_angle_err=0.010 | replans=2 | planning_s=1.74
+CEM solve time: 0.8696 seconds
+CEM solve time: 0.8640 seconds
+episode 6 | seed=13 | success=False | length=50 | min_dist=226.33 | final_dist=407.14 | min_pos_err=84.29 | min_angle_err=0.455 | replans=2 | planning_s=1.73
+CEM solve time: 0.8716 seconds
+episode 7 | seed=30 | success=True | length=14 | steps_to_success=14 | min_dist=138.18 | final_dist=624.29 | min_pos_err=18.56 | min_angle_err=0.200 | replans=1 | planning_s=0.87
+CEM solve time: 0.8711 seconds
+CEM solve time: 0.8657 seconds
+episode 8 | seed=31 | success=False | length=50 | min_dist=50.79 | final_dist=200.91 | min_pos_err=37.64 | min_angle_err=0.255 | replans=2 | planning_s=1.74
+CEM solve time: 0.8827 seconds
+CEM solve time: 0.8694 seconds
+episode 9 | seed=32 | success=False | length=50 | min_dist=115.83 | final_dist=183.18 | min_pos_err=35.51 | min_angle_err=0.468 | replans=2 | planning_s=1.75
+CEM solve time: 0.8717 seconds
+CEM solve time: 0.8678 seconds
+episode 10 | seed=35 | success=False | length=50 | min_dist=251.22 | final_dist=1258.19 | min_pos_err=70.89 | min_angle_err=0.294 | replans=2 | planning_s=1.74
+CEM solve time: 0.8705 seconds
+CEM solve time: 0.8694 seconds
+episode 11 | seed=35 | success=False | length=50 | min_dist=144.52 | final_dist=283.62 | min_pos_err=63.56 | min_angle_err=0.293 | replans=2 | planning_s=1.74
+CEM solve time: 0.8706 seconds
+CEM solve time: 0.8693 seconds
+episode 12 | seed=35 | success=False | length=50 | min_dist=103.22 | final_dist=653.27 | min_pos_err=57.47 | min_angle_err=0.217 | replans=2 | planning_s=1.74
+CEM solve time: 0.8718 seconds
+CEM solve time: 0.8684 seconds
+episode 13 | seed=43 | success=False | length=50 | min_dist=61.28 | final_dist=163.81 | min_pos_err=11.55 | min_angle_err=0.211 | replans=2 | planning_s=1.74
+CEM solve time: 0.8712 seconds
+CEM solve time: 0.8752 seconds
+episode 14 | seed=44 | success=False | length=50 | min_dist=118.85 | final_dist=469.02 | min_pos_err=49.08 | min_angle_err=0.001 | replans=2 | planning_s=1.75
+CEM solve time: 0.8732 seconds
+CEM solve time: 0.8682 seconds
+episode 15 | seed=44 | success=False | length=50 | min_dist=565.17 | final_dist=1833.09 | min_pos_err=107.11 | min_angle_err=0.572 | replans=2 | planning_s=1.74
+CEM solve time: 0.8738 seconds
+CEM solve time: 0.8689 seconds
+episode 16 | seed=44 | success=False | length=50 | min_dist=124.88 | final_dist=166.12 | min_pos_err=37.12 | min_angle_err=0.388 | replans=2 | planning_s=1.74
+CEM solve time: 0.8712 seconds
+CEM solve time: 0.8810 seconds
+episode 17 | seed=45 | success=False | length=50 | min_dist=157.28 | final_dist=395.75 | min_pos_err=51.41 | min_angle_err=0.164 | replans=2 | planning_s=1.75
+CEM solve time: 0.8793 seconds
+CEM solve time: 0.8748 seconds
+episode 18 | seed=45 | success=False | length=50 | min_dist=81.90 | final_dist=357.07 | min_pos_err=45.83 | min_angle_err=0.207 | replans=2 | planning_s=1.75
+CEM solve time: 0.8793 seconds
+CEM solve time: 0.8721 seconds
+episode 19 | seed=45 | success=False | length=50 | min_dist=121.99 | final_dist=149.58 | min_pos_err=48.77 | min_angle_err=0.208 | replans=2 | planning_s=1.75
+CEM solve time: 0.8718 seconds
+CEM solve time: 0.8948 seconds
+episode 20 | seed=45 | success=False | length=50 | min_dist=90.52 | final_dist=463.98 | min_pos_err=49.66 | min_angle_err=0.209 | replans=2 | planning_s=1.77
+CEM solve time: 0.8712 seconds
+CEM solve time: 0.8680 seconds
+episode 21 | seed=45 | success=False | length=50 | min_dist=192.16 | final_dist=419.54 | min_pos_err=42.50 | min_angle_err=0.173 | replans=2 | planning_s=1.74
+CEM solve time: 0.8706 seconds
+CEM solve time: 0.8679 seconds
+episode 22 | seed=72 | success=False | length=50 | min_dist=150.48 | final_dist=369.55 | min_pos_err=68.36 | min_angle_err=0.417 | replans=2 | planning_s=1.74
+CEM solve time: 0.8718 seconds
+CEM solve time: 0.8679 seconds
+episode 23 | seed=82 | success=False | length=50 | min_dist=58.84 | final_dist=764.03 | min_pos_err=44.25 | min_angle_err=0.091 | replans=2 | planning_s=1.74
+CEM solve time: 0.8707 seconds
+CEM solve time: 0.8678 seconds
+episode 24 | seed=84 | success=False | length=50 | min_dist=193.65 | final_dist=997.13 | min_pos_err=57.26 | min_angle_err=0.047 | replans=2 | planning_s=1.74
+CEM solve time: 0.8729 seconds
+CEM solve time: 0.8727 seconds
+episode 25 | seed=84 | success=False | length=50 | min_dist=178.59 | final_dist=397.79 | min_pos_err=57.40 | min_angle_err=0.102 | replans=2 | planning_s=1.75
+CEM solve time: 0.8744 seconds
+CEM solve time: 0.8696 seconds
+episode 26 | seed=84 | success=False | length=50 | min_dist=291.45 | final_dist=1087.66 | min_pos_err=59.33 | min_angle_err=0.303 | replans=2 | planning_s=1.74
+CEM solve time: 0.8693 seconds
+episode 27 | seed=92 | success=True | length=9 | steps_to_success=9 | min_dist=125.50 | final_dist=677.90 | min_pos_err=15.32 | min_angle_err=0.248 | replans=1 | planning_s=0.87
+CEM solve time: 0.8764 seconds
+CEM solve time: 0.8688 seconds
+episode 28 | seed=92 | success=False | length=50 | min_dist=106.40 | final_dist=106.40 | min_pos_err=29.59 | min_angle_err=0.340 | replans=2 | planning_s=1.75
+CEM solve time: 0.8787 seconds
+CEM solve time: 0.8694 seconds
+episode 29 | seed=92 | success=False | length=50 | min_dist=132.54 | final_dist=476.57 | min_pos_err=32.65 | min_angle_err=0.001 | replans=2 | planning_s=1.75
+CEM solve time: 0.8713 seconds
+CEM solve time: 0.8883 seconds
+episode 30 | seed=92 | success=False | length=50 | min_dist=98.13 | final_dist=315.40 | min_pos_err=38.42 | min_angle_err=0.209 | replans=2 | planning_s=1.76
+CEM solve time: 0.8714 seconds
+CEM solve time: 0.8697 seconds
+episode 31 | seed=92 | success=False | length=50 | min_dist=90.26 | final_dist=235.74 | min_pos_err=52.63 | min_angle_err=0.326 | replans=2 | planning_s=1.74
+CEM solve time: 0.8800 seconds
+CEM solve time: 0.8693 seconds
+episode 32 | seed=92 | success=False | length=50 | min_dist=45.89 | final_dist=129.26 | min_pos_err=37.83 | min_angle_err=0.130 | replans=2 | planning_s=1.75
+CEM solve time: 0.8872 seconds
+CEM solve time: 0.8696 seconds
+episode 33 | seed=94 | success=False | length=50 | min_dist=337.27 | final_dist=1847.95 | min_pos_err=155.74 | min_angle_err=0.569 | replans=2 | planning_s=1.76
+CEM solve time: 0.8712 seconds
+CEM solve time: 0.8771 seconds
+episode 34 | seed=112 | success=False | length=50 | min_dist=114.20 | final_dist=322.12 | min_pos_err=46.46 | min_angle_err=0.016 | replans=2 | planning_s=1.75
+CEM solve time: 0.8710 seconds
+CEM solve time: 0.8691 seconds
+episode 35 | seed=121 | success=False | length=50 | min_dist=92.46 | final_dist=725.50 | min_pos_err=44.92 | min_angle_err=0.060 | replans=2 | planning_s=1.74
+CEM solve time: 0.8809 seconds
+CEM solve time: 0.8763 seconds
+episode 36 | seed=121 | success=False | length=50 | min_dist=158.04 | final_dist=705.88 | min_pos_err=64.99 | min_angle_err=0.066 | replans=2 | planning_s=1.76
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+CEM solve time: 0.8707 seconds
+CEM solve time: 0.8686 seconds
+episode 37 | seed=128 | success=False | length=50 | min_dist=293.32 | final_dist=1317.28 | min_pos_err=85.57 | min_angle_err=0.141 | replans=2 | planning_s=1.74
+CEM solve time: 0.8721 seconds
+CEM solve time: 0.8691 seconds
+episode 38 | seed=131 | success=False | length=50 | min_dist=88.08 | final_dist=739.67 | min_pos_err=48.63 | min_angle_err=0.358 | replans=2 | planning_s=1.74
+CEM solve time: 0.8706 seconds
+CEM solve time: 0.9195 seconds
+episode 39 | seed=148 | success=False | length=50 | min_dist=310.74 | final_dist=1026.51 | min_pos_err=126.30 | min_angle_err=0.417 | replans=2 | planning_s=1.79
+CEM solve time: 0.8732 seconds
+CEM solve time: 0.8693 seconds
+episode 40 | seed=151 | success=False | length=50 | min_dist=239.68 | final_dist=866.96 | min_pos_err=56.18 | min_angle_err=0.138 | replans=2 | planning_s=1.74
+CEM solve time: 0.8733 seconds
+CEM solve time: 0.8763 seconds
+episode 41 | seed=151 | success=False | length=50 | min_dist=217.93 | final_dist=815.74 | min_pos_err=39.35 | min_angle_err=0.435 | replans=2 | planning_s=1.75
+CEM solve time: 0.8708 seconds
+CEM solve time: 0.8675 seconds
+episode 42 | seed=151 | success=False | length=50 | min_dist=121.08 | final_dist=812.70 | min_pos_err=40.70 | min_angle_err=0.598 | replans=2 | planning_s=1.74
+CEM solve time: 0.8709 seconds
+CEM solve time: 0.8684 seconds
+episode 43 | seed=151 | success=False | length=50 | min_dist=109.35 | final_dist=466.47 | min_pos_err=24.91 | min_angle_err=0.363 | replans=2 | planning_s=1.74
+CEM solve time: 0.8699 seconds
+CEM solve time: 0.8679 seconds
+episode 44 | seed=164 | success=False | length=50 | min_dist=192.42 | final_dist=1726.81 | min_pos_err=68.35 | min_angle_err=0.011 | replans=2 | planning_s=1.74
+CEM solve time: 0.8802 seconds
+CEM solve time: 0.8726 seconds
+episode 45 | seed=171 | success=False | length=50 | min_dist=59.44 | final_dist=285.70 | min_pos_err=25.45 | min_angle_err=0.021 | replans=2 | planning_s=1.75
+CEM solve time: 0.8712 seconds
+CEM solve time: 0.8687 seconds
+episode 46 | seed=182 | success=False | length=50 | min_dist=47.65 | final_dist=1419.21 | min_pos_err=33.80 | min_angle_err=0.440 | replans=2 | planning_s=1.74
+CEM solve time: 0.8717 seconds
+CEM solve time: 0.8679 seconds
+episode 47 | seed=191 | success=True | length=27 | steps_to_success=27 | min_dist=60.39 | final_dist=480.52 | min_pos_err=13.81 | min_angle_err=0.021 | replans=2 | planning_s=1.74
+CEM solve time: 0.8780 seconds
+CEM solve time: 0.8692 seconds
+episode 48 | seed=191 | success=False | length=50 | min_dist=81.65 | final_dist=206.75 | min_pos_err=22.22 | min_angle_err=0.055 | replans=2 | planning_s=1.75
+CEM solve time: 0.8723 seconds
+CEM solve time: 0.8732 seconds
+episode 49 | seed=199 | success=False | length=50 | min_dist=346.98 | final_dist=1664.66 | min_pos_err=83.47 | min_angle_err=0.470 | replans=2 | planning_s=1.75
+CEM solve time: 0.8716 seconds
+CEM solve time: 0.8691 seconds
+episode 50 | seed=199 | success=False | length=50 | min_dist=153.77 | final_dist=655.52 | min_pos_err=55.59 | min_angle_err=0.419 | replans=2 | planning_s=1.74
+
+=== eval summary (pusht, online_offset) ===
+success_rate: 6.0% (3/50)
+mean_episode_length: 48.0
+mean_steps_to_success: 16.7
+mean_min_state_distance: 156.84 ± 98.64
+mean_final_state_distance: 647.60
+planning: 98 solves, 85.79s total (0.875s/solve), mean 1.716s/episode
+wall_time: 97.2s
+saved metrics: eval_results/pusht/lewm_phi_iql_v1/offset/E4_random/pusht/pusht_seed0/metrics.json
+saved episodes: eval_results/pusht/lewm_phi_iql_v1/offset/E4_random/pusht/pusht_seed0/episodes.csv
+ALL_IQL_EVAL_DONE

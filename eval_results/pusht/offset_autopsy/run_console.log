@@ -1,0 +1,42 @@
+device=cuda:0  phi=/home/aj/code/ssd_repos/robo_ops/ws_weltmodelle/ws_le-wm/stablewm/checkpoints/pusht/lewm_phi_v2/reach.pt
+22:34:11 | INFO  | utils.py    | Loading checkpoint from folder /home/aj/code/ssd_repos/robo_ops/ws_weltmodelle/ws_le-wm/stablewm/checkpoints/hf_pusht...
+22:34:13 | INFO  | __init__.py | JAX version 0.6.2 available.
+22:34:14 | INFO  | atomic_chec~| [atomic_save] installed crash-safe checkpoint plugin (write to sibling .tmp + fsync + atomic rename)
+22:34:14 | INFO  | utils.py    | Created ViT-tiny from scratch with config: {'hidden_size': 192, 'num_hidden_layers': 12, 'num_attention_heads': 3, 'intermediate_size': 768, 'image_size': 224, 'patch_size': 14}
+/media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/.venv/lib/python3.10/site-packages/gymnasium/spaces/box.py:415: UserWarning: [33mWARN: Casting input x to numpy array.[0m
+  gym.logger.warn("Casting input x to numpy array.")
+collecting kinematic bank eps=200
+bank episodes=200 steps=16000
+pair 1/24  φ_spear=0.992  l2_spear=0.999  φ_rel_gap=8132382.393  z_err=6.481
+pair 2/24  φ_spear=1.000  l2_spear=1.000  φ_rel_gap=12099702.835  z_err=6.612
+pair 3/24  φ_spear=0.999  l2_spear=0.999  φ_rel_gap=8924077.988  z_err=7.749
+pair 4/24  φ_spear=0.997  l2_spear=0.998  φ_rel_gap=17654804.230  z_err=12.464
+pair 5/24  φ_spear=0.992  l2_spear=0.992  φ_rel_gap=13813196.182  z_err=8.681
+pair 6/24  φ_spear=0.938  l2_spear=0.978  φ_rel_gap=11984158.516  z_err=6.367
+pair 7/24  φ_spear=0.987  l2_spear=0.990  φ_rel_gap=15172780.037  z_err=8.660
+pair 8/24  φ_spear=0.999  l2_spear=1.000  φ_rel_gap=4877383.709  z_err=4.333
+pair 9/24  φ_spear=0.997  l2_spear=0.997  φ_rel_gap=6405979.633  z_err=5.384
+pair 10/24  φ_spear=0.998  l2_spear=1.000  φ_rel_gap=9380814.552  z_err=5.859
+pair 11/24  φ_spear=0.991  l2_spear=0.991  φ_rel_gap=8460252.762  z_err=3.159
+pair 12/24  φ_spear=0.991  l2_spear=0.991  φ_rel_gap=8811748.505  z_err=3.387
+pair 13/24  φ_spear=0.998  l2_spear=0.999  φ_rel_gap=11946908.951  z_err=8.203
+pair 14/24  φ_spear=0.996  l2_spear=0.999  φ_rel_gap=6002925.396  z_err=6.586
+pair 15/24  φ_spear=0.999  l2_spear=0.999  φ_rel_gap=12017976.761  z_err=5.704
+pair 16/24  φ_spear=0.971  l2_spear=0.995  φ_rel_gap=5120316.505  z_err=4.566
+pair 17/24  φ_spear=0.997  l2_spear=0.995  φ_rel_gap=11608705.521  z_err=6.440
+pair 18/24  φ_spear=0.999  l2_spear=0.999  φ_rel_gap=6273530.960  z_err=3.275
+pair 19/24  φ_spear=0.997  l2_spear=0.998  φ_rel_gap=10727732.658  z_err=5.389
+pair 20/24  φ_spear=0.969  l2_spear=0.997  φ_rel_gap=14171369.553  z_err=6.408
+pair 21/24  φ_spear=0.995  l2_spear=1.000  φ_rel_gap=8831921.577  z_err=3.520
+pair 22/24  φ_spear=0.993  l2_spear=0.999  φ_rel_gap=9043774.605  z_err=3.571
+pair 23/24  φ_spear=0.995  l2_spear=0.995  φ_rel_gap=15409946.442  z_err=11.364
+pair 24/24  φ_spear=0.998  l2_spear=0.997  φ_rel_gap=14450560.570  z_err=7.298
+spread ep=1 start=54  std l2=15.839 φ=0.612 rnd=0.510
+spread ep=2 start=51  std l2=2.774 φ=0.373 rnd=0.152
+spread ep=5 start=53  std l2=2.295 φ=0.397 rnd=0.141
+spread ep=10 start=54  std l2=2.574 φ=0.110 rnd=0.049
+spread ep=32 start=18  std l2=12.307 φ=1.151 rnd=0.355
+spread ep=35 start=25  std l2=2.092 φ=0.243 rnd=0.073
+wrote /media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/le-wm/eval_results/pusht/offset_autopsy/summary.md
+wrote /media/aj/dirk/aj/code/repos/robo_ops/ws_weltmodelle/ws_le-wm/docs/lewm_phi_offset_autopsy_summary.md
+PRIMARY HYPOTHESIS: H1_imagination_ood
