@@ -1,0 +1,98 @@
+{
+  "aggregate": {
+    "mean_episode_length": 100.0,
+    "mean_final_state_distance": 0.30302458770049934,
+    "mean_min_state_distance": 0.2976694495850389,
+    "mean_planning_time_s": 3.9153354320005747,
+    "mean_replans": 4.0,
+    "mean_steps_to_success": null,
+    "num_episodes": 1,
+    "num_successes": 0,
+    "std_min_state_distance": 0.0,
+    "success_rate": 0.0,
+    "total_planning_time_s": 3.9153354320005747,
+    "total_replans": 4,
+    "wall_time_s": 4.866193503001341
+  },
+  "episode_successes": [
+    false
+  ],
+  "episodes": [
+    {
+      "episode_idx": 0,
+      "final_state_distance": 0.30302458770049934,
+      "final_task_score": 0.0,
+      "length": 100,
+      "min_angle_error": null,
+      "min_pos_error": null,
+      "min_state_distance": 0.2976694495850389,
+      "min_task_score": 0.0,
+      "planning_time_s": 3.9153354320005747,
+      "replans": 4,
+      "seed": 0,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 0,
+      "truncated": true
+    }
+  ],
+  "meta": {
+    "cem": {
+      "n_steps": 30,
+      "num_samples": 300,
+      "topk": 30,
+      "var_scale": 1.0
+    },
+    "checkpoint": "/workspace/ws_le-wm/stablewm/checkpoints/hf_reacher",
+    "completed_episodes": 1,
+    "device": "cuda",
+    "env": "reacher",
+    "env_name": "swm/ReacherDMControl-v0",
+    "episodes": 1,
+    "hf_repo": "quentinll/lewm-reacher",
+    "interrupted": false,
+    "metric_notes": {
+      "min_state_distance": "Best (lowest) L2 distance to goal state during the episode. Includes velocities on PushT \u2014 prefer min_pos_error.",
+      "steps_to_success": "Env step index at first success; None if the episode failed.",
+      "success_rate": "Fraction of episodes with env terminated=True (PushT: pose tolerance vs goal_state; Reacher: qpos_match). For online_goal_offset, success is OR'd over the eval budget like World._evaluate_from_dataset."
+    },
+    "normalization": {
+      "keys": [
+        "action"
+      ],
+      "scalers": {
+        "action": {
+          "mean": [
+            -0.01326473621306088,
+            5.7760228834465844e-05
+          ],
+          "n_features": 2,
+          "std": [
+            0.5752851676379439,
+            0.5760204005742645
+          ]
+        }
+      },
+      "source": "live_rollout",
+      "stats_steps": 2000
+    },
+    "notes": "MuJoCo DMC 2-joint arm. qpos_match matches the LeWM paper setup.",
+    "num_envs": 1,
+    "plan_config": {
+      "action_block": 5,
+      "eval_budget": 50,
+      "goal_offset_steps": 25,
+      "horizon": 5,
+      "max_episode_steps": 100,
+      "receding_horizon": 5,
+      "steps_per_replan": 25
+    },
+    "protocol": "live_reset",
+    "seed": 0,
+    "timestamp_utc": "2026-08-29T17:49:09.085650+00:00"
+  },
+  "seeds": [
+    0
+  ],
+  "success_rate": 0.0
+}

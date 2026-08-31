@@ -1,0 +1,14 @@
+{
+  "z_shape": [
+    48,
+    26,
+    192
+  ],
+  "effective_rank_z": 22.45205206549647,
+  "z_dim": 192,
+  "n_tokens": 1248,
+  "effective_rank_u": 10.095788343361606,
+  "u_dim": 64,
+  "rank_u_over_rank_z": 0.44965993816112965,
+  "phi_weights": "/workspace/ws_le-wm/stablewm/checkpoints/pusht/lewm_phi_v2/reach.pt"
+}

@@ -5,10 +5,11 @@ __pycache__/
 .pytest_cache/
 MUJOCO_LOG.TXT
 
-# Eval artifacts (metrics may be force-added selectively)
-eval_results/
+# Eval: campaign artifacts (json/csv/npz/png/html/md) ARE tracked.
+# Skip ephemeral debug galleries and videos.
+eval_results/**/plan_debug/
+eval_results/**/plan_debug*/
 *.mp4
-*.png
 
 # Training / Hydra
 outputs/

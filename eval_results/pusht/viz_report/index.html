@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>lewm-phi visual report</title>
+<style>body{font-family:sans-serif;max-width:960px;margin:2rem auto;padding:0 1rem}
+pre{background:#111;color:#eee;padding:0.8rem;overflow:auto} img{border:1px solid #ccc}</style>
+</head><body>
+<h1>lewm-phi visual report</h1>
+<p>Scalars are the citable result; figures navigate. See report.md for the metric pull.</p>
+<pre>{
+  "ca0_fork": "CA0-INFIDELITY",
+  "ca0": {
+    "1": {
+      "m": 1,
+      "mean_d_end": 1.4256690740585327,
+      "mean_d_start": 2.6107232570648193,
+      "frac_toward": 0.84,
+      "n": 50
+    },
+    "3": {
+      "m": 3,
+      "mean_d_end": 2.0167295932769775,
+      "mean_d_start": 2.6107232570648193,
+      "frac_toward": 0.66,
+      "n": 50
+    },
+    "5": {
+      "m": 5,
+      "mean_d_end": 2.351325273513794,
+      "mean_d_start": 2.6107232570648193,
+      "frac_toward": 0.62,
+      "n": 50
+    },
+    "12": {
+      "m": 12,
+      "mean_d_end": 5.036725044250488,
+      "mean_d_start": 2.6107232570648193,
+      "frac_toward": 0.08,
+      "n": 50
+    },
+    "25": {
+      "m": 25,
+      "mean_d_end": 8.228082656860352,
+      "mean_d_start": 2.6107232570648193,
+      "frac_toward": 0.02,
+      "n": 50
+    }
+  }
+}</pre>
+<h3>oracle_overlay</h3><p>Motivates: ‖ẑ_end−z*‖ and toward-goal fraction vs m (CA0 curve)</p><pre>{
+  "d_end_open": 18.841596603393555,
+  "d_end_closed": 2.5733795166015625,
+  "d_start": 2.6254725456237793,
+  "toward_open": false,
+  "toward_closed": true,
+  "fork": "CA0-INFIDELITY",
+  "pair": 0
+}</pre><img src='figs/oracle_overlay.png' alt='oracle_overlay' style='max-width:100%'/>
+<h3>cem_landscape</h3><p>Motivates: cost(oracle actions) − cost(CEM-selected) (planner regret)</p><pre>{
+  "selected_cost": 5.688507556915283,
+  "oracle_cost": 21.755271911621094,
+  "regret": 16.06676435470581,
+  "n_candidates": 300
+}</pre><img src='figs/cem_landscape.png' alt='cem_landscape' style='max-width:100%'/>
+<h3>drift_contacts</h3><p>Motivates: free-space vs contact mean-drift scalars</p><pre>{
+  "free_mean_drift": 9.77547827533393,
+  "contact_mean_drift": 11.503300003103307,
+  "ratio": 1.1767506079092949,
+  "segment": 0
+}</pre><img src='figs/drift_contacts.png' alt='drift_contacts' style='max-width:100%'/>
+<h3>rank_spectrum</h3><p>Motivates: elbow index and dead-dim fraction (CA2)</p><pre>{
+  "participation_ratio": 22.45205206549647,
+  "elbow_90": 29,
+  "dead_dim_fraction": 0.578125,
+  "z_dim": 192
+}</pre><img src='figs/rank_spectrum.png' alt='rank_spectrum' style='max-width:100%'/>
+<h3>probe_faithfulness</h3><p>Motivates: conditional R² by region (near-wall vs center)</p><pre>{
+  "r2_all": 0.9983716011047363,
+  "r2_wall": null,
+  "r2_center": 0.9983716011047363,
+  "factor": "block_x"
+}</pre><img src='figs/probe_faithfulness.png' alt='probe_faithfulness' style='max-width:100%'/>
+<h3>rollout_filmstrip</h3><p>Motivates: step index where NN-retrieval distance crosses a threshold</p><pre>{
+  "nn_cross_step": 19,
+  "nn_threshold": 16.051511609653318,
+  "mean_nn_dist": 9.383233987745443
+}</pre><img src='figs/rollout_filmstrip.png' alt='rollout_filmstrip' style='max-width:100%'/>
+<h3>intervention_sweep</h3><p>Motivates: slope + linearity (R² of the ε→movement fit) per region</p><pre>{
+  "slope_free": 0.25487919833388306,
+  "linearity_free": 0.9997807571299042,
+  "slope_contact": 0.252406311067906,
+  "linearity_contact": 0.9998915437057058
+}</pre><img src='figs/intervention_sweep.png' alt='intervention_sweep' style='max-width:100%'/>
+</body></html>

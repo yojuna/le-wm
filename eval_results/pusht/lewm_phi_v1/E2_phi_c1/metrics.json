@@ -1,0 +1,283 @@
+{
+  "aggregate": {
+    "mean_episode_length": 43.875,
+    "mean_final_state_distance": 426.5867962416277,
+    "mean_min_state_distance": 107.22214322722706,
+    "mean_planning_time_s": 1.6611470766251841,
+    "mean_replans": 1.875,
+    "mean_steps_to_success": 1.0,
+    "num_episodes": 8,
+    "num_successes": 1,
+    "std_min_state_distance": 43.737552191987355,
+    "success_rate": 12.5,
+    "total_planning_time_s": 13.289176613001473,
+    "total_replans": 15,
+    "wall_time_s": 14.49577293099901
+  },
+  "episode_successes": [
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "episodes": [
+    {
+      "episode_idx": 0,
+      "final_state_distance": 112.21147459050658,
+      "final_task_score": null,
+      "length": 1,
+      "min_angle_error": 0.1957604735279186,
+      "min_pos_error": 16.733693199905858,
+      "min_state_distance": 112.21147459050658,
+      "min_task_score": null,
+      "planning_time_s": 1.1522937509998883,
+      "replans": 1,
+      "seed": 32,
+      "steps_to_success": 1,
+      "success": true,
+      "total_contacts": 1,
+      "truncated": false
+    },
+    {
+      "episode_idx": 1,
+      "final_state_distance": 229.09853258296408,
+      "final_task_score": null,
+      "length": 50,
+      "min_angle_error": 0.21425543865760943,
+      "min_pos_error": 22.562122025948305,
+      "min_state_distance": 61.87994771992533,
+      "min_task_score": null,
+      "planning_time_s": 1.7374534509999648,
+      "replans": 2,
+      "seed": 32,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 5,
+      "truncated": true
+    },
+    {
+      "episode_idx": 2,
+      "final_state_distance": 346.61881297217116,
+      "final_task_score": null,
+      "length": 50,
+      "min_angle_error": 0.06345175998666708,
+      "min_pos_error": 31.046050629393708,
+      "min_state_distance": 94.17221851002552,
+      "min_task_score": null,
+      "planning_time_s": 1.7262880110010883,
+      "replans": 2,
+      "seed": 32,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 26,
+      "truncated": true
+    },
+    {
+      "episode_idx": 3,
+      "final_state_distance": 519.7974871600996,
+      "final_task_score": null,
+      "length": 50,
+      "min_angle_error": 0.025202955397895188,
+      "min_pos_error": 23.709392817999504,
+      "min_state_distance": 115.52843795012663,
+      "min_task_score": null,
+      "planning_time_s": 1.7329503009987093,
+      "replans": 2,
+      "seed": 32,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 8,
+      "truncated": true
+    },
+    {
+      "episode_idx": 4,
+      "final_state_distance": 866.1694158604599,
+      "final_task_score": null,
+      "length": 50,
+      "min_angle_error": 0.16939057435450078,
+      "min_pos_error": 25.91042781606628,
+      "min_state_distance": 75.86288307640103,
+      "min_task_score": null,
+      "planning_time_s": 1.7343483719996584,
+      "replans": 2,
+      "seed": 32,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 6,
+      "truncated": true
+    },
+    {
+      "episode_idx": 5,
+      "final_state_distance": 267.5848241362851,
+      "final_task_score": null,
+      "length": 50,
+      "min_angle_error": 0.18670761691566629,
+      "min_pos_error": 40.63245949844073,
+      "min_state_distance": 96.53788780165051,
+      "min_task_score": null,
+      "planning_time_s": 1.7326800610007922,
+      "replans": 2,
+      "seed": 32,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 4,
+      "truncated": true
+    },
+    {
+      "episode_idx": 6,
+      "final_state_distance": 652.4864187463245,
+      "final_task_score": null,
+      "length": 50,
+      "min_angle_error": 0.1890892658528358,
+      "min_pos_error": 43.16590854268591,
+      "min_state_distance": 206.36401127297458,
+      "min_task_score": null,
+      "planning_time_s": 1.7360043830012728,
+      "replans": 2,
+      "seed": 32,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 6,
+      "truncated": true
+    },
+    {
+      "episode_idx": 7,
+      "final_state_distance": 418.7274038842107,
+      "final_task_score": null,
+      "length": 50,
+      "min_angle_error": 0.028575647442644403,
+      "min_pos_error": 33.79759399433326,
+      "min_state_distance": 95.22028489620628,
+      "min_task_score": null,
+      "planning_time_s": 1.737158283000099,
+      "replans": 2,
+      "seed": 32,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 4,
+      "truncated": true
+    }
+  ],
+  "meta": {
+    "bank_episodes": 48,
+    "bank_steps": 3840,
+    "bank_success_episodes": 48,
+    "bank_success_rate_pct": 100.0,
+    "cem": {
+      "n_steps": 30,
+      "num_samples": 300,
+      "topk": 30,
+      "var_scale": 1.0
+    },
+    "checkpoint": "/home/aj/code/ssd_repos/robo_ops/ws_weltmodelle/ws_le-wm/stablewm/checkpoints/hf_pusht",
+    "collect_steps": 960,
+    "collector": "kinematic",
+    "completed_episodes": 8,
+    "device": "cuda",
+    "env": "pusht",
+    "env_name": "swm/PushT-v1",
+    "episodes": 8,
+    "eval_budget": 50,
+    "goal_offset_steps": 25,
+    "hf_repo": "quentinll/lewm-pusht",
+    "interrupted": false,
+    "max_pos_delta": 55.0,
+    "metric_notes": {
+      "min_state_distance": "Best (lowest) L2 distance to goal state during the episode. Includes velocities on PushT \u2014 prefer min_pos_error.",
+      "steps_to_success": "Env step index at first success; None if the episode failed.",
+      "success_rate": "Fraction of episodes with env terminated=True (PushT: pose tolerance vs goal_state; Reacher: qpos_match). For online_goal_offset, success is OR'd over the eval budget like World._evaluate_from_dataset."
+    },
+    "min_pos_delta": 20.0,
+    "normalization": {
+      "keys": [
+        "action",
+        "proprio",
+        "state"
+      ],
+      "scalers": {
+        "action": {
+          "mean": [
+            0.002898091975832358,
+            -0.00030644586921456114
+          ],
+          "n_features": 2,
+          "std": [
+            0.5057301335118259,
+            0.48495394910140793
+          ]
+        },
+        "proprio": {
+          "mean": [
+            246.4699050694865,
+            233.49814219497188,
+            0.0,
+            0.0
+          ],
+          "n_features": 4,
+          "std": [
+            106.6916457887363,
+            100.8561518257422,
+            0.0,
+            0.0
+          ]
+        },
+        "state": {
+          "mean": [
+            246.4699050694865,
+            233.49814219497188,
+            247.52053172184574,
+            250.1709701105618,
+            2.9552350224199824,
+            0.0,
+            0.0
+          ],
+          "n_features": 7,
+          "std": [
+            106.6916457887363,
+            100.8561518257422,
+            77.7715315936022,
+            70.37092047780295,
+            1.830133888673808,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "source": "weak_policy_bank",
+      "stats_steps": 800
+    },
+    "notes": "Pymunk PushT. online_offset: kinematic start\u2192goal pairs (goal_offset=25, budget=50) + WeakPolicy action scaler. Success = pose match to goal_state, not green-T coverage.",
+    "num_envs": 1,
+    "pair_mode": "short_horizon",
+    "pair_source": "kinematic_policy_live",
+    "pairs_from_success_ep": 8,
+    "pairs_mean_pos_progress": 15.362512064621708,
+    "plan_config": {
+      "action_block": 5,
+      "eval_budget": 50,
+      "goal_offset_steps": 25,
+      "horizon": 5,
+      "max_episode_steps": 100,
+      "receding_horizon": 5,
+      "steps_per_replan": 25
+    },
+    "protocol": "online_offset",
+    "seed": 0,
+    "timestamp_utc": "2026-08-28T15:35:45.366029+00:00"
+  },
+  "seeds": [
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32
+  ],
+  "success_rate": 12.5
+}

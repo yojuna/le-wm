@@ -1,0 +1,305 @@
+{
+  "aggregate": {
+    "mean_episode_length": 200.0,
+    "mean_final_state_distance": 3998.2974688244226,
+    "mean_min_state_distance": 383.31245346292957,
+    "mean_planning_time_s": 6.953573647400117,
+    "mean_replans": 8.0,
+    "mean_steps_to_success": null,
+    "num_episodes": 10,
+    "num_successes": 0,
+    "std_min_state_distance": 196.2362222904917,
+    "success_rate": 0.0,
+    "total_planning_time_s": 69.53573647400117,
+    "total_replans": 80,
+    "wall_time_s": 76.18181275200004
+  },
+  "episode_successes": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "episodes": [
+    {
+      "episode_idx": 0,
+      "final_state_distance": 1467.9678733481092,
+      "final_task_score": null,
+      "length": 200,
+      "min_angle_error": 0.6665355107837634,
+      "min_pos_error": 251.24299998295896,
+      "min_state_distance": 288.02033749739496,
+      "min_task_score": null,
+      "planning_time_s": 7.124970872997437,
+      "replans": 8,
+      "seed": 0,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 153,
+      "truncated": true
+    },
+    {
+      "episode_idx": 1,
+      "final_state_distance": 3265.0735662096645,
+      "final_task_score": null,
+      "length": 200,
+      "min_angle_error": 2.3846259556984135,
+      "min_pos_error": 102.12896773659325,
+      "min_state_distance": 240.13399712879726,
+      "min_task_score": null,
+      "planning_time_s": 6.903747086998919,
+      "replans": 8,
+      "seed": 1,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 1,
+      "truncated": true
+    },
+    {
+      "episode_idx": 2,
+      "final_state_distance": 2089.146158525283,
+      "final_task_score": null,
+      "length": 200,
+      "min_angle_error": 0.23618439467999008,
+      "min_pos_error": 183.25819315370165,
+      "min_state_distance": 275.0582976508953,
+      "min_task_score": null,
+      "planning_time_s": 6.959964457000751,
+      "replans": 8,
+      "seed": 2,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 12,
+      "truncated": true
+    },
+    {
+      "episode_idx": 3,
+      "final_state_distance": 2951.185632500337,
+      "final_task_score": null,
+      "length": 200,
+      "min_angle_error": 2.6343950423084133,
+      "min_pos_error": 257.5064460709765,
+      "min_state_distance": 349.35210797205616,
+      "min_task_score": null,
+      "planning_time_s": 6.889561088002665,
+      "replans": 8,
+      "seed": 3,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 0,
+      "truncated": true
+    },
+    {
+      "episode_idx": 4,
+      "final_state_distance": 3104.5067378077138,
+      "final_task_score": null,
+      "length": 200,
+      "min_angle_error": -1.4570229469943108,
+      "min_pos_error": 374.6628103588444,
+      "min_state_distance": 617.1859088480082,
+      "min_task_score": null,
+      "planning_time_s": 6.9210652139991,
+      "replans": 8,
+      "seed": 4,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 0,
+      "truncated": true
+    },
+    {
+      "episode_idx": 5,
+      "final_state_distance": 5160.743282973867,
+      "final_task_score": null,
+      "length": 200,
+      "min_angle_error": 0.8157305954564418,
+      "min_pos_error": 161.1667310746376,
+      "min_state_distance": 176.44822875660057,
+      "min_task_score": null,
+      "planning_time_s": 6.931922760997622,
+      "replans": 8,
+      "seed": 5,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 0,
+      "truncated": true
+    },
+    {
+      "episode_idx": 6,
+      "final_state_distance": 10162.244381298004,
+      "final_task_score": null,
+      "length": 200,
+      "min_angle_error": -2.1665921121324523,
+      "min_pos_error": 134.48960523533034,
+      "min_state_distance": 325.87676847332926,
+      "min_task_score": null,
+      "planning_time_s": 6.9184068530030345,
+      "replans": 8,
+      "seed": 6,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 0,
+      "truncated": true
+    },
+    {
+      "episode_idx": 7,
+      "final_state_distance": 4340.911252375338,
+      "final_task_score": null,
+      "length": 200,
+      "min_angle_error": -2.537235313200796,
+      "min_pos_error": 440.8015688544073,
+      "min_state_distance": 774.3255020701907,
+      "min_task_score": null,
+      "planning_time_s": 6.957313988999886,
+      "replans": 8,
+      "seed": 7,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 0,
+      "truncated": true
+    },
+    {
+      "episode_idx": 8,
+      "final_state_distance": 3531.303179016853,
+      "final_task_score": null,
+      "length": 200,
+      "min_angle_error": 1.5502358484235401,
+      "min_pos_error": 414.0893978289977,
+      "min_state_distance": 551.8598512852058,
+      "min_task_score": null,
+      "planning_time_s": 6.96930755700123,
+      "replans": 8,
+      "seed": 8,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 0,
+      "truncated": true
+    },
+    {
+      "episode_idx": 9,
+      "final_state_distance": 3909.8926241890586,
+      "final_task_score": null,
+      "length": 200,
+      "min_angle_error": -2.561189629811638,
+      "min_pos_error": 181.73226792477556,
+      "min_state_distance": 234.8635349468176,
+      "min_task_score": null,
+      "planning_time_s": 6.959476595000524,
+      "replans": 8,
+      "seed": 9,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 26,
+      "truncated": true
+    }
+  ],
+  "meta": {
+    "cem": {
+      "n_steps": 30,
+      "num_samples": 300,
+      "topk": 30,
+      "var_scale": 1.0
+    },
+    "checkpoint": "/media/aj/dirk/aj/code/repos/robo_ops/ws_lewm/stablewm/checkpoints/hf_pusht",
+    "completed_episodes": 10,
+    "device": "cuda",
+    "env": "pusht",
+    "env_name": "swm/PushT-v1",
+    "episodes": 10,
+    "hf_repo": "quentinll/lewm-pusht",
+    "interrupted": false,
+    "metric_notes": {
+      "min_state_distance": "Best (lowest) L2 distance to goal state during the episode. Analogous to max progress / best coverage in manipulation benchmarks.",
+      "steps_to_success": "Env step index at first success; None if the episode failed.",
+      "success_rate": "Fraction of episodes with env terminated=True (PushT: pose tolerance; Reacher: qpos_match success)."
+    },
+    "normalization": {
+      "keys": [
+        "action",
+        "proprio",
+        "state"
+      ],
+      "scalers": {
+        "action": {
+          "mean": [
+            0.009533804888710093,
+            0.006167080686049961
+          ],
+          "n_features": 2,
+          "std": [
+            0.4801830848540777,
+            0.5039154875690253
+          ]
+        },
+        "proprio": {
+          "mean": [
+            234.2313489630331,
+            239.07075620145926,
+            3.5295100356936455,
+            2.280784966349602
+          ],
+          "n_features": 4,
+          "std": [
+            126.42860486893832,
+            118.6690055445026,
+            179.17835735595511,
+            188.06696314315315
+          ]
+        },
+        "state": {
+          "mean": [
+            234.2313489630331,
+            239.07075620145926,
+            242.22544552645567,
+            244.43689719526986,
+            3.808531708874564,
+            3.5295100356936455,
+            2.280784966349602
+          ],
+          "n_features": 7,
+          "std": [
+            126.42860486893832,
+            118.6690055445026,
+            116.97605996370005,
+            118.55266342969766,
+            1.6537350053192539,
+            179.17835735595511,
+            188.06696314315315
+          ]
+        }
+      },
+      "source": "live_rollout",
+      "stats_steps": 2000
+    },
+    "notes": "Pymunk 2D push-T. Live goal is the canonical green T pose.",
+    "num_envs": 1,
+    "plan_config": {
+      "action_block": 5,
+      "horizon": 5,
+      "max_episode_steps": 200,
+      "receding_horizon": 5,
+      "steps_per_replan": 25
+    },
+    "protocol": "live_reset",
+    "seed": 0,
+    "timestamp_utc": "2026-08-27T18:49:24.670300+00:00"
+  },
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "success_rate": 0.0
+}

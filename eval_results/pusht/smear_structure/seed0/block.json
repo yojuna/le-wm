@@ -1,0 +1,52 @@
+{
+  "n_steps": 1150,
+  "occupancy": {
+    "k90": 24,
+    "n_dead": 114,
+    "dead_frac_dims": 0.59375,
+    "perp_energy_dead": 0.1425800458725407,
+    "perp_energy_live90": 0.4282755436253557,
+    "true_energy_dead": 0.027214747453633996,
+    "true_energy_live90": 0.6126573699768723,
+    "pred_energy_dead": 0.08254972786254115
+  },
+  "motion": {
+    "k90": 44,
+    "perp_energy_motion90": 0.6587397851051345,
+    "perp_energy_off_motion": 0.34126021489486547
+  },
+  "knn": {
+    "k": 15,
+    "n": 1150,
+    "mean_cosine": 0.44253367239132113,
+    "median_cosine": 0.4664674847992293,
+    "null_shuffle_mean_cosine": 0.06565132004158593
+  },
+  "r2": {
+    "pose_from_true_dz": 0.2625633483990767,
+    "pose_from_pred_dz": 0.31576370446159685,
+    "pose_from_perp_r": -0.0968108041643918,
+    "pose_from_parallel": 0.23775178692530907,
+    "r_from_state_action": -0.034915097202297796,
+    "pose_basis": "occupancy_live90"
+  },
+  "decision": {
+    "where": "MOTION_CONFUSION",
+    "where_reason": "Majority of perpendicular energy lies in the true-\u0394z motion span (wrong heading among real motions).",
+    "systematic": "SYSTEMATIC",
+    "systematic_reason": "Perp residual aligns across nearby (state, action) pairs.",
+    "physics": "PERP_NO_POSE",
+    "physics_reason": "Perpendicular residual does not linearly predict sim \u0394pose (control passed).",
+    "cuts": {
+      "occupancy_dead_rel": 0.001,
+      "occupancy_live_var_frac": 0.9,
+      "motion_var_frac": 0.9,
+      "knn_k": 15,
+      "energy_majority": 0.5,
+      "neighbor_cosine_systematic_at_or_above": 0.3,
+      "neighbor_cosine_random_below": 0.1,
+      "pose_from_perp_r2_physics_at_or_above": 0.2,
+      "pose_from_perp_r2_junk_below": 0.05
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "episode": 0,
+  "solve_index": 1,
+  "n_candidates": 300,
+  "selected_idx": 95,
+  "selected_cost": 5.688507556915283,
+  "oracle_cost": 21.755271911621094,
+  "regret": 16.06676483154297,
+  "n_line_search": 9,
+  "n_iters": 30
+}

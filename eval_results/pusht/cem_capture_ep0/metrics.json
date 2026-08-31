@@ -1,0 +1,149 @@
+{
+  "aggregate": {
+    "mean_episode_length": 25.0,
+    "mean_final_state_distance": 486.33037093632845,
+    "mean_min_state_distance": 183.1591678598966,
+    "mean_planning_time_s": 1.1376399470000251,
+    "mean_replans": 1.0,
+    "mean_steps_to_success": null,
+    "num_episodes": 1,
+    "num_successes": 0,
+    "std_min_state_distance": 0.0,
+    "success_rate": 0.0,
+    "total_planning_time_s": 1.1376399470000251,
+    "total_replans": 1,
+    "wall_time_s": 1.440948724000009
+  },
+  "episode_successes": [
+    false
+  ],
+  "episodes": [
+    {
+      "episode_idx": 0,
+      "final_state_distance": 486.33037093632845,
+      "final_task_score": null,
+      "length": 25,
+      "min_angle_error": 0.006810784379069901,
+      "min_pos_error": 50.618117725347766,
+      "min_state_distance": 183.1591678598966,
+      "min_task_score": null,
+      "planning_time_s": 1.1376399470000251,
+      "replans": 1,
+      "seed": 3,
+      "steps_to_success": null,
+      "success": false,
+      "total_contacts": 59,
+      "truncated": true
+    }
+  ],
+  "meta": {
+    "action_pack": "tile_block",
+    "actor": "cem",
+    "cem": {
+      "n_steps": 30,
+      "num_samples": 300,
+      "topk": 30,
+      "var_scale": 1.0
+    },
+    "checkpoint": "/workspace/ws_le-wm/stablewm/checkpoints/hf_pusht",
+    "completed_episodes": 1,
+    "controller": "goalpush",
+    "device": "cuda",
+    "env": "pusht",
+    "env_name": "swm/PushT-v1",
+    "episodes": 1,
+    "eval_budget": 50,
+    "hf_repo": "quentinll/lewm-pusht",
+    "interrupted": false,
+    "metric_notes": {
+      "min_state_distance": "Best (lowest) L2 distance to goal state during the episode. Includes velocities on PushT \u2014 prefer min_pos_error.",
+      "steps_to_success": "Env step index at first success; None if the episode failed.",
+      "success_rate": "Fraction of episodes with env terminated=True (PushT: pose tolerance vs goal_state; Reacher: qpos_match). For online_goal_offset, success is OR'd over the eval budget like World._evaluate_from_dataset."
+    },
+    "n_bank_episodes": 260,
+    "normalization": {
+      "keys": [
+        "action",
+        "proprio",
+        "state"
+      ],
+      "scalers": {
+        "action": {
+          "mean": [
+            0.010280958414077758,
+            0.02620568037033081
+          ],
+          "n_features": 2,
+          "std": [
+            0.2613579535818501,
+            0.41262455372411194
+          ]
+        },
+        "proprio": {
+          "mean": [
+            542.626799639951,
+            482.68685477800045,
+            -2.9504178854135366,
+            -3.029994377723107
+          ],
+          "n_features": 4,
+          "std": [
+            5.603603384979931,
+            10.45493589489397,
+            101.9608200188998,
+            164.63480348753885
+          ]
+        },
+        "state": {
+          "mean": [
+            542.6268075796274,
+            482.68685443584735,
+            533.9935255784255,
+            469.6692786583534,
+            1.5802478423485389,
+            -2.9504178854135366,
+            -3.029994377723107
+          ],
+          "n_features": 7,
+          "std": [
+            5.603599850786857,
+            10.454935622354146,
+            0.8136296936025202,
+            4.152361946072671,
+            0.010874923142525523,
+            101.9608200188998,
+            164.63480348753885
+          ]
+        }
+      },
+      "source": "weak_policy_bank",
+      "stats_steps": 2000
+    },
+    "notes": "Pymunk PushT. online_offset: kinematic start\u2192goal pairs (goal_offset=25, budget=50) + WeakPolicy action scaler. Success = pose match to goal_state, not green-T coverage.",
+    "num_envs": 1,
+    "oracle_bank": "eval_results/pusht/c0_oracle_livebank/seed0",
+    "oracle_source": "goal+weak",
+    "pair_band": "short_horizon",
+    "pair_source": "oracle_livebank",
+    "pairs_mean_pos_progress": 22.601354598999023,
+    "plan_config": {
+      "action_block": 5,
+      "eval_budget": 25,
+      "goal_offset_steps": 25,
+      "horizon": 5,
+      "max_episode_steps": 100,
+      "receding_horizon": 5,
+      "steps_per_replan": 25
+    },
+    "protocol": "online_offset",
+    "scan_stride": 1,
+    "seed": 0,
+    "stride": 25,
+    "timestamp_utc": "2026-08-30T12:51:13.923277+00:00",
+    "window": 25
+  },
+  "seeds": [
+    3
+  ],
+  "success_rate": 0.0
+}

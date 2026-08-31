@@ -1,0 +1,12 @@
+{
+  "n_pairs": 50,
+  "window": 25,
+  "pair_band": "block_moving",
+  "action_pack": "tile_block",
+  "oracle_source": "goal:80",
+  "median_step_block_xy_min": 2.0,
+  "stride": 25,
+  "n_bank_episodes": 80,
+  "seed": 0,
+  "mean_block_step_median": 7.336594037778497
+}

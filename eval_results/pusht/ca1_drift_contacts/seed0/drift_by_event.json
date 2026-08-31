@@ -1,0 +1,89 @@
+{
+  "rows": [
+    {
+      "source": "dump",
+      "env": "pusht",
+      "n_segments": 48,
+      "segment_len": 26,
+      "contact": {
+        "n_steps": 37,
+        "mean_drift": 11.503300003103307,
+        "median_drift": 11.654685974121094
+      },
+      "wall": {
+        "n_steps": 0,
+        "mean_drift": null,
+        "median_drift": null
+      },
+      "any_event": {
+        "n_steps": 37,
+        "mean_drift": 11.503300003103307,
+        "median_drift": 11.654685974121094
+      },
+      "free": {
+        "n_steps": 1067,
+        "mean_drift": 9.77547827533393,
+        "median_drift": 9.438911437988281
+      },
+      "ratio_contact_over_free": 1.1767506079092949,
+      "dump": "eval_results/pusht/phase_b_dump/seed0/dump.npz"
+    },
+    {
+      "source": "dump",
+      "env": "pusht",
+      "n_segments": 48,
+      "segment_len": 26,
+      "contact": {
+        "n_steps": 5,
+        "mean_drift": 4.371025967597961,
+        "median_drift": 4.3930888175964355
+      },
+      "wall": {
+        "n_steps": 0,
+        "mean_drift": null,
+        "median_drift": null
+      },
+      "any_event": {
+        "n_steps": 5,
+        "mean_drift": 4.371025967597961,
+        "median_drift": 4.3930888175964355
+      },
+      "free": {
+        "n_steps": 1099,
+        "mean_drift": 5.2641671854761976,
+        "median_drift": 4.817766189575195
+      },
+      "ratio_contact_over_free": 0.8303357043175971,
+      "dump": "eval_results/pusht/phase_b_dump_diverse/seed0/dump.npz"
+    },
+    {
+      "source": "ca0",
+      "env": "pusht",
+      "m_open_loop": 25,
+      "n_pairs": 50,
+      "contact": {
+        "n_steps": 104,
+        "mean_drift": 6.63660192489624,
+        "median_drift": 5.2034759521484375
+      },
+      "wall": {
+        "n_steps": 69,
+        "mean_drift": 7.29213809967041,
+        "median_drift": 6.25421142578125
+      },
+      "any_event": {
+        "n_steps": 150,
+        "mean_drift": 6.2192277908325195,
+        "median_drift": 5.632632255554199
+      },
+      "free": {
+        "n_steps": 1000,
+        "mean_drift": 4.981940269470215,
+        "median_drift": 4.167542457580566
+      },
+      "ratio_contact_over_free": 1.3321319738749064,
+      "note": "Uses CA0 m=25 (or largest m) \u1e91 vs encoded true path."
+    }
+  ],
+  "note": "Scalars only. Fig-3 in viz.py draws the curve. ratio_contact_over_free >> 1 suggests a contact-representation fault."
+}

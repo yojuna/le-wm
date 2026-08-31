@@ -1,0 +1,12 @@
+{
+  "n_pairs": 50,
+  "window": 25,
+  "pair_band": "short_horizon",
+  "action_pack": "tile_block",
+  "oracle_source": "goal+weak",
+  "controller": "goalpush",
+  "stride": 25,
+  "scan_stride": 1,
+  "seed": 0,
+  "n_bank_episodes": 260
+}

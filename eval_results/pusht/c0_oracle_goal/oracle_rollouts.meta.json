@@ -1,0 +1,10 @@
+{
+  "n_episodes": 50,
+  "max_t": 50,
+  "actor": "goal_push",
+  "env": "pusht",
+  "seed": 0,
+  "episodes": 50,
+  "pair_mode": "offset",
+  "collector": "kinematic"
+}

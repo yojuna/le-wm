@@ -1,0 +1,25 @@
+{
+  "dump": "eval_results/reacher/phase_b_dump/seed0/dump.npz",
+  "env": "reacher",
+  "n_segments": 48,
+  "segment_len": 26,
+  "true": {
+    "mean_all_frames": 11.894046710087704,
+    "mean_predicted_only": 13.445444107055664,
+    "at_h5_index": 11.860443115234375,
+    "end": 15.413115501403809,
+    "history": 3.0,
+    "cem_horizon": 5.0
+  },
+  "shuffled": {
+    "mean_all_frames": 12.410705162928654,
+    "mean_predicted_only": 14.029492792875871,
+    "at_h5_index": 12.213915824890137,
+    "end": 15.840104103088379,
+    "history": 3.0,
+    "cem_horizon": 5.0
+  },
+  "liveness_mean_gap": 0.5840486884117126,
+  "liveness_end_gap": 0.4269886016845703,
+  "note": "mean_all_frames includes teacher-forced zeros. Use mean_predicted_only and at_h5_index for CEM. Positive liveness gap: shuffled actions drift more than true actions."
+}

@@ -1,0 +1,52 @@
+{
+  "n_steps": 1146,
+  "occupancy": {
+    "k90": 21,
+    "n_dead": 131,
+    "dead_frac_dims": 0.6822916666666666,
+    "perp_energy_dead": 0.3292253498643435,
+    "perp_energy_live90": 0.24838440537924283,
+    "true_energy_dead": 0.051015223969579956,
+    "true_energy_live90": 0.3295509693538985,
+    "pred_energy_dead": 0.15505966119245057
+  },
+  "motion": {
+    "k90": 30,
+    "perp_energy_motion90": 0.4280456486813486,
+    "perp_energy_off_motion": 0.5719543513186514
+  },
+  "knn": {
+    "k": 15,
+    "n": 1146,
+    "mean_cosine": 0.36438132790682104,
+    "median_cosine": 0.346301411620326,
+    "null_shuffle_mean_cosine": 0.09131852123543886
+  },
+  "r2": {
+    "pose_from_true_dz": 0.25477966476217484,
+    "pose_from_pred_dz": 0.4012915781830906,
+    "pose_from_perp_r": -0.10557227174583739,
+    "pose_from_parallel": 0.3073545794232042,
+    "r_from_state_action": -0.10554268110435916,
+    "pose_basis": "occupancy_live90"
+  },
+  "decision": {
+    "where": "MIXED",
+    "where_reason": "No subspace holds a majority of perpendicular energy.",
+    "systematic": "SYSTEMATIC",
+    "systematic_reason": "Perp residual aligns across nearby (state, action) pairs.",
+    "physics": "PERP_NO_POSE",
+    "physics_reason": "Perpendicular residual does not linearly predict sim \u0394pose (control passed).",
+    "cuts": {
+      "occupancy_dead_rel": 0.001,
+      "occupancy_live_var_frac": 0.9,
+      "motion_var_frac": 0.9,
+      "knn_k": 15,
+      "energy_majority": 0.5,
+      "neighbor_cosine_systematic_at_or_above": 0.3,
+      "neighbor_cosine_random_below": 0.1,
+      "pose_from_perp_r2_physics_at_or_above": 0.2,
+      "pose_from_perp_r2_junk_below": 0.05
+    }
+  }
+}

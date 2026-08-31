@@ -1,0 +1,25 @@
+{
+  "dump": "eval_results/pusht/phase_b_dump_diverse/seed0/dump.npz",
+  "env": "pusht",
+  "n_segments": 48,
+  "segment_len": 26,
+  "true": {
+    "mean_all_frames": 4.653184982446524,
+    "mean_predicted_only": 5.260122154069983,
+    "at_h5_index": 2.938321113586426,
+    "end": 8.454585075378418,
+    "history": 3.0,
+    "cem_horizon": 5.0
+  },
+  "shuffled": {
+    "mean_all_frames": 6.221193515337431,
+    "mean_predicted_only": 7.032653539077096,
+    "at_h5_index": 4.869470119476318,
+    "end": 9.914193153381348,
+    "history": 3.0,
+    "cem_horizon": 5.0
+  },
+  "liveness_mean_gap": 1.772531270980835,
+  "liveness_end_gap": 1.4596080780029297,
+  "note": "mean_all_frames includes teacher-forced zeros. Use mean_predicted_only and at_h5_index for CEM. Positive liveness gap: shuffled actions drift more than true actions."
+}
